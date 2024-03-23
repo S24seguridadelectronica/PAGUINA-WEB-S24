@@ -603,21 +603,6 @@ src="https://www.facebook.com/tr?id=969254454530526&ev=PageView&noscript=1"
 
     
 
-<!-- Meta Pixel Code -->
-<script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '969254454530526');
-  fbq('track', 'PageView');fbq('track', 'Purchase');
-</script>
-<noscript><img height='1' width='1' style='display:none' src='https://www.facebook.com/tr?id=969254454530526&ev=PageView&noscript=1'/></noscript>
-<!-- End Meta Pixel Code -->
 
     
 </head>
@@ -783,7 +768,7 @@ src="https://www.facebook.com/tr?id=969254454530526&ev=PageView&noscript=1"
                     <input type="email" class="form-control" id="correoElectronico" name="correoElectronico" required>
                 </div>
                 <!-- Botón de apertura de la ventana modal -->
-                    <button type="button" class="btn btn-primary btn-block custom-btn" onclick="validarYEnviar(); fbq('track', 'Purchase');">Enviar</button>
+                    <button type="button" class="btn btn-primary btn-block custom-btn" onclick="validarYEnviar(); fbq('track', 'Purchase');">comprar</button>
                     Enviar
                 </button>
             </form>
@@ -871,20 +856,24 @@ src="https://www.facebook.com/tr?id=969254454530526&ev=PageView&noscript=1"
             body: formData
         })
         .then(response => {
-    if (response.ok) {
-        // Mostrar la ventana modal
-        $('#myModal').modal('show');
-        // Limpiar el formulario después de enviar
-        document.getElementById("myForm").reset();
-    } else {
-        alert('Error al enviar los datos');
-    }
-})
+            if (response.ok) {
+                // Mostrar la ventana modal
+                $('#myModal').modal('show');
+                // Limpiar el formulario después de enviar
+                document.getElementById("myForm").reset();
+
+                // Rastrear la compra con el píxel de Facebook
+                fbq('track', 'Purchase', {value: 97000.00, currency: 'COP'});
+            } else {
+                alert('Error al enviar los datos');
+            }
+        })
         .catch(error => {
             console.error('Error:', error);
         });
     }
 </script>
+
 
 
 
@@ -906,14 +895,7 @@ src="https://www.facebook.com/tr?id=969254454530526&ev=PageView&noscript=1"
     }
 </script>
 
-<script>
-function enviarDatos() {
-    // Tu script existente para enviar el formulario va aquí
 
-    // Después de enviar el formulario con éxito, activa el evento de compra
-    fbq('track', 'Purchase', {value: 97000.00, currency: 'COP'});
-}
-</script>
 
 
 
