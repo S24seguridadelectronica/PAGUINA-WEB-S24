@@ -505,7 +505,10 @@ html [type="button"],
 .modal-body {
     padding: 30px; /* Mayor espacio entre el contenido y los bordes */
     font-family: 'Arial', sans-serif; /* Fuente legible */
+    color: #ffffff; /* Texto blanco */
+    background-color: #ffA500; /* Fondo naranja */
 }
+
 
 .modal-footer {
     border-bottom-left-radius: 15px; /* Bordes redondeados abajo */
@@ -535,6 +538,38 @@ html [type="button"],
 
 
     </style>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Meta Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '969254454530526');
+  fbq('track', 'PageView');
+  fbq('track', 'Purchase', {value: 97000.00, currency: 'COP'}); 
+</script>
+<noscript><img height='1' width='1' style='display:none' src='https://www.facebook.com/tr?id=969254454530526&ev=PageView&noscript=1'/></noscript>
+<!-- End Meta Pixel Code -->
+
+    
+
+
+    
 </head>
 <body>
     <header>
@@ -611,7 +646,7 @@ html [type="button"],
             <div class="col-lg-12 col-md-6">
                 <div class="content">
                     <h3></h3>
-                    <img src="imagenes/5.png" class="img-fluid" alt="">
+                    <img src="imagenes/5.gif" class="img-fluid" alt="">
                     <div class="btn-container">
                      <button class="btn btn-custom btn-block" onclick="redirectToForm()">Contactar</button>
                     </div>
@@ -621,7 +656,7 @@ html [type="button"],
             <div class="col-lg-12 col-md-6">
                 <div class="content">
                     <h3></h3>
-                    <img src="imagenes/6.gif" class="img-fluid" alt="">
+                    <img src="imagenes/6.png" class="img-fluid" alt="">
                     <div class="btn-container">
                      <button class="btn btn-custom btn-block" onclick="redirectToForm()">Contactar</button>
                     </div>
@@ -631,7 +666,7 @@ html [type="button"],
             <div class="col-lg-12 col-md-6">
                 <div class="content">
                     <h3></h3>
-                    <img src="imagenes/7.png" class="img-fluid" alt="">
+                    <img src="imagenes/7.gif" class="img-fluid" alt="">
                     <div class="btn-container">
                      <button class="btn btn-custom btn-block" onclick="redirectToForm()">Contactar</button>
                     </div>
@@ -641,7 +676,7 @@ html [type="button"],
             <div class="col-lg-12 col-md-6">
                 <div class="content">
                     <h3></h3>
-                    <img src="imagenes/8.gif" class="img-fluid" alt="">
+                    <img src="imagenes/8.png" class="img-fluid" alt="">
                     <div class="btn-container">
                      <button class="btn btn-custom btn-block" onclick="redirectToForm()">Contactar</button>
                     </div>
@@ -661,46 +696,13 @@ html [type="button"],
             <div class="col-lg-12 col-md-6">
                 <div class="content">
                     <h3></h3>
-                    <img src="imagenes/10.gif" class="img-fluid" alt="">
+                    <img src="imagenes/100.png" class="img-fluid" alt="">
                     <div class="btn-container">
                      <button class="btn btn-custom btn-block" onclick="redirectToForm()">Contactar</button>
                     </div>
                 </div>
             </div>
             
-            <div class="col-lg-12 col-md-6">
-                <div class="content">
-                    <h3></h3>
-                    <img src="imagenes/11.png" class="img-fluid" alt="">
-                    <div class="btn-container">
-                     <button class="btn btn-custom btn-block" onclick="redirectToForm()">Contactar</button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-12 col-md-6">
-                <div class="content">
-                    <h3></h3>
-                    <img src="imagenes/12.png" class="img-fluid" alt="">
-                    <div class="btn-container">
-                     <button class="btn btn-custom btn-block" onclick="redirectToForm()">Contactar</button>
-                    </div>
-                </div>
-            </div>
-            
-    <div class="col-lg-10 col-md-6">
-        <div class="content">
-            <h3></h3>
-            <div class="iframe-container">
-                <iframe src="<div>Hola</div>
-" frameborder="0" allowfullscreen></iframe>
-            </div>
-            <div class="btn-container">
-             <button class="btn btn-success btn-block" onclick="redirectToForm()">Contactar</button>
-            </div>
-        </div>
-    </div>
-    
         </div>
     </div>
 </div>
@@ -731,7 +733,7 @@ html [type="button"],
                     <input type="email" class="form-control" id="correoElectronico" name="correoElectronico" required>
                 </div>
                 <!-- Botón de apertura de la ventana modal -->
-                <button type="button" class="btn btn-primary btn-block custom-btn" data-toggle="modal" data-target="#myModal">
+                    <button type="button" class="btn btn-primary btn-block custom-btn" onclick="validarYEnviar(); fbq('track', 'Purchase');">comprar</button>
                     Enviar
                 </button>
             </form>
@@ -739,7 +741,7 @@ html [type="button"],
     </div>
 </div>
 
-<!-- Ventana modal -->
+<!-- Ventana modal -->  
 <div class="modal fade" id="myModal">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -747,13 +749,15 @@ html [type="button"],
                 <!-- Encabezado de la ventana modal -->
                 <div class="modal-header">
                     <h4 class="modal-title">¡Gracias por tu compra!</h4>
+<div id="logo" class="shine" style="position: absolute; left: 80%; ">S24</div>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
     
                 <!-- Cuerpo de la ventana modal -->
                 <div class="modal-body">
-                    <p>Tu pedido ha sido enviado correctamente</p>
-                </div>
+                    <p>Tu pedido ha sido recibido correctamente. En las próximas 24 horas hábiles, serás contactado por un integrador de seguridad nuestro para confirmar los datos de envío. El valor total a pagar es de $268,000 pesos colombianos por la compra de 1 cámara de seguridad Ultra HD 2K+ (4MPx). Adicionalmente, a la cámara se entrega una memoria microSD de 64 GB Western Digital.</p>
+                    <img src="imagenes/1.png" class="img-fluid" alt="">
+                 </div>
     
             </div>
         </div>
@@ -817,20 +821,48 @@ html [type="button"],
             body: formData
         })
         .then(response => {
-    if (response.ok) {
-        // Mostrar la ventana modal
-        $('#myModal').modal('show');
-        // Limpiar el formulario después de enviar
-        document.getElementById("myForm").reset();
-    } else {
-        alert('Error al enviar los datos');
-    }
-})
+            if (response.ok) {
+                // Mostrar la ventana modal
+                $('#myModal').modal('show');
+                // Limpiar el formulario después de enviar
+                document.getElementById("myForm").reset();
+
+                // Rastrear la compra con el píxel de Facebook
+                fbq('track', 'Purchase', {value: 97000.00, currency: 'COP'});
+            } else {
+                alert('Error al enviar los datos');
+            }
+        })
         .catch(error => {
             console.error('Error:', error);
         });
     }
 </script>
+
+
+
+
+<script>
+    function validarYEnviar() {
+        var nombreCompleto = document.getElementById("nombreCompleto").value;
+        var telefono = document.getElementById("telefono").value;
+        var direccionBarrio = document.getElementById("direccionBarrio").value;
+        var ciudadDepartamento = document.getElementById("ciudadDepartamento").value;
+        var correoElectronico = document.getElementById("correoElectronico").value;
+
+        // Verificar si algún campo está vacío
+        if (nombreCompleto === "" || telefono === "" || direccionBarrio === "" || ciudadDepartamento === "" || correoElectronico === "") {
+            alert("Por favor completa todos los campos antes de enviar el formulario.");
+        } else {
+            // Si todos los campos están llenos, llamar a la función para enviar los datos
+            enviarDatos();
+        }
+    }
+</script>
+
+
+
+
 
 </body>
 </html>
