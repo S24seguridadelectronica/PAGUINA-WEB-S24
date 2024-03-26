@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <title>Registro e Inicio de Sesión</title>
+    <style>
+        /* Estilos CSS para los modales */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+        }
+
+        /* Ajustar estilos del formulario dentro del modal */
+        .modal-content form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-content form label {
+            margin-bottom: 10px;
+        }
+
+        .modal-content form input {
+            margin-bottom: 15px;
+        }
+
+
+
+
+/* Estilos para el indicador de carga */
+.loader-container {
+    position: fixed;
+    z-index: 1000; /* Asegura que esté en la parte superior */
+    top: 50%; /* Lo posiciona en la mitad vertical de la pantalla */
+    left: 50%; /* Lo posiciona en la mitad horizontal de la pantalla */
+    transform: translate(-50%, -50%); /* Lo mueve hacia arriba y hacia la izquierda en la mitad de su tamaño */
+    text-align: center; /* Centra el contenido horizontalmente */
+}
+
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Nombre de tu sitio web</h1>
+    </header>
+    
+    <main>
+
+        <input type="text" id="buscador" placeholder="Buscar productos" style="width: 100%; margin-bottom: 10px;">
+
+        <section id="acceso">
+            <div id="loadingIndicator" style="display: none;">
+                <div class="loader"></div>
+                <p>Procesando...</p>
+            </div>
+            
+            
+       
+            <dialog id="loginRegistroModal" aria-labelledby="modalTitle" aria-hidden="true">
+                <div class="modal-content">
+                    <button id="cerrarRegistroModal" class="close" aria-label="Cerrar">&times;</button>
+                    <h2 id="modalTitle">Iniciar Sesión o Registrarse</h2>
+                    <form id="loginForm" method="post" action="/login">
+                        <fieldset>
+                            <legend>Iniciar Sesión</legend>
+                            <label for="loginTelefono">Teléfono:</label>
+                            <input type="tel" id="loginTelefono" name="loginTelefono" required>
+                            <label for="loginContrasena">Contraseña:</label>
+                            <input type="password" id="loginContrasena" name="loginContrasena" required>
+                            <button type="submit">Iniciar Sesión</button>
+                        </fieldset>
+                    </form>
+                    <form id="registroForm" method="post" action="/registro">
+                        <fieldset>
+                            <legend>Registrarse</legend>
+                            <label for="nombre">Nombre:</label>
+                            <input type="text" id="nombre" name="nombre" required>
+                            <label for="telefono">Teléfono:</label>
+                            <input type="tel" id="telefono" name="telefono" required>
+                            <label for="contrasena">Contraseña:</label>
+                            <input type="password" id="contrasena" name="contrasena" required>
+                            <button type="submit">Registrarse</button>
+                        </fieldset>
+                    </form>
+                </div>
+            </dialog>
+        
+    
+            <dialog id="successModal" aria-labelledby="successModalTitle" aria-hidden="true">
+                <div class="modal-content">
+                    <button class="close" aria-label="Cerrar">&times;</button>
+                    <h2 id="successModalTitle">Factura de Venta</h2>
+                    <p id="liveDateTime"></p>
+                    <div class="cliente-info">
+                        <h3>Información del Cliente</h3>
+                        <p><strong>Nombre:</strong> <span id="nombreCliente"></span></p>
+                        <p><strong>Teléfono:</strong> <span id="telefonoCliente"></span></p>
+                        <p><strong>Dirección:</strong> <span id="direccionCliente"></span></p>
+                        <p><strong>Correo Electrónico:</strong> <span id="correoCliente"></span></p>
+                        <p><strong>NIT:</strong> <span id="nitCliente"></span></p>
+                        <p><strong>Razón Social:</strong> <span id="razonSocialCliente"></span></p>
+                    </div>
+                    <div class="otros-campos">
+                        <h3>Productos</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Nombre</th>
+                                    <th>Descripción</th>
+                                    <th>Precio</th>
+                                    <th>Cantidad</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody id="productosTabla">
+                                <!-- Aquí se agregarán dinámicamente los productos -->
+                            </tbody>
+                        </table>
+                        <p><strong>Total:</strong> <span id="totalFactura"></span></p>
+                        <p><strong>Impuestos:</strong> <span id="impuestosFactura"></span></p>
+                        <button id="confirmarCompraBtn">Confirmar Compra</button>
+                    </div>
+                </div>
+            </dialog>
+
+
+            <dialog id="successModalCopy" aria-labelledby="successModalCopyTitle" aria-hidden="true">
+                <div class="modal-content">
+                    <button class="close" aria-label="Cerrar" id="closeModalCopy">&times;</button>
+                    <h2 id="successModalCopyTitle">Factura de Venta (Copia)</h2>
+                    <p id="liveDateTimeCopy"></p>
+                    <div class="cliente-info">
+                        <h3>Información del Cliente</h3>
+                        <p><strong>Nombre:</strong> <span id="nombreClienteCopy"></span></p>
+                        <p><strong>Teléfono:</strong> <span id="telefonoClienteCopy"></span></p>
+                        <p><strong>Dirección:</strong> <span id="direccionClienteCopy"></span></p>
+                        <p><strong>Correo Electrónico:</strong> <span id="correoClienteCopy"></span></p>
+                        <p><strong>NIT:</strong> <span id="nitClienteCopy"></span></p>
+                        <p><strong>Razón Social:</strong> <span id="razonSocialClienteCopy"></span></p>
+                    </div>
+                    <div class="otros-campos">
+                        <h3>Productos</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Nombre</th>
+                                    <th>Descripción</th>
+                                    <th>Precio</th>
+                                    <th>Cantidad</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody id="productosTablaCopy">
+                                <!-- Aquí se agregarán dinámicamente los productos -->
+                            </tbody>
+                        </table>
+                        <p><strong>Total:</strong> <span id="totalFacturaCopy"></span></p>
+                        <p><strong>Impuestos:</strong> <span id="impuestosFacturaCopy"></span></p>
+                        <button id="generatePdfBtn">Generar PDF</button>
+                    </div>
+                </div>
+            </dialog>
+            
+            
+            
+        
+    
+    </section>
+
+    <section id="productos">
+
+           <!-- Producto 1 -->
+<article class="product">
+    <h2>Nombre del Producto 1</h2>
+    <figure>
+        <img src="ruta/a/la/imagen1.jpg" alt="">
+        <figcaption>Descripción opcional de la imagen.</figcaption>
+    </figure>
+    <p class="nombre">fernando</p>
+    <p class="descripcion">fernando</p>
+    <p class="precio">Precio: $100.00</p>
+    <form onsubmit="event.preventDefault(); agregarAlCarrito(this)">
+        <button type="submit">Agregar al Carrito</button>
+    </form>
+</article>
+
+<!-- Producto 2 -->
+<article class="product">
+    <h2>Nombre del Producto 2</h2>
+    <figure>
+        <img src="ruta/a/la/imagen1.jpg" alt="">
+        <figcaption>Descripción opcional de la imagen.</figcaption>
+    </figure>
+    <p class="nombre">Descri 1.</p>
+    <p class="descripcion">Descripción del producto 1.</p>
+    <p class="precio">Precio: $300.00</p>
+    <form onsubmit="event.preventDefault(); agregarAlCarrito(this)">
+        <button type="submit">Agregar al Carrito</button>
+    </form>
+</article>
+
+            
+        </section>
+
+
+          <!-- Carrito de compras -->
+        <aside class="cart" id="carrito">
+        <h2>Carrito de Compras</h2>
+        <p id="productos-carrito">No hay productos en el carrito</p>
+        <p id="total-carrito">Total: $0.00</p>
+        </aside>
+        <button onclick="vaciarCarrito()">Vaciar Carrito</button>
+        <button id="comprarBtn" type="button">Comprar</button>
+
+        
+
+    </main>
+    
+    <footer>
+        <!-- Pie de página -->
+    </footer>
+    
+<!-- Incluir jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    let productosEnCarrito = [];
+
+    function agregarAlCarrito() {
+    const articulo = event.target.closest(".product");
+    const nombres = articulo.querySelectorAll('.nombre');
+    const precios = articulo.querySelectorAll('.precio');
+
+    nombres.forEach((nombreElement, index) => {
+        const nombre = nombreElement.textContent.trim();
+        const precioString = precios[index].textContent.trim();
+        const precio = parseFloat(precioString.replace("Precio: $", ""));
+
+        // Buscar si el producto ya está en el carrito
+        const productoExistenteIndex = productosEnCarrito.findIndex(producto => producto.nombre === nombre);
+
+        if (productoExistenteIndex !== -1) {
+            // Si el producto ya está en el carrito, aumentar la cantidad
+            productosEnCarrito[productoExistenteIndex].cantidad += 1;
+        } else {
+            // Si el producto no está en el carrito, agregarlo con cantidad 1
+            productosEnCarrito.push({ nombre, precio, cantidad: 1 });
+        }
+    });
+
+    mostrarCarrito();
+    mostrarCarritoEnTabla(); // Llamar a la función para mostrar el carrito en la tabla
+    // Llamar a la función para mostrar el carrito en la tabla del modal de agradecimiento
+    mostrarCarritoEnTablaAgradecimiento();
+    return false;
+}
+
+
+
+function mostrarCarrito() {
+    const carrito = document.getElementById("carrito");
+    let html = "<h2>Carrito de Compras</h2>";
+    let total = 0;
+    if (productosEnCarrito.length === 0) {
+        html += "<p>No hay productos en el carrito</p>";
+    } else {
+        html += "<ul>";
+        productosEnCarrito.forEach(producto => {
+            console.log("Nombre del producto:", producto.nombre);
+            console.log("Cantidad del producto:", producto.cantidad);
+            console.log("Precio del producto (string):", producto.precio);
+            html += `<li>${producto.nombre} - Cantidad: ${producto.cantidad} - Precio: $${producto.precio}</li>`;
+            total += producto.precio * producto.cantidad;
+        });
+        html += "</ul>";
+    }
+    html += `<p>Total: $${total.toFixed(2)}</p>`;
+    carrito.innerHTML = html;
+}
+
+    function vaciarCarrito() {
+        productosEnCarrito = [];
+        mostrarCarrito();
+    }
+
+    $(document).ready(function() {
+        $('#comprarBtn').click(function() {
+            $('#loginRegistroModal').css('display', 'block');
+        });
+
+        $('#cerrarRegistroModal').click(function() {
+            $('#loginRegistroModal').css('display', 'none');
+        });
+
+        $('#loginForm').submit(function(event) {
+            event.preventDefault();
+            var formData = $(this).serializeArray();
+            $.ajax({
+                type: "POST",
+                url: "https://script.google.com/macros/s/AKfycbyJtUAz4n2ALcOTJAnJuOQM6xYspShHFqujUSL43GI2KKG7_h2BW7rtkJnQ4as_Ur-Bcg/exec",
+                data: formData,
+                success: function(response) {
+                    console.log(response);
+                    if (response.trim() === 'Inicio de sesión exitoso.') {
+                        alert('¡Inicio de sesión exitoso!');
+                        $('#successModal').css('display', 'block');
+                        $('#loginForm input[type="tel"], #loginForm input[type="password"]').val('');
+                    } else if (response.trim() === 'Credenciales inválidas.') {
+                        alert('Usuario o contraseña incorrectos. Por favor, inténtalo de nuevo.');
+                    } else {
+                        alert('Error al intentar iniciar sesión. Por favor, inténtalo de nuevo.');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                    alert('Error al intentar iniciar sesión. Por favor, inténtalo de nuevo.');
+                }
+            });
+        });
+
+        $('#registroForm').submit(function(event) {
+            event.preventDefault();
+            var formData = $(this).serializeArray();
+            $.ajax({
+                type: "POST",
+                url: "https://script.google.com/macros/s/AKfycbyJtUAz4n2ALcOTJAnJuOQM6xYspShHFqujUSL43GI2KKG7_h2BW7rtkJnQ4as_Ur-Bcg/exec",
+                data: formData,
+                success: function(response) {
+                    console.log(response);
+                    alert('¡Registro exitoso!');
+                    var filaRegistro = $('#registroForm').closest('form');
+                    filaRegistro.css('background-color', 'lightgreen');
+                    filaRegistro.find('button[type="submit"]').text('Registrado');
+                    $('#registroForm input[type="text"], #registroForm input[type="tel"], #registroForm input[type="password"]').val('');
+                    $('#nombreCliente').text(formData[0].value);
+                    $('#telefonoCliente').text(formData[1].value);
+                    $('#successModal').css('display', 'block');
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+
+        $('.close').click(function() {
+            $(this).closest('.modal').css('display', 'none');
+        });
+    });
+
+    function obtenerFechaHoraActual() {
+        const ahora = new Date();
+        const dia = ahora.getDate().toString().padStart(2, '0');
+        const mes = (ahora.getMonth() + 1).toString().padStart(2, '0');
+        const año = ahora.getFullYear();
+        const horas = ahora.getHours().toString().padStart(2, '0');
+        const minutos = ahora.getMinutes().toString().padStart(2, '0');
+        const segundos = ahora.getSeconds().toString().padStart(2, '0');
+        return `${dia}/${mes}/${año} ${horas}:${minutos}:${segundos}`;
+    }
+
+    function actualizarFechaHora() {
+        const liveDateTime = document.getElementById("liveDateTime");
+        if (liveDateTime) {
+            liveDateTime.textContent = "Fecha y hora actual: " + obtenerFechaHoraActual();
+        }
+    }
+
+    setInterval(actualizarFechaHora, 1000);
+
+    function establecerInformacionCliente(nombre, telefono, direccion, correo, nit, razonSocial) {
+        document.getElementById("nombreCliente").textContent = nombre;
+        document.getElementById("telefonoCliente").textContent = telefono;
+        document.getElementById("direccionCliente").textContent = direccion;
+        document.getElementById("correoCliente").textContent = correo;
+        document.getElementById("nitCliente").textContent = nit;
+        document.getElementById("razonSocialCliente").textContent = razonSocial;
+    }
+
+    establecerInformacionCliente("Juan Pérez", "1234567890", "Calle Principal 123", "juan@example.com", "123456-7", "Empresa XYZ");
+</script>
+
+<SCript>
+$(document).ready(function() {
+    // Controlador de eventos para el botón de cierre en el modal de éxito
+    $('#successModal .close').click(function() {
+        // Ocultar el modal de éxito cuando se hace clic en el botón de cierre
+        $('#successModal').css('display', 'none');
+    });
+});
+
+
+
+
+function mostrarCarritoEnTabla() {
+    // Obtener referencia a la tabla donde se mostrarán los productos
+    const tabla = document.getElementById("productosTabla");
+    
+    // Inicializar el total de la factura en 0
+    let totalFactura = 0;
+
+    // Limpiar la tabla antes de agregar nuevos productos
+    tabla.innerHTML = "";
+
+    // Iterar sobre los productos en el carrito
+    productosEnCarrito.forEach(function(producto, index) {
+        // Calcular el precio total del producto (precio por cantidad)
+        const precioTotal = producto.precio * producto.cantidad;
+        
+        // Sumar el precio total al total de la factura
+        totalFactura += precioTotal;
+
+        // Crear una nueva fila para la tabla
+        const fila = document.createElement("tr");
+
+        // Llenar la fila con los datos del producto usando template literals
+        fila.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${producto.nombre}</td>
+            <td>${producto.descripcion}</td>
+            <td>$${producto.precio}</td>
+            <td>${producto.cantidad}</td>
+            <td>$${precioTotal.toFixed(2)}</td>
+        `;
+
+        // Agregar la fila a la tabla
+        tabla.appendChild(fila);
+    });
+
+    // Mostrar el total de la factura actualizado en el modal
+    document.getElementById("totalFactura").textContent = "$" + totalFactura.toFixed(2);
+}
+
+
+$('#loginForm').submit(function(event) {
+    event.preventDefault();
+    var formData = $(this).serializeArray();
+    // Mostrar indicador de carga
+    $('#loadingIndicator').css('display', 'block');
+    $.ajax({
+        type: "POST",
+        url: "https://script.google.com/macros/s/AKfycbyJtUAz4n2ALcOTJAnJuOQM6xYspShHFqujUSL43GI2KKG7_h2BW7rtkJnQ4as_Ur-Bcg/exec",
+        data: formData,
+        success: function(response) {
+            console.log(response);
+            if (response.trim() === 'Inicio de sesión exitoso.') {
+                alert('¡Inicio de sesión exitoso!');
+                $('#successModal').css('display', 'block');
+                $('#loginForm input[type="tel"], #loginForm input[type="password"]').val('');
+            } else if (response.trim() === 'Credenciales inválidas.') {
+                alert('Usuario o contraseña incorrectos. Por favor, inténtalo de nuevo.');
+            } else {
+                alert('Error al intentar iniciar sesión. Por favor, inténtalo de nuevo.');
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error(xhr.responseText);
+            alert('Error al intentar iniciar sesión. Por favor, inténtalo de nuevo.');
+        },
+        complete: function() {
+            // Ocultar indicador de carga cuando se completa la solicitud
+            $('#loadingIndicator').css('display', 'none');
+        }
+    });
+});
+
+
+
+
+
+
+function mostrarCarga() {
+    $('#loadingIndicator').css('display', 'block');
+}
+
+function ocultarCarga() {
+    $('#loadingIndicator').css('display', 'none');
+}
+
+
+
+
+
+
+
+
+
+
+</SCript>
+
+<script>
+    $(document).ready(function() {
+        // Controlador de eventos para el botón de cierre en el modal de éxito
+        $('#successModal .close').click(function() {
+            // Ocultar el modal de éxito cuando se hace clic en el botón de cierre
+            $('#successModal').css('display', 'none');
+        });
+    });
+    </script>
+
+
+
+<section id="productos">
+    <!-- Agregar un campo de búsqueda -->
+    <input type="text" id="buscador" placeholder="Buscar productos">
+
+    <!-- Resto de tu código HTML -->
+    <!-- Producto 1 -->
+    <article class="product" data-nombre="Nombre del Producto 1" data-descripcion="Descripción opcional de la imagen.">
+        <!-- Contenido del producto -->
+    </article>
+
+    <!-- Producto 2 -->
+    <article class="product" data-nombre="Nombre del Producto 2" data-descripcion="Descripción opcional de la imagen.">
+        <!-- Contenido del producto -->
+    </article>
+
+    <!-- Resto de tus productos -->
+</section>
+
+<script>
+    // Obtener referencia al campo de búsqueda
+    const buscador = document.getElementById("buscador");
+
+    // Obtener referencia a todos los productos
+    const productos = document.querySelectorAll(".product");
+
+    // Agregar un controlador de eventos para el evento input en el campo de búsqueda
+    buscador.addEventListener("input", function() {
+        const textoBusqueda = this.value.toLowerCase().trim();
+
+        // Iterar sobre todos los productos y mostrar u ocultar según el texto de búsqueda
+        productos.forEach(function(producto) {
+            const nombre = producto.dataset.nombre.toLowerCase();
+            const descripcion = producto.dataset.descripcion.toLowerCase();
+
+            if (nombre.includes(textoBusqueda) || descripcion.includes(textoBusqueda)) {
+                producto.style.display = "block"; // Mostrar el producto
+            } else {
+                producto.style.display = "none"; // Ocultar el producto
+            }
+        });
+    });
+</script>
+
+    
+<script>
+    // Función para filtrar los productos según el término de búsqueda
+    function filtrarProductos() {
+        // Obtener el término de búsqueda ingresado por el usuario
+        const terminoBusqueda = document.getElementById("buscador").value.trim().toLowerCase();
+        
+        // Obtener todos los productos
+        const productos = document.querySelectorAll(".product");
+
+        // Iterar sobre cada producto y ocultar aquellos que no coincidan con el término de búsqueda
+        productos.forEach(producto => {
+            const nombre = producto.querySelector('.nombre').textContent.trim().toLowerCase();
+            const descripcion = producto.querySelector('.descripcion').textContent.trim().toLowerCase();
+
+            if (nombre.includes(terminoBusqueda) || descripcion.includes(terminoBusqueda)) {
+                producto.style.display = "block"; // Mostrar el producto
+            } else {
+                producto.style.display = "none"; // Ocultar el producto
+            }
+        });
+    }
+
+    // Agregar un event listener para el evento de input en el campo de búsqueda
+    document.getElementById("buscador").addEventListener("input", filtrarProductos);
+
+
+
+    // Agregar un event listener para el botón "Confirmar Compra"
+document.getElementById("confirmarCompraBtn").addEventListener("click", function() {
+    // Ocultar el modal de factura de venta
+    document.getElementById("successModal").close();
+
+    // Mostrar el modal de agradecimiento
+    document.getElementById("agradecimientoModal").showModal();
+});
+
+
+
+
+
+</script>
+
+<script>
+    document.querySelector('#agradecimientoModal .close').addEventListener('click', function() {
+        document.getElementById('agradecimientoModal').close();
+    });
+</script>
+
+<script>
+    // Manejador de eventos para el botón "confirmarCompraBtn"
+    document.getElementById("confirmarCompraBtn").addEventListener("click", function() {
+        // Recolectar datos del modal original
+        var nombreCliente = document.getElementById("nombreCliente").textContent;
+        var telefonoCliente = document.getElementById("telefonoCliente").textContent;
+        var direccionCliente = document.getElementById("direccionCliente").textContent;
+        var correoCliente = document.getElementById("correoCliente").textContent;
+        var nitCliente = document.getElementById("nitCliente").textContent;
+        var razonSocialCliente = document.getElementById("razonSocialCliente").textContent;
+        // Aquí puedes recolectar más datos según sea necesario
+
+        // Mostrar los datos recolectados en el modal original
+        document.getElementById("nombreCliente").textContent = nombreCliente;
+        document.getElementById("telefonoCliente").textContent = telefonoCliente;
+        document.getElementById("direccionCliente").textContent = direccionCliente;
+        document.getElementById("correoCliente").textContent = correoCliente;
+        document.getElementById("nitCliente").textContent = nitCliente;
+        document.getElementById("razonSocialCliente").textContent = razonSocialCliente;
+        // Aquí puedes mostrar más datos según sea necesario
+    });
+
+    // Manejador de eventos para el botón "confirmarCompraBtnCopy"
+    document.getElementById("confirmarCompraBtnCopy").addEventListener("click", function() {
+        // Recolectar datos del modal copiado
+        var nombreClienteCopy = document.getElementById("nombreClienteCopy").textContent;
+        var telefonoClienteCopy = document.getElementById("telefonoClienteCopy").textContent;
+        var direccionClienteCopy = document.getElementById("direccionClienteCopy").textContent;
+        var correoClienteCopy = document.getElementById("correoClienteCopy").textContent;
+        var nitClienteCopy = document.getElementById("nitClienteCopy").textContent;
+        var razonSocialClienteCopy = document.getElementById("razonSocialClienteCopy").textContent;
+        // Aquí puedes recolectar más datos según sea necesario
+
+        // Mostrar los datos recolectados en el modal copiado
+        document.getElementById("nombreClienteCopy").textContent = nombreClienteCopy;
+        document.getElementById("telefonoClienteCopy").textContent = telefonoClienteCopy;
+        document.getElementById("direccionClienteCopy").textContent = direccionClienteCopy;
+        document.getElementById("correoClienteCopy").textContent = correoClienteCopy;
+        document.getElementById("nitClienteCopy").textContent = nitClienteCopy;
+        document.getElementById("razonSocialClienteCopy").textContent = razonSocialClienteCopy;
+        // Aquí puedes mostrar más datos según sea necesario
+    });
+</script>
+
+<script>
+    // Manejador de eventos para el botón "confirmarCompraBtn"
+    document.getElementById("confirmarCompraBtn").addEventListener("click", function() {
+        // Recopilar datos del cliente
+        var nombreCliente = document.getElementById("nombreCliente").textContent;
+        var telefonoCliente = document.getElementById("telefonoCliente").textContent;
+        var direccionCliente = document.getElementById("direccionCliente").textContent;
+        var correoCliente = document.getElementById("correoCliente").textContent;
+        var nitCliente = document.getElementById("nitCliente").textContent;
+        var razonSocialCliente = document.getElementById("razonSocialCliente").textContent;
+
+        // Recopilar datos de los productos
+        var productos = [];
+        var rows = document.getElementById("productosTabla").rows;
+        for (var i = 0; i < rows.length; i++) {
+            var item = rows[i].cells[0].textContent;
+            var nombre = rows[i].cells[1].textContent;
+            var descripcion = rows[i].cells[2].textContent;
+            var precio = rows[i].cells[3].textContent;
+            var cantidad = rows[i].cells[4].textContent;
+            var total = rows[i].cells[5].textContent;
+            productos.push({ item: item, nombre: nombre, descripcion: descripcion, precio: precio, cantidad: cantidad, total: total });
+        }
+
+        // Mostrar datos del cliente en el modal original
+        document.getElementById("nombreCliente").textContent = nombreCliente;
+        document.getElementById("telefonoCliente").textContent = telefonoCliente;
+        document.getElementById("direccionCliente").textContent = direccionCliente;
+        document.getElementById("correoCliente").textContent = correoCliente;
+        document.getElementById("nitCliente").textContent = nitCliente;
+        document.getElementById("razonSocialCliente").textContent = razonSocialCliente;
+
+        // Mostrar datos de los productos en el modal original
+        for (var j = 0; j < productos.length; j++) {
+            var newRow = document.createElement("tr");
+            newRow.innerHTML = "<td>" + productos[j].item + "</td><td>" + productos[j].nombre + "</td><td>" + productos[j].descripcion + "</td><td>" + productos[j].precio + "</td><td>" + productos[j].cantidad + "</td><td>" + productos[j].total + "</td>";
+            document.getElementById("productosTabla").appendChild(newRow);
+        }
+
+        // Mostrar datos del cliente en el modal copia
+        document.getElementById("nombreClienteCopy").textContent = nombreCliente;
+        document.getElementById("telefonoClienteCopy").textContent = telefonoCliente;
+        document.getElementById("direccionClienteCopy").textContent = direccionCliente;
+        document.getElementById("correoClienteCopy").textContent = correoCliente;
+        document.getElementById("nitClienteCopy").textContent = nitCliente;
+        document.getElementById("razonSocialClienteCopy").textContent = razonSocialCliente;
+
+        // Mostrar datos de los productos en el modal copia
+        var productosTablaCopy = document.getElementById("productosTablaCopy");
+        productosTablaCopy.innerHTML = ""; // Limpiar contenido anterior
+        for (var k = 0; k < productos.length; k++) {
+            var newRowCopy = document.createElement("tr");
+            newRowCopy.innerHTML = "<td>" + productos[k].item + "</td><td>" + productos[k].nombre + "</td><td>" + productos[k].descripcion + "</td><td>" + productos[k].precio + "</td><td>" + productos[k].cantidad + "</td><td>" + productos[k].total + "</td>";
+            productosTablaCopy.appendChild(newRowCopy);
+        }
+    });
+
+    // Obtener referencia al botón de cierre de la ventana modal copia
+const closeModalCopyBtn = document.getElementById('closeModalCopy');
+
+// Agregar un evento al botón de cierre de la ventana modal copia
+closeModalCopyBtn.addEventListener('click', function() {
+    successModalCopy.close(); // Cerrar la ventana modal copia
+});
+
+</script>
+
+<script>
+
+// Obtener referencia al botón "Confirmar Compra" del primer modal
+const confirmarCompraBtn = document.getElementById('confirmarCompraBtn');
+
+// Obtener referencia a la ventana modal copia
+const successModalCopy = document.getElementById('successModalCopy');
+
+// Agregar un evento al botón "Confirmar Compra"
+confirmarCompraBtn.addEventListener('click', function() {
+    // Recopilar los datos del primer modal
+    const nombreCliente = document.getElementById('nombreCliente').textContent;
+    const telefonoCliente = document.getElementById('telefonoCliente').textContent;
+    const direccionCliente = document.getElementById('direccionCliente').textContent;
+    const correoCliente = document.getElementById('correoCliente').textContent;
+    const nitCliente = document.getElementById('nitCliente').textContent;
+    const razonSocialCliente = document.getElementById('razonSocialCliente').textContent;
+    // Recopilar los datos de los productos del primer modal
+    // Aquí necesitarías obtener los datos de los productos según la estructura de tu aplicación
+
+    // Llenar los datos en el primer modal (original)
+    // Aquí llenarías los datos en los elementos correspondientes del primer modal
+
+    // Llenar los datos en el segundo modal (copia)
+    document.getElementById('nombreClienteCopy').textContent = nombreCliente;
+    document.getElementById('telefonoClienteCopy').textContent = telefonoCliente;
+    document.getElementById('direccionClienteCopy').textContent = direccionCliente;
+    document.getElementById('correoClienteCopy').textContent = correoCliente;
+    document.getElementById('nitClienteCopy').textContent = nitCliente;
+    document.getElementById('razonSocialClienteCopy').textContent = razonSocialCliente;
+    // Llenar los datos de los productos en el segundo modal (copia)
+    // Aquí llenarías los datos de los productos en los elementos correspondientes del segundo modal
+
+    // Abrir la ventana modal copia
+    successModalCopy.showModal();
+});
+
+
+
+const generatePdfBtn = document.getElementById('generatePdfBtn');
+
+generatePdfBtn.addEventListener('click', function() {
+    // Recolectar la información del modal copia
+    const nombreClienteCopy = document.getElementById('nombreClienteCopy').textContent;
+    const telefonoClienteCopy = document.getElementById('telefonoClienteCopy').textContent;
+    // Recoge más datos según sea necesario
+    
+    // Crear un nuevo documento PDF
+    const doc = new jsPDF();
+    
+    // Agregar la información recolectada al documento PDF
+    doc.text(`Nombre del Cliente: ${nombreClienteCopy}`, 10, 10);
+    doc.text(`Teléfono del Cliente: ${telefonoClienteCopy}`, 10, 20);
+    // Agrega más datos al PDF según sea necesario
+    
+    // Guardar el documento PDF
+    doc.save('factura.pdf');
+});
+
+
+
+
+</script>
+
+
+
+
+
+
+<script>
+
+
+// Supongamos que los datos del cliente se almacenan en variables globales o en el almacenamiento local del navegador
+var nombreCliente = obtenerNombreCliente(); // Función para obtener el nombre del cliente
+var telefonoCliente = obtenerTelefonoCliente(); // Función para obtener el teléfono del cliente
+
+document.getElementById("confirmarCompraBtn").addEventListener("click", function() {
+    // Recopilar los detalles de los productos desde la función mostrarCarrito
+    var productos = obtenerDetallesProductos();
+
+    // Crear un objeto con los datos a enviar
+    var datos = {
+        nombreCliente: nombreCliente,
+        telefonoCliente: telefonoCliente,
+        productos: productos // Agregar los detalles de los productos al objeto de datos
+    };
+
+    // Realizar una solicitud AJAX POST al script de Google Apps Script
+    $.ajax({
+        type: "POST",
+        url: "https://script.google.com/macros/s/AKfycbzDiiURPnwmYhpWtbhRwKO6HtMtW2uvDdt2k0JMg4zLOhWtEZYHpslwMiTLF6KrAi-Xfg/exec",
+        data: JSON.stringify(datos),
+        contentType: "application/json",
+        success: function(response) {
+            alert("Los datos se han enviado exitosamente a Google Sheets.");
+        },
+        error: function(xhr, status, error) {
+            console.error(xhr.responseText);
+            alert("Error al enviar los datos a Google Sheets. Por favor, inténtalo de nuevo.");
+        }
+    });
+});
+
+// Función para obtener los detalles de los productos desde la función mostrarCarrito
+function obtenerDetallesProductos() {
+    var detallesProductos = [];
+    var productos = productosEnCarrito; // Suponiendo que productosEnCarrito contiene los productos en el carrito
+    productos.forEach(function(producto) {
+        detallesProductos.push({
+            nombre: producto.nombre,
+            precio: producto.precio,
+            cantidad: producto.cantidad
+        });
+    });
+    return detallesProductos;
+}
+
+
+document.getElementById("confirmarCompraBtn").addEventListener("click", function() {
+    console.log("Botón de confirmar compra presionado");
+    // Resto del código...
+});
+
+
+
+
+
+
+</script>
+
+    </body>
+    </html>
+    
