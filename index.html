@@ -1,535 +1,194 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ventana Modal</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Normalize CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-    <!-- Estilos personalizados -->
-    <link rel="stylesheet" href="styles.css">
+    <title>Mi Sitio Web</title>
+    <!-- Enlace a Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Icono de la página -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- Enlace a Videoport CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/videoport/2.0.1/css/videoport.min.css">
     <style>
-    /* Tus estilos CSS personalizados van aquí */
-       /* Modern CSS Reset */
-       
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+
+
+
+
+
+
+
+main {
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px;
+    animation: fadeIn 1s ease; /* Animación de desvanecimiento */
+    background-color: rgba(0, 0, 0, 0.5); /* Color de fondo transparente */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra de caja */
 }
 
-body {
-    line-height: 1.6; /* Altura de línea */
-    background-color: black; /* Fondo negro */
-    color: white; /* Color del texto blanco para que sea legible en el fondo negro */
+/* Animación de desvanecimiento */
+@keyframes fadeIn {
+    from {
+        opacity: 0; /* Inicia completamente transparente */
+    }
+    to {
+        opacity: 1; /* Termina completamente visible */
+    }
 }
 
-img,
-iframe,
-embed,
-object,
-video {
-  display: block;
-  max-width: 100%;
+h1 {
+    margin-top: 50px; /* Margen superior aumentado para bajar el elemento */
+    font-size: 24px; /* Tamaño de fuente */
+    font-weight: bold; /* Negrita */
+    color: #333; /* Color del texto */
 }
 
-ol,
-ul {
-  list-style: none;
+.f2 {
+    color: blue;
+    font-size: 9vw;
+    font-weight: bold;
+    position: absolute;
+    top: 30%; /* Ajusta la mitad de la altura del contenedor */
+    right: 20%; /* Ajusta la mitad del ancho del contenedor */
+    transform: translate(50%, -50%); /* Centra horizontal y verticalmente */
+    background-color: rgba(255, 255, 255, 0.5); /* Fondo translúcido */
+    padding: 5px 10px; /* Espaciado alrededor del texto */
+    border-radius: 5px; /* Bordes redondeados */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Sombra del contenedor */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra del texto */
+    animation: floatText 2s infinite alternate; /* Animación de flotación */
 }
 
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-button,
-input,
-optgroup,
-select,
-textarea {
-  font: inherit;
-  margin: 0;
-}
-
-button,
-input {
-  overflow: visible;
-}
-
-button,
-select {
-  text-transform: none;
-}
-
-button,
-html [type="button"],
-[type="reset"],
-[type="submit"] {
-  -webkit-appearance: button;
-}
-
-::-moz-focus-inner {
-  border-style: none;
-  padding: 0;
-}
-
-::-webkit-file-upload-button {
-  font: inherit;
-  -webkit-appearance: button;
-}
-
-::-webkit-inner-spin-button,
-::-webkit-outer-spin-button {
-  height: auto;
-}
-
-::-webkit-input-placeholder {
-  color: inherit;
-  opacity: 0.54;
-}
-
-::-webkit-search-decoration,
-::-webkit-search-cancel-button,
-::-webkit-search-results-button,
-::-webkit-search-results-decoration {
-  -webkit-appearance: none;
+@keyframes floatText {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-5px);
+    }
 }
 
 
 
-.header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 5vh;
-    z-index: 1000;
-    background-color: red;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    overflow-x: auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 2vw;
+
+
+
+
+.f3 {
+    color: blue;
+    font-size: 16px;
+    font-weight: bold;
+    position: absolute;
+    top: 20px; /* Ajusta la distancia desde la parte superior */
+    right: 20px; /* Ajusta la distancia desde el borde derecho */
+    background-color: rgba(255, 255, 255, 0.5); /* Fondo translúcido */
+    padding: 5px 10px; /* Espaciado alrededor del texto */
+    border-radius: 5px; /* Bordes redondeados */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Sombra del contenedor */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra del texto */
+    animation: floatText 2s infinite alternate, fadeInOut 2s infinite alternate; /* Animaciones */
 }
 
-.navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 15vh;
-    z-index: 1000;
-    background-color: red;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    padding: 0 2vw;
+@keyframes floatText {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-5px);
+    }
 }
 
-.navbar-text {
-    color: white;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-    font-size: 4vw;
-    position: fixed;
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+
+
+
+
+.f6 {
+    /* Estilos para el texto */
+    color: blue;
+    font-size: 9vw;
+    font-weight: bold;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-}
-
-.fixed-text {
-    position: fixed;
-    top: 1vh;
-    left: 1vw;
-    z-index: 1001;
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 1vh 2vw;
-    color: black; /* Cambiar el color del texto fijo */
-}
-
-/* Media queries para pantallas pequeñas */
-@media (max-width: 767px) {
-    .navbar-text {
-        font-size: 6vw;
-    }
-
-    .fixed-text {
-        font-size: 3vw;
-    }
-}
-
-/* Media queries para pantallas medianas */
-@media (min-width: 768px) and (max-width: 991px) {
-    .navbar-text {
-        font-size: 4vw;
-    }
-
-    .fixed-text {
-        font-size: 2.5vw;
-    }
-}
-
-/* Media queries para pantallas grandes */
-@media (min-width: 992px) and (max-width: 1199px) {
-    .navbar-text {
-        font-size: 3vw;
-    }
-
-    .fixed-text {
-        font-size: 2vw;
-    }
-}
-
-/* Media queries para pantallas extra grandes */
-@media (min-width: 1200px) {
-    .navbar-text {
-        font-size: 2.5vw;
-    }
-
-    .fixed-text {
-        font-size: 1.5vw;
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-/* Media queries para pantallas pequeñas */
-@media (max-width: 767px) {
-    header {
-        height: 8vh; /* Cambiar la altura del encabezado en pantallas pequeñas */
-    }
-}
-
-/* Media queries para pantallas medianas */
-@media (min-width: 768px) and (max-width: 991px) {
-    header {
-        height: 10vh;
-    }
-}
-
-/* Media queries para pantallas grandes */
-@media (min-width: 992px) and (max-width: 1199px) {
-    header {
-        height: 10vh;
-    }
-}
-
-/* Media queries para pantallas extra grandes */
-@media (min-width: 1200px) {
-    header {
-        height: 10vh;
-    }
-}
-
-
-
-/* Estilos para el logo */
-#logo {
-    font-size: 10vw; /* Tamaño del logo en relación con el ancho de la ventana */
-    font-weight: bold;
-    margin-right: 9vw; /* Margen derecho en relación con el ancho de la ventana */
-}
-
-/* Estilos para el contenedor que envuelve al logo */
-.logo-container {
-    display: flex;
-    align-items: center;
-}
-
-/* Animación del resplandor */
-.shine {
-    animation: shineAnimation 2s infinite alternate;
-}
-
-@keyframes shineAnimation {
-    0% {
-        opacity: 1;
-        text-shadow: none;
-    }
-    100% {
-        opacity: 0.8;
-        text-shadow: 0 0 2vw white, 0 0 4vw white, 0 0 6vw white, 0 0 8vw white, 0 0 10vw white, 0 0 12vw white, 0 0 14vw white;
-    }
-}
-
-/* Media queries para pantallas pequeñas */
-@media (max-width: 767px) {
-    #logo {
-        font-size: 15vw; /* Tamaño del logo en relación con el ancho de la ventana */
-        margin-right: 10vw; /* Margen derecho en relación con el ancho de la ventana */
-    }
-}
-
-/* Media queries para pantallas medianas */
-@media (min-width: 768px) and (max-width: 991px) {
-    #logo {
-        font-size: 7.5vw; /* Tamaño del logo en relación con el ancho de la ventana */
-        margin-right: 5vw; /* Margen derecho en relación con el ancho de la ventana */
-    }
-}
-
-/* Media queries para pantallas grandes */
-@media (min-width: 992px) and (max-width: 1199px) {
-    #logo {
-        font-size: 5vw; /* Tamaño del logo en relación con el ancho de la ventana */
-        margin-right: 3vw; /* Margen derecho en relación con el ancho de la ventana */
-    }
-}
-
-/* Media queries para pantallas extra grandes */
-@media (min-width: 1200px) {
-    #logo {
-        font-size: 3vw; /* Tamaño del logo en relación con el ancho de la ventana */
-        margin-right: 2vw; /* Margen derecho en relación con el ancho de la ventana */
-    }
-}
-
-
-
-.navbar-text {
-    position: fixed;
-    top: 8vh; /* Centrado verticalmente */
-    left: 50vw; /* Centrado horizontalmente */
-    transform: translate(-50%, -50%);
-    display: flex;
-    align-items: center;
-    margin-left: auto; /* Alinear el mensaje al frente del logo */
-    white-space: nowrap; /* Evitar que el texto se divida en dos líneas */
-    color: white; /* Realce con negro */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Agrega una sombra al texto */
-    font-size: 8vw; /* Tamaño de letra en unidades de viewport */
-}
-
-
-/* Media queries para ajustar el margen izquierdo en todas las pantallas */
-@media (max-width: 767px) {
-    .navbar-text {
-        margin-left: 13vw; /* Ajusta el margen izquierdo en relación con el ancho de la ventana */
-        font-size: 8vw; /* Tamaño de letra en unidades de viewport */
-    }
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-    .navbar-text {
-        margin-left: 13vw; /* Ajusta el margen izquierdo en relación con el ancho de la ventana */
-        font-size: 8vw; /* Tamaño de letra en unidades de viewport */
-    }
-}
-
-@media (min-width: 992px) and (max-width: 1199px) {
-    .navbar-text {
-        margin-left: 2vw; /* Ajusta el margen izquierdo en relación con el ancho de la ventana */
-    }
-}
-
-@media (min-width: 1200px) {
-    .navbar-text {
-        margin-left: 2vw; /* Ajusta el margen izquierdo en relación con el ancho de la ventana */
-    }
-}
-
-
-.navbar-text a {
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    font-size: 2.5vw; /* Tamaño de fuente relativo */
-    padding: 1vh 2vw; /* Relleno relativo */
-    border: 2px solid transparent;
-    border-radius: 0.5rem;
-    box-shadow: 2 6px 10px rgba(0, 0, 0, 0.1); /* Sombra */
-    transition: all 0.3s ease;
-}
-
-/* Media query para pantallas más pequeñas */
-@media (max-width: 768px) {
-    .navbar-text a {
-        font-size: 3vw;
-        padding: 1.5vh 3vw;
-        margin-left: -1vw; /* Ajusta el margen izquierdo según sea necesario */
-    }
-}
-
-/* Efecto al pasar el cursor */
-.navbar-text a:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-
-
-
-.btn-container {
-    text-align: center; /* Centra horizontalmente los elementos */
-}
-
-.btn-custom {
-    background-color: orange; /* Color naranja */
-    color: white; /* Texto blanco */
-    border: none; /* Sin borde */
-    border-radius: -10vw; /* Bordes redondeados */
-    padding: 5vw 10vw; /* Espaciado interno */
-    font-size: 10vw; /* Tamaño del texto */
-    cursor: pointer; /* Cursor al pasar */
-    transition: background-color 0.3s ease; /* Transición suave */
-    margin: 10vh auto; /* Margen automático izquierdo y derecho, y 10px arriba y abajo */
-    display: inline-block; /* Permite que el botón respete el margen automático */
-    height: 10vh; /* Altura del botón */
-    width: 75vw; /* Anchura del botón */
-    line-height: 10px; /* Alinea verticalmente el texto */
-
-}
-
-.btn-custom:hover {
-    background-color: darkorange; /* Cambio de color al pasar el cursor */
-}
-
-
-
-
-
-
-.form-container {
-    width: 90vw;
-    margin: 0 auto;
-    margin-left: -3vw; /* Mover el contenedor hacia la izquierda */
-}
-
-
-
-
-
-
-
-
-
-
-
-.iframe-container {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    padding-top: 56.25%; /* 16:9 aspect ratio */
-}
-
-.iframe-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-
-
-
-
-/* Estilos para el botón de WhatsApp */
-  #whatsapp-btn {
-    text-align: center;
-  }
-
-  #whatsapp-btn .btn {
-    font-size: 1.2rem;
-    padding: 10px 20px;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 5px 10px;
     border-radius: 5px;
-  }
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    white-space: nowrap;
+    opacity: 0; /* Inicialmente oculto */
+    transition: opacity 0.5s; /* Transición de opacidad */
+}
 
-  #whatsapp-btn .btn i {
-    margin-right: 10px;
-  }
 
-  /* Estilos para el enlace de WhatsApp */
-  #whatsapp-btn .btn-whatsapp {
-    background-color: #25d366;
-    color: #fff;
-    border: none;
-    transition: background-color 0.3s ease;
-  }
 
-  #whatsapp-btn .btn-whatsapp:hover {
-    background-color: #128c7e;
-  }
 
+
+
+
+
+
+
+
+  /*  sección inicio */
+#inicio {
+    width: 97%; /* Inicialmente, la sección ocupa el 80% del ancho de la pantalla */
+    margin: 0 auto; /* Centra la sección horizontalmente */
+    transition: width 0.5s; /* Transición suave cuando cambia el tamaño de la sección */
+    padding-top: 20px; /* Espacio superior para evitar que el contenido se superponga con el encabezado */
+    position: fixed;
+    left: 50%; /* Ajusta la sección al centro horizontal */
+    transform: translateX(-50%); /* Centra horizontalmente la sección */
+    top: 0;
+    z-index: -1; /* Envía la sección detrás del contenido */
+    background-size: cover; /* Ajusta la imagen para cubrir toda la sección */
+    background-position: center; /* Centra la imagen */
+}
+/* sección está al 100% */
+#inicio.full {
+    width: 100%; /* La sección ocupa el 100% del ancho de la pantalla */
+    left: 0; /* Vuelve a la posición inicial para que se expanda uniformemente en ambas direcciones */
+    transform: translateX(0); /* Elimina la traslación horizontal */
+}
 
   
 
-    footer {
-        background-color: #f8f9fa;
-        padding: 2px;
-        text-align: center;
-    }
 
-    footer p {
-        margin: 0;
-        font-size: 14px;
-        color: #555;
-    }
-  
-
-
-    
-/* Estilos personalizados para la ventana modal */
-.modal-content {
-    background-color: #FFD300; /* Fondo blanco */
-    border-radius: 15px; /* Bordes redondeados */
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* Sombra suave */
-}
-
-.modal-header {
-    background-color: #007bff; /* Fondo azul */
-    color: #fff; /* Texto blanco */
-    border-top-left-radius: 15px; /* Bordes redondeados arriba */
-    border-top-right-radius: 15px;
-}
-
-.modal-body {
-    padding: 30px; /* Mayor espacio entre el contenido y los bordes */
-    font-family: 'Arial', sans-serif; /* Fuente legible */
-    color: #ffffff; /* Texto blanco */
-    background-color: #ffA500; /* Fondo naranja */
+/* Estilo para el contenido debajo de la sección fija */
+body {
+    margin-top: 100vh; /* Ajusta el espacio para evitar que el contenido se solape con la sección fija */
+    margin-left: auto; /* Centra el contenido horizontalmente */
+    margin-right: auto; /* Centra el contenido horizontalmente */
+    width: 80%; /* Ancho del contenido */
+    max-width: 1200px; /* Ancho máximo del contenido */
 }
 
 
-.modal-footer {
-    border-bottom-left-radius: 15px; /* Bordes redondeados abajo */
-    border-bottom-right-radius: 15px;
+#encuentra-un-tecnico {
+    border: 2px solid #1900ff; /* Contorno sólido de 2px de ancho y color negro (#333) */
+    border-radius: 10px; /* Bordes redondeados para suavizar el contorno */
+    padding: 20px; /* Espaciado interno */
+    margin-top: 20px; /* Márgen superior */
+    margin-bottom: 20px; /* Márgen inferior */
+    background-color: aqua;
+    width: 97%; /* Inicialmente, la sección ocupa el 80% del ancho de la pantalla */
+
 }
-
-.modal-footer .btn-secondary {
-    background-color: #6c757d; /* Botón secundario de color gris */
-    border-color: #6c757d;
-}
-
-.modal-footer .btn-primary {
-    background-color: #28a745; /* Botón primario de color verde */
-    border-color: #28a745;
-}
-
-
-
-
-
-
 
 
 
@@ -538,353 +197,315 @@ html [type="button"],
 
 
     </style>
-
-
-
-
-
-
-
-
-
-
-
-<!-- Meta Pixel Code -->
-<script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '969254454530526');
-  fbq('track', 'PageView');
-  fbq('track', 'Purchase', {value: 97000.00, currency: 'COP'}); 
-</script>
-<noscript><img height='1' width='1' style='display:none' src='https://www.facebook.com/tr?id=969254454530526&ev=PageView&noscript=1'/></noscript>
-<!-- End Meta Pixel Code -->
-
-    
-
-
-    
 </head>
 <body>
+
+    <!-- Cabecera de la página con el menú de navegación -->
     <header>
-        <!-- Barra de navegación -->
-        <nav class="navbar navbar-light bg-red">
-            <div class="d-flex align-items-center justify-content-center" style="display: flex;">
-                <!-- Logo -->
-                <a class="navbar-brand" href="#" style="margin-right: 100px;">
-                    <div id="logo" class="shine">S24</div>
-                </a>                
-                <!-- Texto -->
-                <span class="navbar-text mx-2" style="margin-right: auto;">
-                    <a href="#formulario" style="text-decoration: none; color: white;" class="h4 fw-bold">
-                        Pídela ahora y paga en la puerta de tu casa
-                    </a>
-                </span>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="inicio.html">Inicio</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="contacto.html">Contacto</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="tienda.html">Tienda</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="blog.html">Blog</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </nav>
     </header>
-  
-    <div class="container">
-        <div class="row">
-
-            <div class="col-lg-12 col-md-6">
-                <div class="content">
-                    <h3></h3>
-                    <img src="imagenes/0.png" class="img-fluid" alt="">
-                    <div class="btn-container">
-                     <button class="btn btn-custom btn-block" onclick="redirectToForm()">Contactar</button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-12 col-md-6">
-                <div class="content">
-                    <h3></h3>
-                    <img src="imagenes/1.png" class="img-fluid" alt="">
-                    <div class="btn-container">
-                     <button class="btn btn-custom btn-block" onclick="redirectToForm()">Contactar</button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-12 col-md-6">
-                <div class="content">
-                    <h3></h3>
-                    <img src="imagenes/2.png" class="img-fluid" alt="">
-                    <div class="btn-container">
-                     <button class="btn btn-custom btn-block" onclick="redirectToForm()">Contactar</button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-12 col-md-6">
-                <div class="content">
-                    <h3></h3>
-                    <img src="imagenes/3.png" class="img-fluid" alt="">
-                    <div class="btn-container">
-                     <button class="btn btn-custom btn-block" onclick="redirectToForm()">Contactar</button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-12 col-md-6">
-                <div class="content">
-                    <h3></h3>
-                    <img src="imagenes/4.png" class="img-fluid" alt="">
-                    <div class="btn-container">
-                     <button class="btn btn-custom btn-block" onclick="redirectToForm()">Contactar</button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-12 col-md-6">
-                <div class="content">
-                    <h3></h3>
-                    <img src="imagenes/5.gif" class="img-fluid" alt="">
-                    <div class="btn-container">
-                     <button class="btn btn-custom btn-block" onclick="redirectToForm()">Contactar</button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-12 col-md-6">
-                <div class="content">
-                    <h3></h3>
-                    <img src="imagenes/6.png" class="img-fluid" alt="">
-                    <div class="btn-container">
-                     <button class="btn btn-custom btn-block" onclick="redirectToForm()">Contactar</button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-12 col-md-6">
-                <div class="content">
-                    <h3></h3>
-                    <img src="imagenes/7.gif" class="img-fluid" alt="">
-                    <div class="btn-container">
-                     <button class="btn btn-custom btn-block" onclick="redirectToForm()">Contactar</button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-12 col-md-6">
-                <div class="content">
-                    <h3></h3>
-                    <img src="imagenes/8.png" class="img-fluid" alt="">
-                    <div class="btn-container">
-                     <button class="btn btn-custom btn-block" onclick="redirectToForm()">Contactar</button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-12 col-md-6">
-                <div class="content">
-                    <h3></h3>
-                    <img src="imagenes/9.gif" class="img-fluid" alt="">
-                    <div class="btn-container">
-                     <button class="btn btn-custom btn-block" onclick="redirectToForm()">Contactar</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-12 col-md-6">
-                <div class="content">
-                    <h3></h3>
-                    <img src="imagenes/10.gif" class="img-fluid" alt="">
-                    <div class="btn-container">
-                     <button class="btn btn-custom btn-block" onclick="redirectToForm()">Contactar</button>
-                    </div>
-                </div>
-            </div>
-
-            
-            <div class="col-lg-12 col-md-6">
-                <div class="content">
-                    <h3></h3>
-                    <img src="imagenes/11.png" class="img-fluid" alt="">
-                    <div class="btn-container">
-                     <button class="btn btn-custom btn-block" onclick="redirectToForm()">Contactar</button>
-                    </div>
-                </div>
-            </div>
-
-            
-            <div class="col-lg-12 col-md-6">
-                <div class="content">
-                    <h3></h3>
-                    <img src="imagenes/12.png" class="img-fluid" alt="">
-                    <div class="btn-container">
-                     <button class="btn btn-custom btn-block" onclick="redirectToForm()">Contactar</button>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-    </div>
-</div>
-
-<div class="container" id="formulario" style="margin-top: 50px;">
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-4">
-        <div class="form-container">
-            <h2 class="text-center mb-4">Ingrese sus datos para enviar su pedido. ¡Incluya el correo electrónico para FACTURACIÓN ELECTRÓNICA!</h2>
-            <form id="myForm">
-                <div class="form-group">
-                    <label for="nombreCompleto">Nombre Completo:</label>
-                    <input type="text" class="form-control" id="nombreCompleto" name="nombreCompleto" required>
-                </div>
-                <div class="form-group">
-                    <label for="telefono">Teléfono:</label>
-                    <input type="tel" class="form-control" id="telefono" name="telefono" required>
-                </div>
-                <div class="form-group">
-                    <label for="direccionBarrio">Dirección/Barrio:</label>
-                    <input type="text" class="form-control" id="direccionBarrio" name="direccionBarrio" required>
-                </div>
-                <div class="form-group">
-                    <label for="ciudadDepartamento">Ciudad/Departamento:</label>
-                    <input type="text" class="form-control" id="ciudadDepartamento" name="ciudadDepartamento" required>
-                </div>
-                <div class="form-group">
-                    <label for="correoElectronico">Correo Electrónico:</label>
-                    <input type="email" class="form-control" id="correoElectronico" name="correoElectronico" required>
-                </div>
-                <!-- Botón de apertura de la ventana modal -->
-                    <button type="button" class="btn btn-primary btn-block custom-btn" onclick="validarYEnviar(); fbq('track', 'Purchase');">comprar</button>
-                    Enviar
-                </button>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- Ventana modal -->  
-<div class="modal fade" id="myModal">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
     
-                <!-- Encabezado de la ventana modal -->
-                <div class="modal-header">
-                    <h4 class="modal-title">¡Gracias por tu compra!</h4>
-<div id="logo" class="shine" style="position: absolute; left: 80%; ">S24</div>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
+    <!-- Contenido principal de la página -->
+    <main>
+     <!-- Sección de inicio -->
+<section id="inicio">
+    <header>
+        <h1>nos encontramos construyendo la pagina pedimos diculpas si algunas funciones no estan disponibles</h1>
+        <figcaption id="1">visita gratis para bucaramanga y area metropolitana</figcaption>
+        </header>
+    <!-- Carrusel de imágenes -->
+    <article id="carrusel-inicio" class="carousel slide" data-bs-ride="carousel">
+        <section class="carousel-inner">
+            <article class="carousel-item active">
+                <figure class="carousel-img">
+                    <img src="imagenes/1.jpg" class="d-block w-100" alt="Imagen 1">
+                    <figcaption class="f2">encuentra un instalador de camaras HOY!!?</figcaption>
+                    <figcaption class="f3">llamanos ahora11</figcaption>
+                    <figcaption class="4"></figcaption>
+                    <figcaption class="5"></figcaption>
+                </figure>
+            </article>
+            <article class="carousel-item">id="carousel-item">
+                <figure class="carousel-img">
+                    <img src="imagenes/2.jpg" class="d-block w-100" alt="Imagen 2">
+                    <div class="f6">encuentra uno hoy mismo!!</div>
+                    <figcaption class="6"></figcaption>
+                    <figcaption class="8"></figcaption>
+                    <figcaption class="9"></figcaption>
+                </figure>
+            </article>
+            
+            <article class="carousel-item">
+                <figure class="carousel-img">
+                    <img src="imagenes/3.jpg" class="d-block w-100" alt="Imagen 3">
+                    <figcaption class="10">contactanos ahora!</figcaption>
+                    <figcaption class="11">en 24 horas un tecnico contigo</figcaption>
+                    <figcaption class="12"></figcaption>
+                    <figcaption class="13"></figcaption>
+                </figure>
+            </article>
+            <!-- Agrega los demás artículos aquí con las clases consecutivas -->
+        </section>
+    </article>
     
-                <!-- Cuerpo de la ventana modal -->
-                <div class="modal-body">
-                    <p>Tu pedido ha sido recibido correctamente. En las próximas 24 horas hábiles, serás contactado por un integrador de seguridad nuestro para confirmar los datos de envío. El valor total a pagar es de $259,919 pesos colombianos por la compra de 1 cámara de seguridad Ultra HD 2K+ (4MPx). Adicionalmente, a la cámara se entrega una memoria microSD de 64 GB Western Digital.</p>
-                    <img src="imagenes/13.png" class="img-fluid" alt="">
-                 </div>
+    <article class="carousel-item">
+        <figure class="carousel-img">
+            <img src="imagenes/4.jpg" class="d-block w-100" alt="Imagen 4">
+            <figcaption class="14">soporte técnico</figcaption>
+            <figcaption class="15"></figcaption>
+            <figcaption class="16"></figcaption>
+            <figcaption class="17"></figcaption>
+        </figure>
+    </article>
     
-            </div>
-        </div>
-    </div>
+    <article class="carousel-item">
+        <figure class="carousel-img">
+            <img src="imagenes/5.jpg" class="d-block w-100" alt="Imagen 4">
+            <figcaption class="18">instalación de alarmas</figcaption>
+            <figcaption class="19"></figcaption>
+            <figcaption class="20"></figcaption>
+            <figcaption class="21"></figcaption>
+        </figure>
+    </article>
+    
+    <article class="carousel-item">
+        <figure class="carousel-img">
+            <img src="imagenes/6.jpg" class="d-block w-100" alt="Imagen 4">
+            <figcaption class="22">video porteros</figcaption>
+            <figcaption class="23"></figcaption>
+            <figcaption class="24"></figcaption>
+            <figcaption class="25"></figcaption>
+        </figure>
+    </article>
+    
+    <article class="carousel-item">
+        <figure class="carousel-img">
+            <img src="imagenes/7.jpg" class="d-block w-100" alt="Imagen 4">
+            <figcaption class="26">cámaras de seguridad</figcaption>
+            <figcaption class="27"></figcaption>
+            <figcaption class="28"></figcaption>
+            <figcaption class="29"></figcaption>
+        </figure>
+    </article>
+    
+    <article class="carousel-item">
+        <figure class="carousel-img">
+            <img src="imagenes/8.jpg" class="d-block w-100" alt="Imagen 4">
+            <figcaption class="30">controles de acceso!</figcaption>
+            <figcaption class="31">y mas..</figcaption>
+            <figcaption class="32"></figcaption>
+            <figcaption class="33"></figcaption>
+        </figure>
+    </article>
+    
+    <article class="carousel-item">
+        <figure class="carousel-img">
+            <img src="imagenes/9.jpg" class="d-block w-100" alt="Imagen 4">
+            <figcaption class="34"></figcaption>
+            <figcaption class="35"></figcaption>
+            <figcaption class="36"></figcaption>
+            <figcaption class="37"></figcaption>
+        </figure>
+    </article>
+    
+    <article class="carousel-item">
+        <figure class="carousel-img">
+            <img src="imagenes/10.jpg" class="d-block w-100" alt="Imagen 4">
+            <figcaption class="38"></figcaption>
+            <figcaption class="39"></figcaption>
+            <figcaption class="40"></figcaption>
+            <figcaption class="41"></figcaption>
+        </figure>
+    </article>
+    
+    <article class="carousel-item">
+        <figure class="carousel-img">
+            <img src="imagenes/11.jpg" class="d-block w-100" alt="Imagen 4">
+            <figcaption class="42"></figcaption>
+            <figcaption class="43"></figcaption>
+            <figcaption class="44"></figcaption>
+            <figcaption class="45"></figcaption>
+        </figure>
+    </article>
+    
+    <article class="carousel-item">
+        <figure class="carousel-img">
+            <img src="imagenes/12.jpg" class="d-block w-100" alt="Imagen 4">
+            <figcaption class="46"></figcaption>
+            <figcaption class="47"></figcaption>
+            <figcaption class="48"></figcaption>
+            <figcaption class="49"></figcaption>
+        </figure>
+    </article>
+    
+
+    <article class="carousel-item">
+        <figure class="carousel-img">
+            <img src="imagenes/13.jpg" class="d-block w-100" alt="Imagen 4">
+            <figcaption class="50">encuentra un tecnico HOY!!</figcaption>
+            <figcaption class="51">con nosotros encuentras:</figcaption>
+            <figcaption class="52">instalcion de camaras de seguridad</figcaption>
+            <figcaption class="53">instalacion de alarmas</figcaption>
+        </figure>
+    </article>
+    
+
+        </section>
+        <!-- Controles del carrusel -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#carrusel-inicio" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carrusel-inicio" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Siguiente</span>
+        </button>
+    </article>
+</section>
 
 
- <!-- Botón de WhatsApp -->
-<div id="whatsapp-btn" class="mt-3" style="margin-top: 50px;">
-  <a href="https://wa.me/3158859744" target="_blank" class="btn btn-success btn-lg custom-btn w-100">
-    <i class="fab fa-whatsapp" style="margin-right: 10px;"></i> WhatsApp
-  </a>
-</div>
+        <!-- Sección de Encuentra un Técnico -->
+<section id="encuentra-un-tecnico" class="mt-5">
+    <header>
+    <figcaption class="54">video porteros y domotica en general..</figcaption>
+    <figcaption class="55">contactanos yaa!</figcaption>
+</header>
+<!-- Imagen de Encuentra un Técnico -->
+<article class="imagen-tecnico">
+    <figure>
+        <img src="imagenes/14.jpg" class="d-block w-100" alt="Imagen de técnico">
+        <figcaption class="56">tenemos todo los servicios que necesita</figcaption>
+        <figcaption class="57">mantenimiento a camaras de seguridad, limpieza y configuracion de alarmas!</figcaption>
+        <figcaption class="58">cotiza hoy mismo </figcaption>
+        <figcaption class="59"></figcaption>
+    </figure>
+</article>            
+<!-- Botón para más información -->
+<a href="tienda.html" class="btn btn-primary">Más información</a>
 
-<footer>
-    <p>© 2024 Nombre de tu empresa. Todos los derechos reservados.</p>
+</section>
+
+ <!-- SECCION SERVICIOS -->
+ <section id="encuentra-un-tecnico" class="mt-5">
+    <header>
+        <figcaption class="60"></figcaption>
+        <figcaption class="61">nuestros productos</figcaption>
+    </header>
+    <!-- Imagen de Encuentra un Técnico -->
+    <article class="imagen-tecnico">
+        <figure>
+            <img src="imagenes/15.jpg" class="d-block w-100" alt="Imagen de técnico">
+            <figcaption class="62">manejamos gran variedad de marcas</figcaption>
+            <figcaption class="63"></figcaption>            
+            <figcaption class="64"></figcaption>  
+            <figcaption class="65"></figcaption>
+        </figure>
+    </article>
+</section>
+        
+    <!-- Botón para más información -->
+    <a href="tienda.html" class="btn btn-primary">tienda de servicios</a>
+</section>
+
+ <!-- SECCION PRODUCTOS -->
+ <section id="encuentra-un-tecnico" class="mt-5">
+    <header>
+        <figcaption class="66"></figcaption>  
+        <figcaption class="67"></figcaption>  
+    </header>
+    <!-- Imagen de Encuentra un Técnico -->
+    <article class="imagen-tecnico">
+        <figure>
+            <img src="imagenes/16.jpg" class="d-block w-100" alt="Imagen de técnico">
+            <figcaption class="68"></figcaption>  
+            <figcaption class="69"></figcaption> 
+            <figcaption class="70"></figcaption>  
+            <figcaption class="71"></figcaption>  
+        </figure>
+    </article>            
+    <!-- Botón para más información -->
+    <a href="tienda.html" class="btn btn-primary">tienda de productos</a>
+</section>
+
+
+
+
+
+</main>
+
+<!-- Pie de página común a todas las secciones -->
+<footer class="bg-dark text-light py-4 text-center">
+    <p>s24seguridadelectronica.com</p>
 </footer>
 
+<!-- Scripts -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/videoport/2.0.1/js/videoport.min.js"></script>
 
-<!-- Bootstrap JS and jQuery (optional) -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- Bootstrap JS -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+<!-- Script para cambiar el estilo de la sección principal al hacer scroll -->
 <script>
-    function redirectToForm() {
-        window.location.href = "#formulario";
-    }
-</script>
+    // Función para manejar el evento de scroll
+    function handleScroll() {
+        var inicio = document.getElementById('inicio');
+        var scrollPos = window.scrollY; // Posición actual de scroll vertical
+        var windowHeight = window.innerHeight; // Altura de la ventana del navegador
 
-<script>
-    // Función para alternar la clase de brillo DEL LOGO
-    function toggleShine() {
-        var logo = document.getElementById('logo');
-        logo.classList.toggle('shine');
-    }
-
-    // Ejecutar la función cada cierto tiempo
-    setInterval(toggleShine, 3000); // Cambiar el valor de 3000 para ajustar la frecuencia del brillo
-</script>
-
-<script>
-    function enviarDatos() {
-        var nombreCompleto = document.getElementById("nombreCompleto").value;
-        var telefono = document.getElementById("telefono").value;
-        var direccionBarrio = document.getElementById("direccionBarrio").value;
-        var ciudadDepartamento = document.getElementById("ciudadDepartamento").value;
-        var correoElectronico = document.getElementById("correoElectronico").value;
-
-        var formData = new FormData();
-        formData.append("nombreCompleto", nombreCompleto);
-        formData.append("telefono", telefono);
-        formData.append("direccionBarrio", direccionBarrio);
-        formData.append("ciudadDepartamento", ciudadDepartamento);
-        formData.append("correoElectronico", correoElectronico);
-
-        fetch('https://script.google.com/macros/s/AKfycbwd5Ne_B5sPStA1KHNPm390zcBubpNJWyBBtu8dzI88rbdg9CPYsy-cXEPs2wqB6nix-A/exec', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => {
-            if (response.ok) {
-                // Mostrar la ventana modal
-                $('#myModal').modal('show');
-                // Limpiar el formulario después de enviar
-                document.getElementById("myForm").reset();
-
-                // Rastrear la compra con el píxel de Facebook
-                fbq('track', 'Purchase', {value: 97000.00, currency: 'COP'});
-            } else {
-                alert('Error al enviar los datos');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    }
-</script>
-
-
-
-
-<script>
-    function validarYEnviar() {
-        var nombreCompleto = document.getElementById("nombreCompleto").value;
-        var telefono = document.getElementById("telefono").value;
-        var direccionBarrio = document.getElementById("direccionBarrio").value;
-        var ciudadDepartamento = document.getElementById("ciudadDepartamento").value;
-        var correoElectronico = document.getElementById("correoElectronico").value;
-
-        // Verificar si algún campo está vacío
-        if (nombreCompleto === "" || telefono === "" || direccionBarrio === "" || ciudadDepartamento === "" || correoElectronico === "") {
-            alert("Por favor completa todos los campos antes de enviar el formulario.");
+        // Si el usuario ha hecho scroll más allá de la mitad de la pantalla
+        if (scrollPos > windowHeight / 2) {
+            inicio.classList.add('full'); // Agrega la clase 'full' para expandir la sección al 100%
         } else {
-            // Si todos los campos están llenos, llamar a la función para enviar los datos
-            enviarDatos();
+            inicio.classList.remove('full'); // Si el scroll está por debajo de la mitad, remueve la clase 'full'
         }
     }
-</script>
 
+    // Asigna la función de manejo de scroll al evento 'scroll' del documento
+    document.addEventListener('scroll', handleScroll);
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+    // Obtener el elemento del carrusel
+    var carouselItem = document.getElementById("carousel-item");
+    
+    // Escuchar el evento transitionstart del carrusel
+    carouselItem.addEventListener("transitionstart", function () {
+        // Mostrar el texto
+        document.querySelector(".f6").style.opacity = 1;
+    });
+});
+
+
+
+</script>
 
 
 
 
 </body>
 </html>
+
+
+
+    
