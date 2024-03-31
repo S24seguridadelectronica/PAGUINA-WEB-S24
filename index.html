@@ -266,32 +266,31 @@ body {
 
 
 #redes-sociales {
-    position: fixed;
-    left: 20px;
-    top: 400px;
-    z-index: 1000;
-}
+            position: fixed;
+            left: 20px;
+            top: 400px;
+            z-index: 1000;
+        }
 
-#redes-sociales img {
-    width: 80px;
-    border-radius: 50%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    cursor: pointer; /* Hace que el cursor se convierta en una mano al pasar por encima */
-}
+        #redes-sociales img {
+            width: 80px;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+        }
 
-#iconos-redes {
-    display: none; /* Inicialmente oculto */
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    padding-top: 10px; /* Espacio adicional para separar los iconos del botón */
-}
+        #iconos-redes {
+            display: none;
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            padding-top: 10px;
+        }
 
-#iconos-redes img {
-    border-radius: 50%;
-}
-
+        #iconos-redes img {
+            border-radius: 50%;
+        }
 
 
 
@@ -629,20 +628,17 @@ body {
     <img src="imagenes/REDES.png" alt="Logo de WhatsApp" id="boton-toggle">
     <div id="iconos-redes">
         <!-- Enlaces a las redes sociales -->
-        <a href="https://www.facebook.com"><img src="imagenes/REDES.png" alt="Facebook"></a>
-        <a href="https://twitter.com"><img src="imagenes/REDES.png" alt="Twitter"></a>
-        <a href="https://www.instagram.com"><img src="imagenes/REDES.png" alt="Instagram"></a>
+        <a href="https://www.facebook.com"><img src="imagenes/logowhatsapp.png" alt="Facebook"></a>
+        <a href="https://twitter.com"><img src="imagenes/logoinstagram.png" alt="Twitter"></a>
+        <a href="https://www.instagram.com"><img src="imagenes/logofacbook.png" alt="Instagram"></a>
         <!-- Agrega más enlaces e iconos según tus necesidades -->
     </div>
 </div>
 
 
 <div id="llamadas">
-    <img src="imagenes/REDES.png" alt="Logo de WhatsApp" id="boton-toggle">
-    <div id="iconos-redes">
-        <!-- Icono para llamar -->
-        <img src="icono_llamar.png" alt="Llamar" class="llamada-icon">
-    </div>
+    <a href="tel:+573158859744"><img src="imagenes/logotelefono.png" alt="Logo de WhatsApp" id="llamada-icon"></a>
+    <a href="tel:+573158859744">Llámanos ahora!!</a>
 </div>
 
 
@@ -771,9 +767,15 @@ window.onclick = function(event) {
     document.addEventListener("DOMContentLoaded", function() {
         const botonToggle = document.getElementById("boton-toggle");
         const iconosRedes = document.getElementById("iconos-redes");
+        const llamadaIcon = document.getElementById("llamada-icon");
 
         botonToggle.addEventListener("click", function() {
             toggleIconosRedes();
+        });
+        
+        // Añadir el event listener para la imagen de llamadas
+        llamadaIcon.addEventListener("click", function() {
+            realizarLlamada();
         });
     });
 
@@ -785,10 +787,13 @@ window.onclick = function(event) {
             iconosRedes.style.display = "none";
         }
     }
+
+    function realizarLlamada() {
+        // No es necesario realizar ninguna acción aquí ya que el enlace de teléfono se encargará de ello.
+        // Puedes eliminar esta función si no necesitas realizar ninguna acción adicional.
+    }
 </script>
 
 </body>
 </html>
-
-
     
