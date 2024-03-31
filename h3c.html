@@ -379,8 +379,9 @@ html [type="button"],
 
 
 .btn-container {
-    text-align: center; /* Centra horizontalmente los elementos */
-}
+        display: flex;
+        justify-content: center;
+    }
 
 .btn-custom {
     background-color: orange; /* Color naranja */
@@ -410,6 +411,13 @@ html [type="button"],
         text-overflow: ellipsis;
     }
 
+
+    /* Estilo para ajustar el texto al botón */
+    #customBtn {
+        white-space: normal;
+        font-size: 14px; /* Tamaño de fuente más pequeño */
+        padding: 8px 16px; /* Ajustar el padding del botón */
+    }
 
 
 .form-container {
@@ -621,7 +629,7 @@ html [type="button"],
                     <h3></h3>
                     <img src="imagenes/0.png" class="img-fluid" alt="">
                     <div class="btn-container">
-                     <button class="btn btn-custom btn-block" onclick="redirectToForm()">Obtén oferta!</button>
+                     <button id="customBtn" class="btn btn-custom btn-block" onclick="redirectToForm()">¡Hasta agotar existencias!</button>
                     </div>
                 </div>
             </div>
@@ -631,7 +639,7 @@ html [type="button"],
                     <h3></h3>
                     <img src="imagenes/1.png" class="img-fluid" alt="">
                     <div class="btn-container">
-                     <button class="btn btn-custom btn-block" onclick="redirectToForm()">Comprar!</button>
+                    <button id="customBtn" class="btn btn-custom btn-block" onclick="redirectToForm()">¡Hasta agotar existencias!</button>
                     </div>
                 </div>
             </div>
@@ -641,7 +649,7 @@ html [type="button"],
                     <h3></h3>
                     <img src="imagenes/2.png" class="img-fluid" alt="">
                     <div class="btn-container">
-                     <button class="btn btn-custom btn-block" onclick="redirectToForm()">Obtén un obsequio!</button>
+                        <button id="customBtn" class="btn btn-custom btn-block" onclick="redirectToForm()">¡Hasta agotar existencias!</button>
                     </div>
                 </div>
             </div>
@@ -651,7 +659,7 @@ html [type="button"],
                     <h3></h3>
                     <img src="imagenes/3.png" class="img-fluid" alt="">
                     <div class="btn-container">
-                     <button class="btn btn-custom btn-block" onclick="redirectToForm()">¡Hasta agotar existencias!</button>
+                        <button id="customBtn" class="btn btn-custom btn-block" onclick="redirectToForm()">¡Hasta agotar existencias!</button>
                     </div>
                 </div>
             </div>
@@ -661,7 +669,7 @@ html [type="button"],
                     <h3></h3>
                     <img src="imagenes/4.png" class="img-fluid" alt="">
                     <div class="btn-container">
-                     <button class="btn btn-custom btn-block" onclick="redirectToForm()">¡Comprala ahora!</button>
+                        <button id="customBtn" class="btn btn-custom btn-block" onclick="redirectToForm()">¡Hasta agotar existencias!</button>
                     </div>
                 </div>
             </div>
@@ -671,7 +679,7 @@ html [type="button"],
                     <h3></h3>
                     <img src="imagenes/5.png" class="img-fluid" alt="">
                     <div class="btn-container">
-                     <button class="btn btn-custom btn-block" onclick="redirectToForm()">¡Obtén oferta!</button>
+                        <button id="customBtn" class="btn btn-custom btn-block" onclick="redirectToForm()">¡Hasta agotar existencias!</button>
                     </div>
                 </div>
             </div>
@@ -681,7 +689,7 @@ html [type="button"],
                     <h3></h3>
                     <img src="imagenes/6.png" class="img-fluid" alt="">
                     <div class="btn-container">
-                     <button class="btn btn-custom btn-block" onclick="redirectToForm()">¡Obtén oferta!</button>
+                        <button id="customBtn" class="btn btn-custom btn-block" onclick="redirectToForm()">¡Hasta agotar existencias!</button>
                     </div>
                 </div>
             </div>
@@ -691,7 +699,7 @@ html [type="button"],
                     <h3></h3>
                     <img src="imagenes/7.png" class="img-fluid" alt="">
                     <div class="btn-container">
-                     <button class="btn btn-custom btn-block" onclick="redirectToForm()">¡Pídela y paga en casa!/button>
+                        <button id="customBtn" class="btn btn-custom btn-block" onclick="redirectToForm()">¡Hasta agotar existencias!</button>
                     </div>
                 </div>
             </div>
@@ -701,7 +709,7 @@ html [type="button"],
                     <h3></h3>
                     <img src="imagenes/8.gif" class="img-fluid" alt="">
                     <div class="btn-container">
-                     <button class="btn btn-custom btn-block" onclick="redirectToForm()">Unidades Limitadas!</button>
+                        <button id="customBtn" class="btn btn-custom btn-block" onclick="redirectToForm()">¡Hasta agotar existencias!</button>
                     </div>
                 </div>
             </div>
@@ -711,7 +719,7 @@ html [type="button"],
                     <h3></h3>
                     <img src="imagenes/9.gif" class="img-fluid" alt="">
                     <div class="btn-container">
-                     <button class="btn btn-custom btn-block" onclick="redirectToForm()">Hasta agotar existencias</button>
+                        <button id="customBtn" class="btn btn-custom btn-block" onclick="redirectToForm()">¡Hasta agotar existencias!</button>
                     </div>
                 </div>
             </div>
@@ -721,7 +729,7 @@ html [type="button"],
                     <h3></h3>
                     <img src="imagenes/10.gif" class="img-fluid" alt="">
                     <div class="btn-container">
-                     <button class="btn btn-custom btn-block" onclick="redirectToForm()">Compra Hoy!</button>
+                        <button id="customBtn" class="btn btn-custom btn-block" onclick="redirectToForm()">¡Hasta agotar existencias!</button>
                     </div>
                 </div>
             </div>
@@ -732,7 +740,7 @@ html [type="button"],
                     <h3></h3>
                     <img src="imagenes/11.png" class="img-fluid" alt="">
                     <div class="btn-container">
-                     <button class="btn btn-custom btn-block" onclick="redirectToForm()">Obtén la Oferta!</button>
+                        <button id="customBtn" class="btn btn-custom btn-block" onclick="redirectToForm()">¡Hasta agotar existencias!</button>
                     </div>
                 </div>
             </div>
@@ -743,7 +751,7 @@ html [type="button"],
                     <h3></h3>
                     <img src="imagenes/12.png" class="img-fluid" alt="">
                     <div class="btn-container">
-                     <button class="btn btn-custom btn-block" onclick="redirectToForm()">Comprar hoy!</button>
+                        <button id="customBtn" class="btn btn-custom btn-block" onclick="redirectToForm()">¡Hasta agotar existencias!</button>
                     </div>
                 </div>
             </div>
@@ -834,6 +842,44 @@ html [type="button"],
         window.location.href = "#formulario";
     }
 </script>
+
+
+
+<script>
+    function ajustarTextoAlBoton() {
+        var boton = document.getElementById("customBtn");
+        var texto = boton.innerText;
+
+        // Obtenemos el ancho del botón
+        var anchoBoton = boton.offsetWidth;
+
+        // Calculamos el ancho del texto
+        var anchoTexto = boton.scrollWidth;
+
+        // Si el ancho del texto es mayor que el ancho del botón
+        if (anchoTexto > anchoBoton) {
+            // Calculamos la longitud del texto ajustado
+            var longitudTexto = texto.length * (anchoBoton / anchoTexto);
+            // Actualizamos el texto del botón con el texto ajustado
+            boton.innerText = texto.substring(0, longitudTexto - 3) + '...';
+        }
+    }
+
+    // Llamamos a la función para ajustar el texto al cargar la página
+    window.onload = function() {
+        ajustarTextoAlBoton();
+    };
+
+    // También puedes llamar a la función cuando se redimensione la ventana, si es necesario
+    window.onresize = function() {
+        ajustarTextoAlBoton();
+    };
+</script>
+
+
+
+
+
 
 <script>
     // Función para alternar la clase de brillo DEL LOGO
