@@ -768,66 +768,27 @@ window.onclick = function(event) {
 
 
 <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const botonToggle = document.getElementById("boton-toggle");
+        const iconosRedes = document.getElementById("iconos-redes");
 
+        botonToggle.addEventListener("click", function() {
+            toggleIconosRedes();
+        });
+    });
 
-document.addEventListener("DOMContentLoaded", function() {
-    const botonToggle = document.getElementById("boton-toggle");
-    const iconosRedes = document.getElementById("iconos-redes");
-
-    botonToggle.addEventListener("click", function() {
+    function toggleIconosRedes() {
+        const iconosRedes = document.getElementById("iconos-redes");
         if (iconosRedes.style.display === "none" || iconosRedes.style.display === "") {
             iconosRedes.style.display = "block";
         } else {
             iconosRedes.style.display = "none";
         }
-    });
-});
-
-
-
-document.addEventListener("DOMContentLoaded", function() {
-    const botonToggle = document.getElementById("boton-toggle");
-    const llamadaIcon = document.querySelector(".llamada-icon");
-
-    botonToggle.addEventListener("click", function() {
-        toggleIconosLlamadas();
-    });
-
-    // Manejar la acción de llamar
-    llamadaIcon.addEventListener("click", function() {
-        realizarLlamada();
-    });
-});
-
-
-
-
-
-
-function toggleIconosLlamadas() {
-    const iconosLlamadas = document.getElementById("iconos-redes");
-    if (iconosLlamadas.style.display === "none" || iconosLlamadas.style.display === "") {
-        iconosLlamadas.style.display = "block";
-    } else {
-        iconosLlamadas.style.display = "none";
     }
-}
-
-function realizarLlamada() {
-    // Aquí puedes colocar el código para realizar la llamada
-    alert("Realizando llamada...");
-    // Por ejemplo, podrías iniciar una llamada telefónica con una API específica
-}
-
-
 </script>
-
-
-
 
 </body>
 </html>
-
 
 
     
