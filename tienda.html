@@ -3,9 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Registro e Inicio de Sesión</title>
     <style>
+/* Estilos generales */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1200px; /* Ancho máximo del contenido */
+  margin: 0 auto; /* Centrar el contenido en pantallas más grandes */
+  padding: 20px;
+}
+
+/* Estilos para la cabecera */
+header {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+}
+
+/* Estilos para la barra de navegación */
+nav {
+  background-color: #444;
+  color: white;
+  padding: 10px;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 10px;
+}
+
+/* Estilos para el contenido principal */
+main {
+  padding: 20px 0;
+}
+
+/* Estilos para el pie de página */
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
         /* Estilos CSS para los modales */
         .modal {
             display: none;
@@ -62,7 +128,7 @@
 .loader-container {
     position: fixed;
     z-index: 1000; /* Asegura que esté en la parte superior */
-    top: 50%; /* Lo posiciona en la mitad vertical de la pantalla */
+    top: 60%; /* Lo posiciona en la mitad vertical de la pantalla */
     left: 50%; /* Lo posiciona en la mitad horizontal de la pantalla */
     transform: translate(-50%, -50%); /* Lo mueve hacia arriba y hacia la izquierda en la mitad de su tamaño */
     text-align: center; /* Centra el contenido horizontalmente */
@@ -84,13 +150,164 @@
 
 
 
+
+
+.cart {
+    position: fixed;
+    top: 55px;
+    right: 20px;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 8px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    max-width: 250px; /* Reducir el ancho máximo */
+    font-size: 14px; /* Reducir el tamaño de fuente */
+}
+
+.cart h2 {
+    margin-top: 0;
+    font-size: 16px; /* Tamaño de fuente ligeramente mayor para el encabezado */
+}
+
+.cart-buttons {
+    margin-top: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.cart-buttons button {
+    padding: 4px 8px; /* Reducir el espacio alrededor del botón */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 14px; /* Reducir el tamaño de fuente */
+}
+
+.cart-buttons button:hover {
+    background-color: #0056b3;
+}
+
+#productos-carrito p {
+    margin-bottom: 6px; /* Reducir el espacio entre los párrafos */
+}
+
+#total-carrito {
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+ /* Estilos para la sección de productos */
+#productos {
+    display: flex;
+    flex-wrap: wrap; /* Para que los productos se envuelvan en filas */
+    gap: 20px; /* Espacio entre los productos */
+}
+
+/* Estilos para cada artículo de producto */
+.product {
+    width: calc(50% - 10px); /* Ancho del producto (50% - espacio entre productos) */
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Estilos adicionales para mejorar la apariencia */
+.product h2 {
+    margin-top: 0;
+}
+
+.product img {
+    max-width: 100%;
+    height: auto;
+}
+/* Estilos para cuando la pantalla es pequeña (menos de 600px de ancho) */
+@media (max-width: 600px) {
+    .product {
+        width: calc(50% - 20px); /* Dividir en dos columnas con un espacio entre ellas */
+    }
+}
+
+
+/* Estilos para pantallas medianas (tablets en posición vertical) */
+@media (min-width: 601px) and (max-width: 992px) {
+    .product {
+        width: calc(50% - 20px); /* Dividir en dos columnas con un espacio entre ellas */
+    }
+}
+
+/* Estilos para pantallas grandes (tablets en posición horizontal o monitores pequeños) */
+@media (min-width: 993px) and (max-width: 1200px) {
+    .product {
+        width: calc(25% - 15px); /* Ancho del producto (25% - espacio entre productos) */
+    }
+}
+
+
+/* Estilos para pantallas extra grandes (monitores grandes y televisores) */
+@media (min-width: 1201px) {
+    .product {
+        width: calc(25% - 20px); /* Ancho del producto (25% - espacio entre productos) */
+    }
+}
+
+
+
+
+
+#buscador {
+    width: 100%;
+    margin-bottom: 10px;
+    position: fixed; /* Establecer el posicionamiento fijo */
+    top: 60px; /* Bajar el buscador 40px desde la parte superior */
+    left: 0; /* Alinear a la izquierda */
+    z-index: 9999; /* Asegurar que esté por encima de otros elementos */
+}
+
+
+
+
+
+
     </style>
 </head>
 <body>
+    <!-- Cabecera de la página con el menú de navegación -->
     <header>
-        <h1>Nombre de tu sitio web</h1>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="inicio.html">Inicio</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="contacto.html">Contacto</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="tienda.html">Tienda</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="blog.html">Blog</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
     </header>
-    
     <main>
 
         <input type="text" id="buscador" placeholder="Buscar productos" style="width: 100%; margin-bottom: 10px;">
@@ -216,6 +433,21 @@
     
     </section>
 
+        
+    <aside class="cart" id="carrito">
+        <h2>Carrito de Compras</h2>
+        <div id="productos-carrito">
+            <p>No hay productos en el carrito</p>
+            <p id="total-carrito">Total: $0.00</p>
+        </div>
+        <div class="cart-buttons">
+            <button onclick="vaciarCarrito()">Vaciar Carrito</button>
+            <button id="comprarBtn" type="button">Comprar</button>
+        </div>
+    </aside>
+    
+              
+
     <section id="productos">
 
            <!-- Producto 1 -->
@@ -248,19 +480,77 @@
     </form>
 </article>
 
+<article class='product'>
+    <h2>Título 1</h2>
+    <figure>
+    <img src='imagenes/1.jpg' alt=''>
+    <figcaption>Descripción opcional de la imagen.</figcaption>
+    </figure>
+    <p class='nombre'>Párrafo 1</p>
+    <p class='descripcion'>Subtítulo 1</p>
+    <p class='precio'>Subtítulo 1</p>
+    <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+    <button type='submit'>Agregar al Carrito</button>
+    <button type='button' onclick='openModal()'>Ver Detalles</button>
+    </form>
+    </article>
+    <article class='product'>
+    <h2>Título 2</h2>
+    <figure>
+    <img src='imagenes/2.jpeg' alt=''>
+    <figcaption>Descripción opcional de la imagen.</figcaption>
+    </figure>
+    <p class='nombre'>Párrafo 2</p>
+    <p class='descripcion'>Subtítulo 2</p>
+    <p class='precio'>Subtítulo 2</p>
+    <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+    <button type='submit'>Agregar al Carrito</button>
+    <button type='button' onclick='openModal()'>Ver Detalles</button>
+    </form>
+    </article>
+    <article class='product'>
+    <h2>Título 3</h2>
+    <figure>
+    <img src='imagenes/3.jpeg' alt=''>
+    <figcaption>Descripción opcional de la imagen.</figcaption>
+    </figure>
+    <p class='nombre'>Párrafo 3</p>
+    <p class='descripcion'>Subtítulo 3</p>
+    <p class='precio'>Subtítulo 3</p>
+    <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+    <button type='submit'>Agregar al Carrito</button>
+    <button type='button' onclick='openModal()'>Ver Detalles</button>
+    </form>
+    </article>
+    <article class='product'>
+    <h2>Título 4</h2>
+    <figure>
+    <img src='imagenes/4.jpeg' alt=''>
+    <figcaption>Descripción opcional de la imagen.</figcaption>
+    </figure>
+    <p class='nombre'>Párrafo 4</p>
+    <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+    <button type='submit'>Agregar al Carrito</button>
+    <button type='button' onclick='openModal()'>Ver Detalles</button>
+    </form>
+    </article>
+
             
         </section>
 
 
-          <!-- Carrito de compras -->
-        <aside class="cart" id="carrito">
-        <h2>Carrito de Compras</h2>
-        <p id="productos-carrito">No hay productos en el carrito</p>
-        <p id="total-carrito">Total: $0.00</p>
-        </aside>
-        <button onclick="vaciarCarrito()">Vaciar Carrito</button>
-        <button id="comprarBtn" type="button">Comprar</button>
+        <!-- La ventana modal -->
+<div id="myModal" class="modal">
+    <!-- Contenido de la ventana modal -->
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2>Detalles del Producto</h2>
+      <p>Aquí van los detalles del producto...</p>
+    </div>
+  </div>
 
+
+      
         
 
     </main>
@@ -879,8 +1169,29 @@ document.getElementById("confirmarCompraBtn").addEventListener("click", function
 
 
 
+
+
+// Función para abrir la ventana modal
+function openModal() {
+  document.getElementById("myModal").style.display = "block";
+}
+
+// Función para cerrar la ventana modal
+function closeModal() {
+  document.getElementById("myModal").style.display = "none";
+}
+
+// Cerrar la ventana modal haciendo clic fuera de ella
+window.onclick = function(event) {
+  var modal = document.getElementById("myModal");
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+
+
 </script>
 
     </body>
     </html>
-    
