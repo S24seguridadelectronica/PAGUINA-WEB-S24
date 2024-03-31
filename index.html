@@ -265,9 +265,63 @@ body {
 
 
 
+#redes-sociales {
+    position: fixed;
+    left: 20px;
+    top: 400px;
+    z-index: 1000;
+}
+
+#redes-sociales img {
+    width: 80px;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    cursor: pointer; /* Hace que el cursor se convierta en una mano al pasar por encima */
+}
+
+#iconos-redes {
+    display: none; /* Inicialmente oculto */
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-top: 10px; /* Espacio adicional para separar los iconos del botón */
+}
+
+#iconos-redes img {
+    border-radius: 50%;
+}
 
 
 
+
+#llamadas {
+    position: fixed;
+    left: 20px;
+    top: 500px;
+    z-index: 1000;
+    float: left; /* Flota a la izquierda */
+}
+
+#llamadas img {
+    width: 80px;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    cursor: pointer; /* Hace que el cursor se convierta en una mano al pasar por encima */
+}
+
+#iconos-llamadas {
+    display: none; /* Inicialmente oculto */
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-top: 10px; /* Espacio adicional para separar los iconos del botón */
+}
+
+#iconos-llamadas img {
+    border-radius: 50%;
+}
 
 
 
@@ -571,6 +625,25 @@ body {
 </section>
 
 
+<div id="redes-sociales">
+    <img src="imagenes/REDES.png" alt="Logo de WhatsApp" id="boton-toggle">
+    <div id="iconos-redes">
+        <!-- Enlaces a las redes sociales -->
+        <a href="https://www.facebook.com"><img src="imagenes/REDES.png" alt="Facebook"></a>
+        <a href="https://twitter.com"><img src="imagenes/REDES.png" alt="Twitter"></a>
+        <a href="https://www.instagram.com"><img src="imagenes/REDES.png" alt="Instagram"></a>
+        <!-- Agrega más enlaces e iconos según tus necesidades -->
+    </div>
+</div>
+
+
+<div id="llamadas">
+    <img src="imagenes/REDES.png" alt="Logo de WhatsApp" id="boton-toggle">
+    <div id="iconos-redes">
+        <!-- Icono para llamar -->
+        <img src="icono_llamar.png" alt="Llamar" class="llamada-icon">
+    </div>
+</div>
 
 
 
@@ -694,7 +767,60 @@ window.onclick = function(event) {
 
 
 
+<script>
 
+
+document.addEventListener("DOMContentLoaded", function() {
+    const botonToggle = document.getElementById("boton-toggle");
+    const iconosRedes = document.getElementById("iconos-redes");
+
+    botonToggle.addEventListener("click", function() {
+        if (iconosRedes.style.display === "none" || iconosRedes.style.display === "") {
+            iconosRedes.style.display = "block";
+        } else {
+            iconosRedes.style.display = "none";
+        }
+    });
+});
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    const botonToggle = document.getElementById("boton-toggle");
+    const llamadaIcon = document.querySelector(".llamada-icon");
+
+    botonToggle.addEventListener("click", function() {
+        toggleIconosLlamadas();
+    });
+
+    // Manejar la acción de llamar
+    llamadaIcon.addEventListener("click", function() {
+        realizarLlamada();
+    });
+});
+
+
+
+
+
+
+function toggleIconosLlamadas() {
+    const iconosLlamadas = document.getElementById("iconos-redes");
+    if (iconosLlamadas.style.display === "none" || iconosLlamadas.style.display === "") {
+        iconosLlamadas.style.display = "block";
+    } else {
+        iconosLlamadas.style.display = "none";
+    }
+}
+
+function realizarLlamada() {
+    // Aquí puedes colocar el código para realizar la llamada
+    alert("Realizando llamada...");
+    // Por ejemplo, podrías iniciar una llamada telefónica con una API específica
+}
+
+
+</script>
 
 
 
