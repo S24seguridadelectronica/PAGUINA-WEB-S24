@@ -198,38 +198,58 @@ body {
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  z-index: 1000; /* Sit on top */
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6); /* Black with opacity */
 }
 
 /* Modal Content/Box */
 .modal-content {
-  background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
+  background-color: #fff; /* White background */
+  margin: 5% auto; /* 5% from the top and centered horizontally */
   padding: 20px;
-  border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 80%; /* Set width */
+  max-width: 500px; /* Max width */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow */
 }
 
 /* The Close Button */
 .close {
-  color: #aaa;
+  color: #333;
   float: right;
-  font-size: 28px;
+  font-size: 24px;
   font-weight: bold;
+  transition: color 0.3s; /* Add smooth transition */
 }
 
 .close:hover,
 .close:focus {
-  color: black;
+  color: #ff0000c4; /* Change color on hover */
   text-decoration: none;
   cursor: pointer;
 }
+
+/* Botón Ir a Facebook */
+.modal-content button {
+  background-color: #4267b2; /* Facebook blue */
+  color: #fff; /* White text */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px; /* Add space at the top */
+}
+
+.modal-content button:hover {
+  background-color: #3b5998; /* Darker Facebook blue on hover */
+}
+
 
 
 
@@ -519,13 +539,13 @@ body {
         <!-- Sección de Encuentra un Técnico -->
 <section id="encuentra-un-tecnico" class="mt-5">
     <header>
-    <figcaption class="54">video porteros y domotica en general..</figcaption>
+    <figcaption class="54">Instalamos cámaras, alarmas de seguridad y domótica en general...</figcaption>
     <figcaption class="55">contactanos yaa!</figcaption>
 </header>
 <!-- Imagen de Encuentra un Técnico -->
 <article class="imagen-tecnico">
     <figure>
-        <button id="btn-modal">Solicitar Mantenimiento Gratis</button>
+        <button id="btn-modal">obtenga Mantenimiento Gratis</button>
         <img src="imagenes/14.jpg" class="d-block w-100" alt="Imagen de técnico">
         <figcaption class="56">tenemos todo los servicios que necesita</figcaption>
         <figcaption class="57">mantenimiento a camaras de seguridad, limpieza y configuracion de alarmas!</figcaption>
@@ -543,10 +563,10 @@ body {
     <!-- Modal content -->
     <div class="modal-content">
       <span class="close">&times;</span>
-      <p>Mantenimiento Gratis</p>
-      <p>¡Contáctanos para obtener tu mantenimiento gratis!</p>
-      <p>¡Contáctanos para obtener tu mantenimiento gratis!</p>
-      <a href="https://www.instagram.com/tu_perfil_aqui/post/{{ID_DEL_POST}}" target="_blank"><button>Me gusta en Instagram</button></a>
+      <p>Síguenos y comenta en Instagram para obtener</p>
+      <p></p>
+      <p></p>
+      <a href="https://www.instagram.com/tu_perfil_aqui/post/{{ID_DEL_POST}}" target="_blank"><button>ir a Instagram</button></a>
     </div>
   </div>
   
@@ -587,11 +607,11 @@ body {
     <!-- Modal content -->
     <div class="modal-content">
       <span class="close">&times;</span>
-      <p>Servicio Gratis</p>
-      <p>¡Contáctanos para obtener tu servicio gratis!</p>
-      <p>¡Contáctanos para obtener tu servicio gratis!</p>
-      <p>¡Contáctanos para obtener tu servicio gratis!</p>
-      <a href="https://www.facebook.com/{{ID_DEL_POST}}" target="_blank"><button>Me gusta en Facebook</button></a>
+      <p>Comparte y comenta en Facebook para obtener</p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <a href="https://www.facebook.com/{{ID_DEL_POST}}" target="_blank"><button>ir a Facebook</button></a>
     </div>
   </div>
 
