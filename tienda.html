@@ -560,6 +560,7 @@ Empresa:
 
 Productos:
 `;
+
     productosEnCarrito.forEach(producto => {
         mensaje += `
 - Nombre: ${producto.nombre}
@@ -567,8 +568,8 @@ Productos:
   Cantidad: ${producto.cantidad}
   Precio unitario: $${producto.precio.toFixed(2)}
   Precio total: $${(producto.precio * producto.cantidad).toFixed(2)}
-  Imagen: ${producto.imagen}
-`;
+  Imagen:
+  <img src="${producto.imagen}" alt="${producto.nombre}" style="width: 100px; height: auto;">`;
     });
 
     // Codificar el mensaje para que se pueda enviar a través de la URL de WhatsApp
@@ -577,6 +578,9 @@ Productos:
     // Abrir una nueva ventana de WhatsApp con el mensaje codificado
     window.open('https://api.whatsapp.com/send?phone=573158859744&text=' + mensajeCodificado);
 }
+
+
+
 
 
 
