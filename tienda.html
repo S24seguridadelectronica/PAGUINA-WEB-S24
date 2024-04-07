@@ -537,7 +537,7 @@ function actualizarFechaHora() {
 // Función para enviar el pedido a WhatsApp con toda la información
 // Función para enviar el pedido a WhatsApp con toda la información
 // Función para enviar el pedido a WhatsApp con toda la información
-function enviarPedidoWhatsApp() {
+async function enviarPedidoWhatsApp() {
     // Obtener la información del cliente y la empresa
     var nombreCliente = ""; // Aquí deberías obtener el nombre del cliente del formulario o del DOM
     var telefonoCliente = ""; // Aquí deberías obtener el teléfono del cliente del formulario o del DOM
@@ -561,6 +561,12 @@ Empresa:
 Productos:
 `;
 
+    // Obtener imágenes en formato base64
+    for (const producto of productosEnCarrito) {
+        const base64Image = await obtenerBase64DesdeURL(producto.imagen);
+        producto.base64Imagen = base64Image; // Almacenar la imagen en formato base64 en el objeto de producto
+    }
+
     productosEnCarrito.forEach(producto => {
         mensaje += `
 - Nombre: ${producto.nombre}
@@ -569,14 +575,18 @@ Productos:
   Precio unitario: $${producto.precio.toFixed(2)}
   Precio total: $${(producto.precio * producto.cantidad).toFixed(2)}
   Imagen:
-  <img src="${producto.imagen}" alt="${producto.nombre}" style="width: 100px; height: auto;">`;
+  <img src="${producto.base64Imagen}" alt="${producto.nombre}" style="width: 100px; height: auto;">`;
     });
 
-    // Codificar el mensaje para que se pueda enviar a través de la URL de WhatsApp
-    var mensajeCodificado = encodeURIComponent(mensaje);
+    // Eliminar saltos de línea del mensaje antes de codificarlo
+    var mensajeSinSaltosDeLinea = mensaje.replace(/(\r\n|\n|\r)/gm, "");
+
+    // Codificar el mensaje sin saltos de línea para que se pueda enviar a través de la URL de WhatsApp
+    var mensajeCodificado = encodeURIComponent(mensajeSinSaltosDeLinea);
 
     // Abrir una nueva ventana de WhatsApp con el mensaje codificado
-    window.open('https://api.whatsapp.com/send?phone=573158859744&text=' + mensajeCodificado);
+// Abrir una nueva ventana de WhatsApp con el mensaje codificado
+window.open('https://api.whatsapp.com/send?phone=3158859744&text=' + mensajeCodificado);
 }
 
 
@@ -610,6 +620,10 @@ function obtenerBase64DesdeURL(url) {
         imagen.src = url;
     });
 }
+
+
+
+
 
 // Agregar un evento de clic al botón de cierre
 closeButton.addEventListener('click', function(event) {
