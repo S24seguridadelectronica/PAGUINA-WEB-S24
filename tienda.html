@@ -1,70 +1,654 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generador de PDF y envío de pedido por WhatsApp</title>
-    <!-- Importar la biblioteca jsPDF -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Icono de Carrito de Compras Arrastrable</title>
+  <style>
+    .draggable {
+      position: absolute;
+      cursor: move;
+      width: 50px; /* Ancho del icono */
+      height: 50px; /* Alto del icono */
+      font-size: 30px; /* Tamaño de fuente para emojis */
+      background-color: #ff9800;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .cart {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 500px; /* Ancho del carrito */
+  max-height: 100px; /* Altura máxima del carrito */
+  overflow-y: auto; /* Habilitar desbordamiento vertical con scrollbar */
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 10px;
+  display: none; /* Ocultar el carrito inicialmente */
+}
+
+
+
+    .producto {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+
+    .producto button {
+      margin-right: 5px;
+    }
+
+
+    .cart-buttons{
+      position: fixed;
+      top: 200px;
+      right: 20px;
+      width: 200px; /* Ancho del carrito */
+      max-height: 400px; /* Altura máxima del carrito */
+      overflow-y: auto; /* Habilitar desbordamiento vertical */
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      padding: 10px;
+      display: none; /* Ocultar el carrito inicialmente */
+    }
+
+
+    .toggle-cart {
+  position: absolute;
+  top: -20px; /* Posición para ocultar la pestaña */
+  right: 0;
+  background-color: #ccc;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
+    .modal {
+  display: none; /* Ocultar la modal inicialmente */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+
+.trash-icon {
+      cursor: pointer;
+      font-size: 20px;
+      margin-right: 10px;
+    }
+
+
+
+
+
+
+    /* Nuevo estilo para el mensaje de confirmación */
+    /* Nuevo estilo para el mensaje de confirmación */
+    #confirmacion {
+      display: none;
+      position: absolute;
+      background-color: #ffffff;
+      padding: 10px;
+      border: 1px solid #ccc;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+      z-index: 9999;
+    }
+
+
+
+
+    
+  </style>
 </head>
 <body>
+    <div id="icono" class="draggable">
+        🛒 <!-- Emoji de carrito de compras -->
+        <div id="contador">0</div> <!-- Contador de elementos -->
+    </div>
+    
+    <div class="cart-buttons" style="display: none;">
+        <button onclick="vaciarCarrito()">Vaciar Carrito</button>
+        <button id="comprarBtn" type="button">enviar cotizacion</button>
+    </div>
+    <aside class="cart" id="carrito">
+        <h2>Carrito de Compras</h2>
+        <div id="productos-carrito">
+          <div id="toggleCart" class="toggle-cart">Toggle Cart</div>
+            <p>No hay productos en el carrito</p>
+            <p id="total-carrito">Total: $0.00</p>
+        </div>
+    </aside>
+    
+    <div id="modal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Resumen de la compra</h2>
+          <div id="modal-content"></div>
+        </div>
+      </div>
+      
 
-    <!-- Contenido de la página -->
-    <h1>Generador de PDF y envío de pedido por WhatsApp</h1>
 
-    <!-- Botón para generar el PDF y enviar el pedido por WhatsApp -->
-    <button onclick="enviarPedidoWhatsApp()">Generar PDF y enviar pedido por WhatsApp</button>
+      <div id="confirmacion">
+        <p>¿Estás seguro de que deseas eliminar este producto?</p>
+        <button onclick="eliminarProductoConfirmado(true)">Aceptar</button>
+        <button onclick="eliminarProductoConfirmado(false)">Cancelar</button>
+      </div>
 
-    <script>
-        // Función para enviar el pedido a WhatsApp con toda la información
-        function enviarPedidoWhatsApp() {
-            // Obtener la información del cliente y la empresa
-            var nombreCliente = ""; // Aquí deberías obtener el nombre del cliente del formulario o del DOM
-            var telefonoCliente = ""; // Aquí deberías obtener el teléfono del cliente del formulario o del DOM
-            var emailCliente = ""; // Aquí deberías obtener el email del cliente del formulario o del DOM
-            var nombreEmpresa = "S24 Seguridad Electrónica";
-            var telefonoEmpresa = "3158859744";
-            var mailEmpresa = ""; // Aquí deberías obtener el email de la empresa del formulario o del DOM
 
-            // Crear un nuevo documento PDF
-            var doc = new jsPDF();
 
-            // Agregar información del cliente y la empresa al PDF
-            doc.text(`Cliente:
+
+  <!-- Artículo 63 -->
+  <article class='product'>
+    <h2>Nombre del Producto 63</h2>
+    <figure>
+        <img src='imagenes/face.png' alt=''>
+        <figcaption>Descripción opcional de la imagen.</figcaption>
+    </figure>
+    <p class='nombre'>Nombre del Producto 63</p>
+    <p class='descripcion'>Descripción del producto 63.</p>
+    <p class='precio'>Precio: $63.00</p>
+    <form onsubmit='event.preventDefault(); agregarAlCarrito()'>
+        <button type='submit'>Agregar al Carrito</button>
+    </form>
+  </article>
+
+  <!-- Artículo 64 -->
+  <article class='product'>
+    <h2>Nombre del Producto 64</h2>
+    <figure>
+        <img src='imagenes/logowhatsapp.png' alt=''>
+        <figcaption>Descripción opcional de la imagen.</figcaption>
+    </figure>
+    <p class='nombre'>Nombre del Producto 64</p>
+    <p class='descripcion'>Descripción del producto 64.</p>
+    <p class='precio'>Precio: $64.00</p>
+    <form onsubmit='event.preventDefault(); agregarAlCarrito()'>
+        <button type='submit'>Agregar al Carrito</button>
+    </form>
+  </article>
+
+  <!-- Artículo 65 -->
+  <article class='product'>
+    <h2>Nombre del Producto 65</h2>
+    <figure>
+        <img src='imagenes/logowhatsapp.png' alt=''>
+        <figcaption>Descripción opcional de la imagen.</figcaption>
+    </figure>
+    <p class='nombre'>Nombre del Producto 65</p>
+    <p class='descripcion'>Descripción del producto 65.</p>
+    <p class='precio'>Precio: $65.00</p>
+    <form onsubmit='event.preventDefault(); agregarAlCarrito()'>
+        <button type='submit'>Agregar al Carrito</button>
+    </form>
+  </article>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.3/jspdf.umd.min.js"></script>
+
+  <script>
+    let productosEnCarrito = [];
+
+    function agregarAlCarrito() {
+    const articulo = event.target.closest(".product");
+    const nombres = articulo.querySelectorAll('.nombre');
+    const precios = articulo.querySelectorAll('.precio');
+    const descripciones = articulo.querySelectorAll('.descripcion');
+    const imagenes = articulo.querySelectorAll('img');
+
+    nombres.forEach((nombreElement, index) => {
+        const nombre = nombreElement.textContent.trim();
+        const precioString = precios[index].textContent.trim();
+        const precio = parseFloat(precioString.replace("Precio: $", ""));
+        const descripcion = descripciones[index].textContent.trim();
+        const imagen = imagenes[index].src;
+
+        // Buscar si el producto ya está en el carrito
+        const productoExistenteIndex = productosEnCarrito.findIndex(producto => producto.nombre === nombre);
+
+        if (productoExistenteIndex !== -1) {
+            // Si el producto ya está en el carrito, aumentar la cantidad
+            productosEnCarrito[productoExistenteIndex].cantidad += 1;
+        } else {
+            // Si el producto no está en el carrito, agregarlo con cantidad 1
+            productosEnCarrito.push({ nombre, precio, cantidad: 1, descripcion, imagen });
+        }
+    });
+
+    mostrarCarrito();
+    actualizarContador(productosEnCarrito.reduce((total, producto) => total + producto.cantidad, 0));
+    return false;
+}
+
+// Función para eliminar un producto del carrito
+ // Función para eliminar un producto del carrito
+ // Función para eliminar un producto del carrito con confirmación
+  // Función para eliminar un producto del carrito con confirmación
+  // Función para eliminar un producto del carrito con confirmación // Función para eliminar un producto del carrito con confirmación
+ // Función para eliminar un producto del carrito con confirmación
+ // Función para eliminar un producto del carrito con confirmación
+ function eliminarProductoConConfirmacion(nombreProducto) {
+      const confirmacion = confirm("¿Estás seguro de que deseas eliminar este producto?");
+      if (confirmacion) {
+        const index = productosEnCarrito.findIndex(producto => producto.nombre === nombreProducto);
+        if (index !== -1) {
+          productosEnCarrito.splice(index, 1);
+          mostrarCarrito();
+          actualizarContador(productosEnCarrito.reduce((total, producto) => total + producto.cantidad, 0));
+        }
+      }
+    }
+
+    // Función para mostrar el carrito
+    function mostrarCarrito() {
+      const carrito = document.getElementById("carrito");
+      let html = "<h2>Carrito de Compras</h2>";
+      let total = 0;
+      if (productosEnCarrito.length === 0) {
+          html += "<p>No hay productos en el carrito</p>";
+      } else {
+          html += "<ul>";
+          productosEnCarrito.forEach(producto => {
+              html += `<li>
+                          <span class="trash-icon" onclick="eliminarProductoConConfirmacion('${producto.nombre}')">&#128465;</span> <!-- Icono de cesta de basura -->
+                          <img src="${producto.imagen}" alt="${producto.nombre}" style="width: 50px; height: 50px;">
+                          <strong>${producto.nombre}</strong><br>
+                          ${producto.descripcion}<br>
+                          <button onclick="disminuirCantidad('${producto.nombre}')">-</button> 
+                          Cantidad: ${producto.cantidad} 
+                          <button onclick="aumentarCantidad('${producto.nombre}')">+</button><br>
+                          Precio: $${(producto.precio * producto.cantidad).toFixed(2)}
+                      </li>`;
+              total += producto.precio * producto.cantidad;
+          });
+          html += "</ul>";
+      }
+      html += `<p>Total: $${total.toFixed(2)}</p>`;
+      carrito.innerHTML = html;
+    }
+
+
+
+function vaciarCarrito() {
+    productosEnCarrito = []; // Limpiar el arreglo de productos en el carrito
+    mostrarCarrito(); // Actualizar la visualización del carrito en la interfaz
+    actualizarContador(0); // Actualizar el contador para que muestre 0
+}
+
+
+
+function actualizarContador(cantidad) {
+      contador.textContent = cantidad;
+    }
+
+
+    var icono = document.getElementById('icono');
+var carrito = document.getElementById('carrito');
+var cartButtons = document.querySelector('.cart-buttons');
+
+icono.onclick = function() {
+  if (carrito.style.display === "none") {
+    carrito.style.display = "block";
+    cartButtons.style.display = "block"; // Mostrar los botones del carrito al abrirlo
+  } else {
+    carrito.style.display = "none";
+    cartButtons.style.display = "none"; // Ocultar los botones del carrito al cerrarlo
+  }
+};
+
+document.getElementById('icono').addEventListener('click', function() {
+  var cartButtons = document.querySelector('.cart-buttons');
+  if (cartButtons.style.display === 'none') {
+    cartButtons.style.display = 'block';
+  } else {
+    cartButtons.style.display = 'none';
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+    document.getElementById('icono').addEventListener('click', function() {
+    var cartButtons = document.querySelector('.cart-buttons');
+    if (cartButtons.style.display === 'none') {
+        cartButtons.style.display = 'block';
+    } else {
+        cartButtons.style.display = 'none';
+    }
+});
+
+
+
+
+
+function aumentarCantidad(nombreProducto) {
+    const producto = productosEnCarrito.find(producto => producto.nombre === nombreProducto);
+    if (producto) {
+        producto.cantidad++;
+        mostrarCarrito();
+        actualizarContador(productosEnCarrito.reduce((total, producto) => total + producto.cantidad, 0));
+    }
+}
+
+function disminuirCantidad(nombreProducto) {
+    const producto = productosEnCarrito.find(producto => producto.nombre === nombreProducto);
+    if (producto) {
+        if (producto.cantidad > 0) { // Verificar si la cantidad es mayor que cero
+            producto.cantidad--;
+            mostrarCarrito();
+            actualizarContador(productosEnCarrito.reduce((total, producto) => total + producto.cantidad, 0));
+        } else {
+            // Si la cantidad es igual a cero, puedes eliminar el producto del carrito
+            const index = productosEnCarrito.indexOf(producto);
+            if (index !== -1) {
+                productosEnCarrito.splice(index, 1);
+                mostrarCarrito();
+                actualizarContador(productosEnCarrito.reduce((total, producto) => total + producto.cantidad, 0));
+            }
+        }
+    }
+}
+
+
+
+
+
+ // Obtener el elemento que se puede arrastrar
+ var icono = document.getElementById('icono');
+    // Obtener el contador
+    var contador = document.getElementById('contador');
+    // Obtener el carrito
+    var carrito = document.getElementById('carrito');
+
+    // Variables para almacenar la posición inicial del mouse y la posición inicial del elemento
+    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+
+    // Función que se llama cuando se hace clic y se mantiene en el elemento
+    icono.onmousedown = function(e) {
+      e = e || window.event;
+      e.preventDefault();
+      // Obtener la posición inicial del mouse
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      // Llamar a la función cuando se mueva el mouse
+      document.onmousemove = function(e) {
+        e = e || window.event;
+        e.preventDefault();
+        // Calcular la nueva posición del elemento
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        // Establecer la nueva posición del elemento
+        icono.style.top = (icono.offsetTop - pos2) + "px";
+        icono.style.left = (icono.offsetLeft - pos1) + "px";
+      };
+      // Llamar a la función cuando se suelte el mouse
+      document.onmouseup = function() {
+        // Dejar de mover el elemento cuando se suelta el mouse
+        document.onmouseup = null;
+        document.onmousemove = null;
+      };
+    };
+
+    
+    var comprarBtn = document.getElementById('comprarBtn');
+var modal = document.getElementById('modal');
+var modalContent = document.getElementById('modal-content');
+var closeButton = document.querySelector('.close');
+var modalAbierto = false; // Bandera para indicar si el modal está abierto o cerrado
+
+// Función para actualizar la fecha y hora en el modal
+function actualizarFechaHora() {
+    // Obtener la fecha y hora actual
+    var now = new Date();
+    var fechaHora = now.toLocaleString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' });
+
+    // Limpiar el contenido modal
+    modalContent.innerHTML = '';
+
+    // Calcular el gran total
+    var total = 0;
+    productosEnCarrito.forEach(producto => {
+        total += producto.precio * producto.cantidad;
+    });
+
+    // Crear un elemento para la fecha y hora
+    var fechaHoraElement = document.createElement('p');
+    fechaHoraElement.innerHTML = `<strong>Fecha y Hora:</strong> ${fechaHora}`;
+    fechaHoraElement.style.marginTop = '10px';
+    fechaHoraElement.style.marginLeft = '10px';
+    modalContent.appendChild(fechaHoraElement);
+
+    // Construir la tabla con la información del carrito
+    var table = document.createElement('table');
+    table.innerHTML = `
+        <thead>
+            <tr>
+                <th colspan="3">Datos del Cliente</th>
+                <th colspan="3">Datos de tu Empresa</th>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <th>Teléfono</th>
+                <th>Email</th>
+                <th colspan="3">Nombre: S24 Seguridad Electrónica<br>Teléfono: 3158859744<br>Mail: ?</th>
+            </tr>
+            <tr>
+                <th>Nombre del Cliente</th>
+                <th>Teléfono</th>
+                <th>Email</th>
+                <th colspan="3">&nbsp;</th>
+            </tr>
+            <tr>
+                <th>Dirección del Cliente</th>
+                <th colspan="2">Dirección de la Empresa</th>
+                <th colspan="3">&nbsp;</th>
+            </tr>
+            <tr>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Cantidad</th>
+                <th>Precio unitario</th>
+                <th>Precio total</th>
+            </tr>
+        </thead>
+        <tbody>
+    `;
+    productosEnCarrito.forEach(producto => {
+        var row = document.createElement('tr');
+        row.innerHTML = `
+            <td><img src="${producto.imagen}" alt="${producto.nombre}" style="width: 50px; height: 50px;"></td>
+            <td>${producto.nombre}</td>
+            <td>${producto.descripcion}</td>
+            <td>${producto.cantidad}</td>
+            <td>$${producto.precio.toFixed(2)}</td>
+            <td>$${(producto.precio * producto.cantidad).toFixed(2)}</td>
+        `;
+        table.appendChild(row);
+    });
+
+    table.innerHTML += `</tbody>`;
+
+    // Agregar la tabla y el gran total al contenido modal
+    modalContent.appendChild(table);
+    modalContent.innerHTML += `<p><strong>Gran Total:</strong> $${total.toFixed(2)}</p>`;
+
+    // Crear un botón para enviar el pedido a WhatsApp
+    var enviarPedidoBtn = document.createElement('button');
+    enviarPedidoBtn.textContent = 'Enviar Pedido a WhatsApp';
+    enviarPedidoBtn.style.marginTop = '20px';
+    enviarPedidoBtn.style.marginLeft = '10px';
+    enviarPedidoBtn.onclick = enviarPedidoWhatsApp;
+    modalContent.appendChild(enviarPedidoBtn);
+
+    // Mostrar la ventana modal
+    modal.style.display = 'block';
+    modalAbierto = true; // Establecer la bandera a true cuando se abre el modal
+}
+
+// Función para enviar el pedido a WhatsApp con toda la información
+// Función para enviar el pedido a WhatsApp con toda la información
+// Función para enviar el pedido a WhatsApp con toda la información
+// Función para enviar el pedido a WhatsApp con toda la información
+function enviarPedidoWhatsApp() {
+    // Obtener la información del cliente y la empresa
+    var nombreCliente = ""; // Aquí deberías obtener el nombre del cliente del formulario o del DOM
+    var telefonoCliente = ""; // Aquí deberías obtener el teléfono del cliente del formulario o del DOM
+    var emailCliente = ""; // Aquí deberías obtener el email del cliente del formulario o del DOM
+    var nombreEmpresa = "S24 Seguridad Electrónica";
+    var telefonoEmpresa = "3158859744";
+    var mailEmpresa = ""; // Aquí deberías obtener el email de la empresa del formulario o del DOM
+
+    // Crear un nuevo documento PDF
+    var doc = new jsPDF();
+
+    // Agregar información del cliente y la empresa al PDF
+    doc.text(`Cliente:
 - Nombre: ${nombreCliente}
 - Teléfono: ${telefonoCliente}
 - Email: ${emailCliente}`, 10, 10);
 
-            doc.text(`Empresa:
+    doc.text(`Empresa:
 - Nombre: ${nombreEmpresa}
 - Teléfono: ${telefonoEmpresa}
 - Email: ${mailEmpresa}`, 10, 50);
 
-            // Agregar información de productos al PDF
-            var y = 90;
-            productosEnCarrito.forEach(producto => {
-                doc.text(`- Nombre: ${producto.nombre}
+    // Agregar información de productos al PDF
+    var y = 90;
+    productosEnCarrito.forEach(producto => {
+        doc.text(`- Nombre: ${producto.nombre}
   Descripción: ${producto.descripcion}
   Cantidad: ${producto.cantidad}
   Precio unitario: $${producto.precio.toFixed(2)}
   Precio total: $${(producto.precio * producto.cantidad).toFixed(2)}
   Imagen: ${producto.imagen}`, 10, y);
-                y += 60; // Ajustar la posición vertical para el siguiente producto
-            });
+        y += 60; // Ajustar la posición vertical para el siguiente producto
+    });
 
-            // Guardar el documento PDF como un Blob
-            var pdfBlob = doc.output("blob");
+    // Guardar el documento PDF como un Blob
+    var pdfBlob = doc.output("blob");
 
-            // Crear una URL para el Blob
-            var pdfUrl = URL.createObjectURL(pdfBlob);
+    // Crear una URL para el Blob
+    var pdfUrl = URL.createObjectURL(pdfBlob);
 
-            // Abrir una nueva ventana de WhatsApp con el PDF adjunto
-            window.open('https://api.whatsapp.com/send?phone=573158859744&text=¡Hola! Adjunto te envío mi pedido.', '_blank');
+    // Abrir una nueva ventana de WhatsApp con el PDF adjunto
+    window.open('https://api.whatsapp.com/send?phone=573158859744&text=¡Hola! Adjunto te envío mi pedido.', '_blank');
 
-            // Liberar la URL del Blob
-            URL.revokeObjectURL(pdfUrl);
+    // Liberar la URL del Blob
+    URL.revokeObjectURL(pdfUrl);
+}
+
+
+
+// Agregar un evento de clic al botón de cierre
+closeButton.addEventListener('click', function(event) {
+    // Ocultar el modal cuando se hace clic en el botón de cierre
+    modal.style.display = 'none';
+    modalAbierto = false; // Establecer la bandera a false cuando se cierra el modal
+    event.stopPropagation(); // Detener la propagación del evento
+});
+
+// Agregar un evento de clic al botón de compra
+comprarBtn.onclick = function() {
+    // Llamar a la función para actualizar la fecha y hora inmediatamente
+    actualizarFechaHora();
+
+    // Función para actualizar la fecha y hora cada segundo
+    function actualizarCadaSegundo() {
+        if (modalAbierto) { // Solo actualizar si el modal está abierto
+            actualizarFechaHora();
+            setTimeout(actualizarCadaSegundo, 1000); // Llamar a la función nuevamente después de 1 segundo
         }
-    </script>
+    }
 
+    // Llamar a la función para actualizar la fecha y hora cada segundo
+    setTimeout(actualizarCadaSegundo, 1000);
+};
+
+
+
+
+
+
+
+
+
+// Obtener el elemento de la pestaña
+// Obtener el elemento de la pestaña
+var toggleCart = document.getElementById('toggleCart');
+
+// Agregar un evento de clic a la pestaña
+toggleCart.addEventListener('click', function() {
+  // Obtener el carrito de compras
+  var carrito = document.getElementById('carrito');
+  var cartButtons = document.querySelector('.cart-buttons');
+
+  // Cambiar la visibilidad del carrito y los botones
+  if (carrito.style.display === 'none') {
+    carrito.style.display = 'block';
+    cartButtons.style.display = 'block'; // Mostrar los botones del carrito al abrirlo
+  } else {
+    carrito.style.display = 'none';
+    cartButtons.style.display = 'none'; // Ocultar los botones del carrito al cerrarlo
+  }
+});
+
+
+
+
+
+
+
+
+
+  </script>
 </body>
 </html>
