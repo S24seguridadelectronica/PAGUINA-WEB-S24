@@ -537,7 +537,6 @@ function actualizarFechaHora() {
 // Función para enviar el pedido a WhatsApp con toda la información
 // Función para enviar el pedido a WhatsApp con toda la información
 // Función para enviar el pedido a WhatsApp con toda la información
-// Función para enviar el pedido a WhatsApp con toda la información
 function enviarPedidoWhatsApp() {
     // Obtener la información del cliente y la empresa
     var nombreCliente = ""; // Aquí deberías obtener el nombre del cliente del formulario o del DOM
@@ -547,46 +546,66 @@ function enviarPedidoWhatsApp() {
     var telefonoEmpresa = "3158859744";
     var mailEmpresa = ""; // Aquí deberías obtener el email de la empresa del formulario o del DOM
 
-    // Crear un nuevo documento PDF
-    var doc = new jsPDF();
-
-    // Agregar información del cliente y la empresa al PDF
-    doc.text(`Cliente:
+    // Construir el mensaje con la información del cliente, empresa y productos
+    var mensaje = `¡Hola! Me gustaría hacer un pedido. Aquí están los detalles:
+Cliente:
 - Nombre: ${nombreCliente}
 - Teléfono: ${telefonoCliente}
-- Email: ${emailCliente}`, 10, 10);
+- Email: ${emailCliente}
 
-    doc.text(`Empresa:
+Empresa:
 - Nombre: ${nombreEmpresa}
 - Teléfono: ${telefonoEmpresa}
-- Email: ${mailEmpresa}`, 10, 50);
+- Email: ${mailEmpresa}
 
-    // Agregar información de productos al PDF
-    var y = 90;
+Productos:
+`;
     productosEnCarrito.forEach(producto => {
-        doc.text(`- Nombre: ${producto.nombre}
+        mensaje += `
+- Nombre: ${producto.nombre}
   Descripción: ${producto.descripcion}
   Cantidad: ${producto.cantidad}
   Precio unitario: $${producto.precio.toFixed(2)}
   Precio total: $${(producto.precio * producto.cantidad).toFixed(2)}
-  Imagen: ${producto.imagen}`, 10, y);
-        y += 60; // Ajustar la posición vertical para el siguiente producto
+  Imagen: ${producto.imagen}
+`;
     });
 
-    // Guardar el documento PDF como un Blob
-    var pdfBlob = doc.output("blob");
+    // Codificar el mensaje para que se pueda enviar a través de la URL de WhatsApp
+    var mensajeCodificado = encodeURIComponent(mensaje);
 
-    // Crear una URL para el Blob
-    var pdfUrl = URL.createObjectURL(pdfBlob);
-
-    // Abrir una nueva ventana de WhatsApp con el PDF adjunto
-    window.open('https://api.whatsapp.com/send?phone=573158859744&text=¡Hola! Adjunto te envío mi pedido.', '_blank');
-
-    // Liberar la URL del Blob
-    URL.revokeObjectURL(pdfUrl);
+    // Abrir una nueva ventana de WhatsApp con el mensaje codificado
+    window.open('https://api.whatsapp.com/send?phone=573158859744&text=' + mensajeCodificado);
 }
 
 
+
+// Función para obtener la representación Base64 de una imagen desde su URL
+function obtenerBase64DesdeURL(url) {
+    var imagen = new Image();
+    imagen.crossOrigin = 'Anonymous';
+    
+    return new Promise((resolve, reject) => {
+        imagen.onload = function() {
+            var canvas = document.createElement('canvas');
+            canvas.width = this.width;
+            canvas.height = this.height;
+
+            var ctx = canvas.getContext('2d');
+            ctx.drawImage(this, 0, 0);
+
+            var base64 = canvas.toDataURL('image/jpeg'); // Puedes cambiar el tipo de imagen si es necesario
+
+            resolve(base64);
+        };
+
+        imagen.onerror = function(error) {
+            reject(error);
+        };
+
+        imagen.src = url;
+    });
+}
 
 // Agregar un evento de clic al botón de cierre
 closeButton.addEventListener('click', function(event) {
