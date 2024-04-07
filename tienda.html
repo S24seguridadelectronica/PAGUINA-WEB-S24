@@ -1,383 +1,70 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Icono de Carrito de Compras Arrastrable</title>
-  <style>
-    .draggable {
-      position: absolute;
-      cursor: move;
-      width: 50px; /* Ancho del icono */
-      height: 50px; /* Alto del icono */
-      font-size: 30px; /* Tamaño de fuente para emojis */
-      background-color: #ff9800;
-      color: white;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .cart {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  width: 500px; /* Ancho del carrito */
-  max-height: 100px; /* Altura máxima del carrito */
-  overflow-y: auto; /* Habilitar desbordamiento vertical con scrollbar */
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  padding: 10px;
-  display: none; /* Ocultar el carrito inicialmente */
-}
-
-
-
-    .producto {
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-    }
-
-    .producto button {
-      margin-right: 5px;
-    }
-
-
-    .cart-buttons{
-      position: fixed;
-      top: 200px;
-      right: 20px;
-      width: 200px; /* Ancho del carrito */
-      max-height: 400px; /* Altura máxima del carrito */
-      overflow-y: auto; /* Habilitar desbordamiento vertical */
-      background-color: #f0f0f0;
-      border: 1px solid #ccc;
-      padding: 10px;
-      display: none; /* Ocultar el carrito inicialmente */
-    }
-    
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de PDF y envío de pedido por WhatsApp</title>
+    <!-- Importar la biblioteca jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 </head>
 <body>
-    <div id="icono" class="draggable">
-        🛒 <!-- Emoji de carrito de compras -->
-        <div id="contador">0</div> <!-- Contador de elementos -->
-    </div>
-    
-    <div class="cart-buttons" style="display: none;">
-        <button onclick="vaciarCarrito()">Vaciar Carrito</button>
-        <button id="comprarBtn" type="button">enviar cotizacion</button>
-    </div>
-    <aside class="cart" id="carrito">
-        <h2>Carrito de Compras</h2>
-        <div id="productos-carrito">
-            <p>No hay productos en el carrito</p>
-            <p id="total-carrito">Total: $0.00</p>
-        </div>
-    </aside>
-    
 
-  <!-- Artículo 63 -->
-  <article class='product'>
-    <h2>Nombre del Producto 63</h2>
-    <figure>
-        <img src='imagenes/63.jpeg' alt=''>
-        <figcaption>Descripción opcional de la imagen.</figcaption>
-    </figure>
-    <p class='nombre'>Nombre del Producto 63</p>
-    <p class='descripcion'>Descripción del producto 63.</p>
-    <p class='precio'>Precio: $63.00</p>
-    <form onsubmit='event.preventDefault(); agregarAlCarrito()'>
-        <button type='submit'>Agregar al Carrito</button>
-    </form>
-  </article>
+    <!-- Contenido de la página -->
+    <h1>Generador de PDF y envío de pedido por WhatsApp</h1>
 
-  <!-- Artículo 64 -->
-  <article class='product'>
-    <h2>Nombre del Producto 64</h2>
-    <figure>
-        <img src='imagenes/64.jpeg' alt=''>
-        <figcaption>Descripción opcional de la imagen.</figcaption>
-    </figure>
-    <p class='nombre'>Nombre del Producto 64</p>
-    <p class='descripcion'>Descripción del producto 64.</p>
-    <p class='precio'>Precio: $64.00</p>
-    <form onsubmit='event.preventDefault(); agregarAlCarrito()'>
-        <button type='submit'>Agregar al Carrito</button>
-    </form>
-  </article>
+    <!-- Botón para generar el PDF y enviar el pedido por WhatsApp -->
+    <button onclick="enviarPedidoWhatsApp()">Generar PDF y enviar pedido por WhatsApp</button>
 
-  <!-- Artículo 65 -->
-  <article class='product'>
-    <h2>Nombre del Producto 65</h2>
-    <figure>
-        <img src='imagenes/65.jpeg' alt=''>
-        <figcaption>Descripción opcional de la imagen.</figcaption>
-    </figure>
-    <p class='nombre'>Nombre del Producto 65</p>
-    <p class='descripcion'>Descripción del producto 65.</p>
-    <p class='precio'>Precio: $65.00</p>
-    <form onsubmit='event.preventDefault(); agregarAlCarrito()'>
-        <button type='submit'>Agregar al Carrito</button>
-    </form>
-  </article>
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.3/jspdf.umd.min.js"></script>
+    <script>
+        // Función para enviar el pedido a WhatsApp con toda la información
+        function enviarPedidoWhatsApp() {
+            // Obtener la información del cliente y la empresa
+            var nombreCliente = ""; // Aquí deberías obtener el nombre del cliente del formulario o del DOM
+            var telefonoCliente = ""; // Aquí deberías obtener el teléfono del cliente del formulario o del DOM
+            var emailCliente = ""; // Aquí deberías obtener el email del cliente del formulario o del DOM
+            var nombreEmpresa = "S24 Seguridad Electrónica";
+            var telefonoEmpresa = "3158859744";
+            var mailEmpresa = ""; // Aquí deberías obtener el email de la empresa del formulario o del DOM
 
-  <script>
-    let productosEnCarrito = [];
+            // Crear un nuevo documento PDF
+            var doc = new jsPDF();
 
-    function agregarAlCarrito() {
-    const articulo = event.target.closest(".product");
-    const nombres = articulo.querySelectorAll('.nombre');
-    const precios = articulo.querySelectorAll('.precio');
-    const descripciones = articulo.querySelectorAll('.descripcion');
-    const imagenes = articulo.querySelectorAll('img');
+            // Agregar información del cliente y la empresa al PDF
+            doc.text(`Cliente:
+- Nombre: ${nombreCliente}
+- Teléfono: ${telefonoCliente}
+- Email: ${emailCliente}`, 10, 10);
 
-    nombres.forEach((nombreElement, index) => {
-        const nombre = nombreElement.textContent.trim();
-        const precioString = precios[index].textContent.trim();
-        const precio = parseFloat(precioString.replace("Precio: $", ""));
-        const descripcion = descripciones[index].textContent.trim();
-        const imagen = imagenes[index].src;
+            doc.text(`Empresa:
+- Nombre: ${nombreEmpresa}
+- Teléfono: ${telefonoEmpresa}
+- Email: ${mailEmpresa}`, 10, 50);
 
-        // Buscar si el producto ya está en el carrito
-        const productoExistenteIndex = productosEnCarrito.findIndex(producto => producto.nombre === nombre);
+            // Agregar información de productos al PDF
+            var y = 90;
+            productosEnCarrito.forEach(producto => {
+                doc.text(`- Nombre: ${producto.nombre}
+  Descripción: ${producto.descripcion}
+  Cantidad: ${producto.cantidad}
+  Precio unitario: $${producto.precio.toFixed(2)}
+  Precio total: $${(producto.precio * producto.cantidad).toFixed(2)}
+  Imagen: ${producto.imagen}`, 10, y);
+                y += 60; // Ajustar la posición vertical para el siguiente producto
+            });
 
-        if (productoExistenteIndex !== -1) {
-            // Si el producto ya está en el carrito, aumentar la cantidad
-            productosEnCarrito[productoExistenteIndex].cantidad += 1;
-        } else {
-            // Si el producto no está en el carrito, agregarlo con cantidad 1
-            productosEnCarrito.push({ nombre, precio, cantidad: 1, descripcion, imagen });
+            // Guardar el documento PDF como un Blob
+            var pdfBlob = doc.output("blob");
+
+            // Crear una URL para el Blob
+            var pdfUrl = URL.createObjectURL(pdfBlob);
+
+            // Abrir una nueva ventana de WhatsApp con el PDF adjunto
+            window.open('https://api.whatsapp.com/send?phone=573158859744&text=¡Hola! Adjunto te envío mi pedido.', '_blank');
+
+            // Liberar la URL del Blob
+            URL.revokeObjectURL(pdfUrl);
         }
-    });
+    </script>
 
-    mostrarCarrito();
-    actualizarContador(productosEnCarrito.reduce((total, producto) => total + producto.cantidad, 0));
-    return false;
-}
-
-function mostrarCarrito() {
-    const carrito = document.getElementById("carrito");
-    let html = "<h2>Carrito de Compras</h2>";
-    let total = 0;
-    if (productosEnCarrito.length === 0) {
-        html += "<p>No hay productos en el carrito</p>";
-    } else {
-        html += "<ul>";
-        productosEnCarrito.forEach(producto => {
-            html += `<li>
-                        <img src="${producto.imagen}" alt="${producto.nombre}" style="width: 50px; height: 50px;">
-                        <strong>${producto.nombre}</strong><br>
-                        ${producto.descripcion}<br>
-                        <button onclick="disminuirCantidad('${producto.nombre}')">-</button> 
-                        Cantidad: ${producto.cantidad} 
-                        <button onclick="aumentarCantidad('${producto.nombre}')">+</button><br> 
-                        Precio: $${(producto.precio * producto.cantidad).toFixed(2)}
-                    </li>`;
-            total += producto.precio * producto.cantidad;
-        });
-        html += "</ul>";
-    }
-    html += `<p>Total: $${total.toFixed(2)}</p>`;
-    carrito.innerHTML = html;
-}
-
-function vaciarCarrito() {
-    productosEnCarrito = []; // Limpiar el arreglo de productos en el carrito
-    mostrarCarrito(); // Actualizar la visualización del carrito en la interfaz
-    actualizarContador(0); // Actualizar el contador para que muestre 0
-}
-
-
-
-function actualizarContador(cantidad) {
-      contador.textContent = cantidad;
-    }
-
-
-    var icono = document.getElementById('icono');
-var carrito = document.getElementById('carrito');
-var cartButtons = document.querySelector('.cart-buttons');
-
-icono.onclick = function() {
-  if (carrito.style.display === "none") {
-    carrito.style.display = "block";
-    cartButtons.style.display = "block"; // Mostrar los botones del carrito al abrirlo
-  } else {
-    carrito.style.display = "none";
-    cartButtons.style.display = "none"; // Ocultar los botones del carrito al cerrarlo
-  }
-};
-
-document.getElementById('icono').addEventListener('click', function() {
-  var cartButtons = document.querySelector('.cart-buttons');
-  if (cartButtons.style.display === 'none') {
-    cartButtons.style.display = 'block';
-  } else {
-    cartButtons.style.display = 'none';
-  }
-});
-
-
-
-
-
-
-
-
-
-
-
-    document.getElementById('icono').addEventListener('click', function() {
-    var cartButtons = document.querySelector('.cart-buttons');
-    if (cartButtons.style.display === 'none') {
-        cartButtons.style.display = 'block';
-    } else {
-        cartButtons.style.display = 'none';
-    }
-});
-
-
-
-
-
-function aumentarCantidad(nombreProducto) {
-    const producto = productosEnCarrito.find(producto => producto.nombre === nombreProducto);
-    if (producto) {
-        producto.cantidad++;
-        mostrarCarrito();
-        actualizarContador(productosEnCarrito.reduce((total, producto) => total + producto.cantidad, 0));
-    }
-}
-
-function disminuirCantidad(nombreProducto) {
-    const producto = productosEnCarrito.find(producto => producto.nombre === nombreProducto);
-    if (producto && producto.cantidad > 1) {
-        producto.cantidad--;
-        mostrarCarrito();
-        actualizarContador(productosEnCarrito.reduce((total, producto) => total + producto.cantidad, 0));
-    }
-}
-
-
-
-
- // Obtener el elemento que se puede arrastrar
- var icono = document.getElementById('icono');
-    // Obtener el contador
-    var contador = document.getElementById('contador');
-    // Obtener el carrito
-    var carrito = document.getElementById('carrito');
-
-    // Variables para almacenar la posición inicial del mouse y la posición inicial del elemento
-    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-
-    // Función que se llama cuando se hace clic y se mantiene en el elemento
-    icono.onmousedown = function(e) {
-      e = e || window.event;
-      e.preventDefault();
-      // Obtener la posición inicial del mouse
-      pos3 = e.clientX;
-      pos4 = e.clientY;
-      // Llamar a la función cuando se mueva el mouse
-      document.onmousemove = function(e) {
-        e = e || window.event;
-        e.preventDefault();
-        // Calcular la nueva posición del elemento
-        pos1 = pos3 - e.clientX;
-        pos2 = pos4 - e.clientY;
-        pos3 = e.clientX;
-        pos4 = e.clientY;
-        // Establecer la nueva posición del elemento
-        icono.style.top = (icono.offsetTop - pos2) + "px";
-        icono.style.left = (icono.offsetLeft - pos1) + "px";
-      };
-      // Llamar a la función cuando se suelte el mouse
-      document.onmouseup = function() {
-        // Dejar de mover el elemento cuando se suelta el mouse
-        document.onmouseup = null;
-        document.onmousemove = null;
-      };
-    };
-
-
-
-
-
-
-    // Función para generar la factura
-    function generarFactura() {
-    // Obtener la información de los productos en el carrito
-    const productos = productosEnCarrito.map(producto => ({
-        nombre: producto.nombre,
-        cantidad: producto.cantidad,
-        precioTotal: producto.precio * producto.cantidad,
-        descripcion: producto.descripcion,
-        imagenUrl: producto.imagenUrl
-    }));
-
-    // Crear la representación visual de la factura
-    let facturaHTML = "<h2>Factura de Compra</h2>";
-    facturaHTML += "<table>";
-    facturaHTML += "<tr><th>Producto</th><th>Descripción</th><th>Imagen</th><th>Cantidad</th><th>Precio Total</th></tr>";
-    productos.forEach(producto => {
-        facturaHTML += `<tr>
-                            <td>${producto.nombre}</td>
-                            <td>${producto.descripcion}</td>
-                            <td><img src="${producto.imagenUrl}" alt="${producto.nombre}" style="width: 50px; height: 50px;"></td>
-                            <td>${producto.cantidad}</td>
-                            <td>$${producto.precioTotal.toFixed(2)}</td>
-                        </tr>`;
-    });
-    facturaHTML += "</table>";
-
-    // Calcular el total de la compra
-    const totalCompra = productos.reduce((total, producto) => total + producto.precioTotal, 0);
-    facturaHTML += `<p>Total de la compra: $${totalCompra.toFixed(2)}</p>`;
-
-    // Agregar un botón para enviar a WhatsApp
-    facturaHTML += `<button onclick="enviarWhatsApp('${encodeURIComponent(facturaHTML)}')">Enviar a WhatsApp</button>`;
-
-    // Mostrar la factura en una ventana emergente
-    const ventanaFactura = window.open("", "Factura", "width=600,height=400");
-    ventanaFactura.document.body.innerHTML = facturaHTML;
-}
-
-function enviarWhatsApp(facturaEncoded) {
-    // Decodificar la factura
-    const facturaHTML = decodeURIComponent(facturaEncoded);
-
-    // Número de WhatsApp en formato internacional (sin espacios ni guiones)
-    const numeroWhatsApp = "573158859744"; // Tu número de WhatsApp en formato internacional
-
-    // Mensaje a enviar
-    const mensaje = encodeURIComponent(facturaHTML);
-
-    // Crear el enlace de WhatsApp con el número de destino y el mensaje predefinido
-    const whatsappLink = `https://wa.me/${numeroWhatsApp}?text=${mensaje}`;
-
-    // Redirigir la ventana actual al enlace de WhatsApp
-    window.location.href = whatsappLink;
-}
-
-
-
-
-
-
-
-
-// Asociar la función generarFactura al evento click del botón "Comprar"
-document.getElementById("comprarBtn").addEventListener("click", generarFactura);
-
-
-
-
-
-  </script>
 </body>
 </html>
