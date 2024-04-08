@@ -1,23 +1,91 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Icono de Carrito de Compras Arrastrable</title>
-  <style>
-    .draggable {
-      position: absolute;
-      cursor: move;
-      width: 50px; /* Ancho del icono */
-      height: 50px; /* Alto del icono */
-      font-size: 30px; /* Tamaño de fuente para emojis */
-      background-color: #ff9800;
-      color: white;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Registro e Inicio de Sesión</title>
+    <style>
+/* Estilos generales */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1200px; /* Ancho máximo del contenido */
+  margin: 0 auto; /* Centrar el contenido en pantallas más grandes */
+  padding: 20px;
+}
+
+/* Estilos para la cabecera */
+header {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+}
+
+/* Estilos para la barra de navegación */
+nav {
+  background-color: #444;
+  color: white;
+  padding: 10px;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 10px;
+}
+
+/* Estilos para el contenido principal */
+main {
+  padding: 20px 0;
+}
+
+/* Estilos para el pie de página */
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
+
+
+
+
+
+
+
+
+.draggable {
+  position: fixed; /* Cambiado a 'fixed' para que se mantenga en la misma posición al hacer scroll */
+  bottom: 20px; /* Ajustar la distancia desde la parte inferior de la pantalla */
+  left: 20px; /* Ajustar la distancia desde el borde izquierdo de la pantalla */
+  cursor: move;
+  width: 50px;
+  height: 50px;
+  font-size: 30px;
+  background-color: #ff9800;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Aumentar el valor de z-index */
+}
+
 
     .cart {
   position: fixed;
@@ -26,7 +94,7 @@
   width: 500px; /* Ancho del carrito */
   max-height: 100px; /* Altura máxima del carrito */
   overflow-y: auto; /* Habilitar desbordamiento vertical con scrollbar */
-  background-color: #f0f0f0;
+  background-color: hwb(0 100% 0%);
   border: 1px solid #ccc;
   padding: 10px;
   display: none; /* Ocultar el carrito inicialmente */
@@ -88,7 +156,7 @@
 }
 
 .modal-content {
-  background-color: #fefefe;
+  background-color: hsl(0, 0%, 100%);
   margin: 10% auto;
   padding: 20px;
   border: 1px solid #888;
@@ -137,10 +205,97 @@
 
 
 
+    #productos {
+        margin-top: 100px; /* Ajusta este valor según lo que necesites */
+        margin-bottom: 10px; /* Ajusta este valor según lo que necesites */
+    }
+
+
+    #carrito_buscador {
+        margin-top: 100px; /* Ajusta este valor según lo que necesites */
+        margin-bottom: 10px; /* Ajusta este valor según lo que necesites */
+    }
+
+
+
+
+
+
+
+
     
   </style>
 </head>
 <body>
+
+   <!-- Cabecera de la página con el menú de navegación -->
+   <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="inicio.html">Inicio</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="contacto.html">Contacto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="tienda.html">Tienda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html">Blog</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<main>
+
+
+  <section id="carrito_buscador">
+   <!-- HTML del buscador -->
+<input type="text" id="buscador" placeholder="Buscar productos" style="width: 100%; margin-bottom: 10px;">
+
+<!-- JavaScript para la funcionalidad del buscador -->
+<script>
+    // Obtener el elemento del input de búsqueda
+    const buscador = document.getElementById('buscador');
+
+    // Agregar un evento de escucha para detectar cuando se presiona una tecla en el input
+    buscador.addEventListener('keyup', function(event) {
+        // Obtener el valor del input de búsqueda
+        const valorBusqueda = event.target.value.toLowerCase();
+
+        // Obtener todos los productos
+        const productos = document.querySelectorAll('.product');
+
+        // Recorrer cada producto y mostrar/ocultar según coincida con el valor de búsqueda
+        productos.forEach(producto => {
+            // Obtener el nombre del producto y convertirlo a minúsculas
+            const nombreProducto = producto.querySelector('.nombre').textContent.toLowerCase();
+
+            // Verificar si el nombre del producto contiene el valor de búsqueda
+            if (nombreProducto.includes(valorBusqueda)) {
+                producto.style.display = 'block'; // Mostrar el producto si coincide
+            } else {
+                producto.style.display = 'none'; // Ocultar el producto si no coincide
+            }
+        });
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
     <div id="icono" class="draggable">
         🛒 <!-- Emoji de carrito de compras -->
         <div id="contador">0</div> <!-- Contador de elementos -->
@@ -177,52 +332,264 @@
 
 
 
+    </section>
 
-  <!-- Artículo 63 -->
-  <article class='product'>
-    <h2>Nombre del Producto 63</h2>
-    <figure>
-        <img src='imagenes/face.png' alt=''>
-        <figcaption>Descripción opcional de la imagen.</figcaption>
-    </figure>
-    <p class='nombre'>Nombre del Producto 63</p>
-    <p class='descripcion'>Descripción del producto 63.</p>
-    <p class='precio'>Precio: $63.00</p>
-    <form onsubmit='event.preventDefault(); agregarAlCarrito()'>
-        <button type='submit'>Agregar al Carrito</button>
-    </form>
-  </article>
 
-  <!-- Artículo 64 -->
-  <article class='product'>
-    <h2>Nombre del Producto 64</h2>
-    <figure>
-        <img src='imagenes/logowhatsapp.png' alt=''>
-        <figcaption>Descripción opcional de la imagen.</figcaption>
-    </figure>
-    <p class='nombre'>Nombre del Producto 64</p>
-    <p class='descripcion'>Descripción del producto 64.</p>
-    <p class='precio'>Precio: $64.00</p>
-    <form onsubmit='event.preventDefault(); agregarAlCarrito()'>
-        <button type='submit'>Agregar al Carrito</button>
-    </form>
-  </article>
 
-  <!-- Artículo 65 -->
-  <article class='product'>
-    <h2>Nombre del Producto 65</h2>
-    <figure>
-        <img src='imagenes/logowhatsapp.png' alt=''>
-        <figcaption>Descripción opcional de la imagen.</figcaption>
-    </figure>
-    <p class='nombre'>Nombre del Producto 65</p>
-    <p class='descripcion'>Descripción del producto 65.</p>
-    <p class='precio'>Precio: $65.00</p>
-    <form onsubmit='event.preventDefault(); agregarAlCarrito()'>
-        <button type='submit'>Agregar al Carrito</button>
-    </form>
-  </article>
+    <section id="productos">
+
+      <!-- Artículo 50 -->
+      <article class='product'>
+          <h2>Nombre del Producto 50</h2>
+          <figure>
+              <img src='imagenes/50.jpeg' alt=''>
+              <figcaption>Descripción opcional de la imagen.</figcaption>
+          </figure>
+          <p class='nombre'>Nombre del Producto 50</p>
+          <p class='descripcion'>Descripción del producto 50.</p>
+          <p class='precio'>Precio: $50.00</p>
+          <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+              <button type='submit'>Agregar al Carrito</button>
+          </form>
+      </article>
+      
+      <!-- Artículo 51 -->
+      <article class='product'>
+          <h2>Nombre del Producto 51</h2>
+          <figure>
+              <img src='imagenes/51.jpeg' alt=''>
+              <figcaption>Descripción opcional de la imagen.</figcaption>
+          </figure>
+          <p class='nombre'>Nombre del Producto 51</p>
+          <p class='descripcion'>Descripción del producto 51.</p>
+          <p class='precio'>Precio: $51.00</p>
+          <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+              <button type='submit'>Agregar al Carrito</button>
+          </form>
+      </article>
+      
+      <!-- Artículo 52 -->
+      <article class='product'>
+          <h2>Nombre del Producto 52</h2>
+          <figure>
+              <img src='imagenes/52.jpeg' alt=''>
+              <figcaption>Descripción opcional de la imagen.</figcaption>
+          </figure>
+          <p class='nombre'>Nombre del Producto 52</p>
+          <p class='descripcion'>Descripción del producto 52.</p>
+          <p class='precio'>Precio: $52.00</p>
+          <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+              <button type='submit'>Agregar al Carrito</button>
+          </form>
+      </article>
+      
+      <!-- Artículo 53 -->
+      <article class='product'>
+          <h2>Nombre del Producto 53</h2>
+          <figure>
+              <img src='imagenes/53.jpeg' alt=''>
+              <figcaption>Descripción opcional de la imagen.</figcaption>
+          </figure>
+          <p class='nombre'>Nombre del Producto 53</p>
+          <p class='descripcion'>Descripción del producto 53.</p>
+          <p class='precio'>Precio: $53.00</p>
+          <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+              <button type='submit'>Agregar al Carrito</button>
+          </form>
+      </article>
+      
+      <!-- Artículo 54 -->
+      <article class='product'>
+          <h2>Nombre del Producto 54</h2>
+          <figure>
+              <img src='imagenes/54.jpeg' alt=''>
+              <figcaption>Descripción opcional de la imagen.</figcaption>
+          </figure>
+          <p class='nombre'>Nombre del Producto 54</p>
+          <p class='descripcion'>Descripción del producto 54.</p>
+          <p class='precio'>Precio: $54.00</p>
+          <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+              <button type='submit'>Agregar al Carrito</button>
+          </form>
+      </article>
+      
+      <!-- Artículo 55 -->
+      <article class='product'>
+          <h2>Nombre del Producto 55</h2>
+          <figure>
+              <img src='imagenes/55.jpeg' alt=''>
+              <figcaption>Descripción opcional de la imagen.</figcaption>
+          </figure>
+          <p class='nombre'>Nombre del Producto 55</p>
+          <p class='descripcion'>Descripción del producto 55.</p>
+          <p class='precio'>Precio: $55.00</p>
+          <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+              <button type='submit'>Agregar al Carrito</button>
+          </form>
+      </article>
+      
+      <!-- Artículo 56 -->
+      <article class='product'>
+          <h2>Nombre del Producto 56</h2>
+          <figure>
+              <img src='imagenes/56.jpeg' alt=''>
+              <figcaption>Descripción opcional de la imagen.</figcaption>
+          </figure>
+          <p class='nombre'>Nombre del Producto 56</p>
+          <p class='descripcion'>Descripción del producto 56.</p>
+          <p class='precio'>Precio: $56.00</p>
+          <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+              <button type='submit'>Agregar al Carrito</button>
+          </form>
+      </article>
+      
+      <!-- Artículo 57 -->
+      <article class='product'>
+          <h2>Nombre del Producto 57</h2>
+          <figure>
+              <img src='imagenes/57.jpeg' alt=''>
+              <figcaption>Descripción opcional de la imagen.</figcaption>
+          </figure>
+          <p class='nombre'>Nombre del Producto 57</p>
+          <p class='descripcion'>Descripción del producto 57.</p>
+          <p class='precio'>Precio: $57.00</p>
+          <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+              <button type='submit'>Agregar al Carrito</button>
+          </form>
+      </article>
+      
+      <!-- Artículo 58 -->
+      <article class='product'>
+          <h2>Nombre del Producto 58</h2>
+          <figure>
+              <img src='imagenes/58.jpeg' alt=''>
+              <figcaption>Descripción opcional de la imagen.</figcaption>
+          </figure>
+          <p class='nombre'>Nombre del Producto 58</p>
+          <p class='descripcion'>Descripción del producto 58.</p>
+          <p class='precio'>Precio: $58.00</p>
+          <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+              <button type='submit'>Agregar al Carrito</button>
+          </form>
+      </article>
+      
+      <!-- Artículo 59 -->
+      <article class='product'>
+          <h2>Nombre del Producto 59</h2>
+          <figure>
+              <img src='imagenes/59.jpeg' alt=''>
+              <figcaption>Descripción opcional de la imagen.</figcaption>
+          </figure>
+          <p class='nombre'>Nombre del Producto 59</p>
+          <p class='descripcion'>Descripción del producto 59.</p>
+          <p class='precio'>Precio: $59.00</p>
+          <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+              <button type='submit'>Agregar al Carrito</button>
+          </form>
+      </article>
+      
+      <!-- Artículo 60 -->
+      <article class='product'>
+          <h2>Nombre del Producto 60</h2>
+          <figure>
+              <img src='imagenes/60.jpeg' alt=''>
+              <figcaption>Descripción opcional de la imagen.</figcaption>
+          </figure>
+          <p class='nombre'>Nombre del Producto 60</p>
+          <p class='descripcion'>Descripción del producto 60.</p>
+          <p class='precio'>Precio: $60.00</p>
+          <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+              <button type='submit'>Agregar al Carrito</button>
+          </form>
+      </article>
+      
+      <!-- Artículo 61 -->
+      <article class='product'>
+          <h2>Nombre del Producto 61</h2>
+          <figure>
+              <img src='imagenes/61.jpeg' alt=''>
+              <figcaption>Descripción opcional de la imagen.</figcaption>
+          </figure>
+          <p class='nombre'>Nombre del Producto 61</p>
+          <p class='descripcion'>Descripción del producto 61.</p>
+          <p class='precio'>Precio: $61.00</p>
+          <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+              <button type='submit'>Agregar al Carrito</button>
+          </form>
+      </article>
+      
+      <!-- Artículo 62 -->
+      <article class='product'>
+          <h2>Nombre del Producto 62</h2>
+          <figure>
+              <img src='imagenes/62.jpeg' alt=''>
+              <figcaption>Descripción opcional de la imagen.</figcaption>
+          </figure>
+          <p class='nombre'>Nombre del Producto 62</p>
+          <p class='descripcion'>Descripción del producto 62.</p>
+          <p class='precio'>Precio: $62.00</p>
+          <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+              <button type='submit'>Agregar al Carrito</button>
+          </form>
+      </article>
+      
+      <!-- Artículo 63 -->
+      <article class='product'>
+          <h2>Nombre del Producto 63</h2>
+          <figure>
+              <img src='imagenes/63.jpeg' alt=''>
+              <figcaption>Descripción opcional de la imagen.</figcaption>
+          </figure>
+          <p class='nombre'>Nombre del Producto 63</p>
+          <p class='descripcion'>Descripción del producto 63.</p>
+          <p class='precio'>Precio: $63.00</p>
+          <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+              <button type='submit'>Agregar al Carrito</button>
+          </form>
+      </article>
+      
+      <!-- Artículo 64 -->
+      <article class='product'>
+          <h2>Nombre del Producto 64</h2>
+          <figure>
+              <img src='imagenes/64.jpeg' alt=''>
+              <figcaption>Descripción opcional de la imagen.</figcaption>
+          </figure>
+          <p class='nombre'>Nombre del Producto 64</p>
+          <p class='descripcion'>Descripción del producto 64.</p>
+          <p class='precio'>Precio: $64.00</p>
+          <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+              <button type='submit'>Agregar al Carrito</button>
+          </form>
+      </article>
+      
+      <!-- Artículo 65 -->
+      <article class='product'>
+          <h2>Nombre del Producto 65</h2>
+          <figure>
+              <img src='imagenes/65.jpeg' alt=''>
+              <figcaption>Descripción opcional de la imagen.</figcaption>
+          </figure>
+          <p class='nombre'>Nombre del Producto 65</p>
+          <p class='descripcion'>Descripción del producto 65.</p>
+          <p class='precio'>Precio: $65.00</p>
+          <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+              <button type='submit'>Agregar al Carrito</button>
+          </form>
+      </article>
+      
+      
+                  
+              </section>
+      
+      
+
+</main>
   
+<footer>
+  <!-- Pie de página -->
+</footer>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.3/jspdf.umd.min.js"></script>
 
   <script>
@@ -659,6 +1026,47 @@ toggleCart.addEventListener('click', function() {
     cartButtons.style.display = 'none'; // Ocultar los botones del carrito al cerrarlo
   }
 });
+
+
+
+
+
+
+
+var icono = document.getElementById('icono');
+var carrito = document.getElementById('carrito');
+var cartButtons = document.querySelector('.cart-buttons');
+
+icono.onclick = function(event) {
+    // Calcular la posición del icono de carrito
+    var iconoRect = icono.getBoundingClientRect();
+    var iconoTop = iconoRect.top;
+    var iconoLeft = iconoRect.left;
+
+    // Establecer la posición del carrito en función de la posición del icono
+    carrito.style.top = (iconoTop + icono.offsetHeight + 10) + 'px'; // Agregar 10 píxeles de separación vertical
+    carrito.style.left = iconoLeft + 'px';
+
+    // Alternar la visibilidad del carrito y los botones
+    if (carrito.style.display === 'none') {
+        carrito.style.display = 'block';
+        cartButtons.style.display = 'block'; // Mostrar los botones del carrito
+    } else {
+        carrito.style.display = 'none';
+        cartButtons.style.display = 'none'; // Ocultar los botones del carrito
+    }
+};
+
+function vaciarCarrito() {
+    // Aquí puedes agregar la lógica para vaciar el carrito
+}
+
+// Event listener para el botón de comprar
+document.getElementById('comprarBtn').addEventListener('click', function() {
+    // Aquí puedes agregar la lógica para realizar la compra
+});
+
+
 
 
 
