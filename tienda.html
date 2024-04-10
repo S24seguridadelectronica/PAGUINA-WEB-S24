@@ -564,19 +564,20 @@ footer {
     
 
 /* Estilo para el contador */
+
 #contador {
         position: absolute;
         top: -10px;
         right: -10px;
         background-color: red;
         color: white;
-        border-radius: 50%;
         width: 20px;
         height: 20px;
-        font-size: 12px;
-        text-align: center;
-        line-height: 20px;
-        z-index: 2; /* Asegura que esté por encima del icono */
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
     }
 
 
@@ -602,40 +603,38 @@ footer {
     align-items: center;
     z-index: 9999;
     filter: invert(100%);
-    font-size: 2.5vw;
+    font-size: 9vw;
 }
-
+#contador {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        background-color: red;
+        color: white;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
+    }
+    #icono.moving::after {
+        transform: translate(0, -200%); /* Mueve el icono al contenedor principal */
+    }
 
 /* Estilos para dispositivos muy pequeños */
 /* Por ejemplo, smartphones en modo portrait */
 /* Rango: Menos de 500px */
-@media (max-width: 499px) {
-    #icono {
-      position: fixed;
-    bottom: 20px; /* Ajustar según sea necesario */
-    left: 50%;
-    transform: translateX(-50%);
-    cursor: pointer;
-    width: 60px;
-    height: 60px;
-    background-color: hsl(73, 100%, 50%);
-    border-radius: 80%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    filter: invert(100%);
-    font-size: 2.5vw;
-    }
-}
+
 
 /* Estilos para smartphones en modo landscape y dispositivos similares */
 /* Rango: De 500px a 699px */
-@media (min-width: 500px) and (max-width: 699px) {
-    #icono {
-      position: fixed;
+@media only screen and (max-width: 600px) {
+  #icono {
+    position: fixed;
     bottom: 20px; /* Ajustar según sea necesario */
-    left: 50%;
+    left: 10%;
     transform: translateX(-50%);
     cursor: pointer;
     width: 60px;
@@ -647,17 +646,19 @@ footer {
     align-items: center;
     z-index: 9999;
     filter: invert(100%);
-    font-size: 2.5vw;
+    font-size: 4vw;
     }
 }
-
+#icono.moving::after {
+        transform: translate(0, -200%); /* Mueve el icono al contenedor principal */
+    }
 /* Estilos para tablets y dispositivos con pantalla más grande */
 /* Rango: De 700px a 899px */
 @media (min-width: 700px) and (max-width: 899px) {
     #icono {
-      position: fixed;
+    position: fixed;
     bottom: 20px; /* Ajustar según sea necesario */
-    left: 50%;
+    left: 10%;
     transform: translateX(-50%);
     cursor: pointer;
     width: 60px;
@@ -669,10 +670,26 @@ footer {
     align-items: center;
     z-index: 9999;
     filter: invert(100%);
-    font-size: 2.5vw;
+    font-size: 4vw;
     }
 }
-
+#contador {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        background-color: red;
+        color: white;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
+    }
+    #icono.moving::after {
+        transform: translate(0, -200%); /* Mueve el icono al contenedor principal */
+    }
 /* Estilos para laptops y pantallas de escritorio */
 /* Rango: De 900px a 1199px */
 @media (min-width: 900px) and (max-width: 1199px) {
@@ -694,7 +711,23 @@ footer {
     font-size: 2.5vw;
     }
 }
-
+#contador {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        background-color: red;
+        color: white;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
+    }
+    #icono.moving::after {
+        transform: translate(0, -200%); /* Mueve el icono al contenedor principal */
+    }
 /* Estilos para pantallas de alta resolución y monitores grandes */
 /* Rango: 1200px o más */
 @media (min-width: 1200px) {
@@ -716,6 +749,23 @@ footer {
     font-size: 2.5vw;
     }
 }
+#contador {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        background-color: red;
+        color: white;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
+    }
+    #icono.moving::after {
+        transform: translate(0, -200%); /* Mueve el icono al contenedor principal */
+    }
 
 
 
@@ -1622,113 +1672,79 @@ document.getElementById('comprarBtn').addEventListener('click', function() {
 
 
 <script>
-    // Obtener el elemento que se puede arrastrar
-    var icono = document.getElementById('icono');
+  // Obtener el elemento que se puede arrastrar
+  // Obtener el elemento que se puede arrastrar
+  var icono = document.getElementById('icono');
 
-    // Variables para almacenar la posición inicial del mouse y la posición inicial del elemento
-    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+// Variables para almacenar la posición inicial del mouse y la posición inicial del elemento
+var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
 
-    // Función para manejar el evento mousedown en el icono
-    icono.onmousedown = function(e) {
-        e.preventDefault(); // Evitar el comportamiento predeterminado del clic (evitar desplazamiento)
+// Función para manejar el evento mousedown en el icono
+icono.onmousedown = function(e) {
+    e.preventDefault(); // Evitar el comportamiento predeterminado del clic (evitar desplazamiento)
 
-        // Obtener la posición inicial del mouse en relación con el icono
+    // Obtener la posición inicial del mouse en relación con el icono
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+
+    // Llamar a la función cuando se mueva el mouse
+    document.onmousemove = function(e) {
+        e.preventDefault();
+
+        // Calcular la nueva posición del icono
+        var newX = pos3 - e.clientX;
+        var newY = pos4 - e.clientY;
         pos3 = e.clientX;
         pos4 = e.clientY;
 
-        // Llamar a la función cuando se mueva el mouse
-        document.onmousemove = function(e) {
-            e.preventDefault();
+        // Establecer la nueva posición del icono
+        var newTop = icono.offsetTop - newY;
+        var newLeft = icono.offsetLeft - newX;
 
-            // Calcular la nueva posición del icono
-            var newX = pos3 - e.clientX;
-            var newY = pos4 - e.clientY;
-            pos3 = e.clientX;
-            pos4 = e.clientY;
+        // Restringir la posición del icono para que no se salga de la ventana visible
+        var scrollY = window.scrollY || window.pageYOffset;
+        var scrollX = window.scrollX || window.pageXOffset;
+        var windowHeight = window.innerHeight;
+        var windowWidth = window.innerWidth;
+        
+        // Ajustar la posición para mantener el icono dentro de la ventana visible
+        if (newTop < 0) {
+            newTop = 0;
+        }
+        if (newTop + icono.offsetHeight > windowHeight) {
+            newTop = windowHeight - icono.offsetHeight;
+        }
+        if (newLeft < 0) {
+            newLeft = 0;
+        }
+        if (newLeft + icono.offsetWidth > windowWidth) {
+            newLeft = windowWidth - icono.offsetWidth;
+        }
 
-            // Establecer la nueva posición del icono
-            var newTop = icono.offsetTop - newY;
-            var newLeft = icono.offsetLeft - newX;
-
-            // Restringir la posición del icono para que no se salga de la ventana visible
-            var scrollY = window.scrollY || window.pageYOffset;
-            var scrollX = window.scrollX || window.pageXOffset;
-            var windowHeight = window.innerHeight;
-            var windowWidth = window.innerWidth;
-            
-            // Ajustar la posición para mantener el icono dentro de la ventana visible
-            if (newTop < 180) {
-                newTop = 180;
-            }
-            if (newTop + icono.offsetHeight > windowHeight) {
-                newTop = windowHeight - icono.offsetHeight;
-            }
-            if (newLeft < 0) {
-                newLeft = 0;
-            }
-            if (newLeft + icono.offsetWidth > windowWidth) {
-                newLeft = windowWidth - icono.offsetWidth;
-            }
-
-            // Establecer la nueva posición del icono
-            icono.style.top = newTop + "px";
-            icono.style.left = newLeft + "px";
-        };
-
-        // Llamar a la función cuando se suelte el mouse
-        document.onmouseup = function() {
-            // Dejar de mover el icono cuando se suelte el mouse
-            document.onmouseup = null;
-            document.onmousemove = null;
-        };
+        // Establecer la nueva posición del icono
+        icono.style.top = newTop + "px";
+        icono.style.left = newLeft + "px";
     };
 
-
-
-    var icono = document.getElementById('icono');
-var carrito = document.getElementById('carrito');
-var cartButtons = document.querySelector('.cart-buttons');
-
-icono.onclick = function() {
-  if (carrito.style.display === "none") {
-    carrito.style.display = "block";
-    cartButtons.style.display = "block"; // Mostrar los botones del carrito al abrirlo
-  } else {
-    carrito.style.display = "none";
-    cartButtons.style.display = "none"; // Ocultar los botones del carrito al cerrarlo
-  }
+    // Llamar a la función cuando se suelte el mouse
+    document.onmouseup = function() {
+        // Dejar de mover el icono cuando se suelte el mouse
+        document.onmouseup = null;
+        document.onmousemove = null;
+    };
 };
 
-document.getElementById('icono').addEventListener('click', function() {
-  var cartButtons = document.querySelector('.cart-buttons');
-  if (cartButtons.style.display === 'none') {
-    cartButtons.style.display = 'block';
-  } else {
-    cartButtons.style.display = 'none';
-  }
-});
+  // Función para mostrar/ocultar el carrito al hacer clic en el icono
+  icono.onclick = function() {
+      carrito.style.display = carrito.style.display === "none" ? "block" : "none";
+      cartButtons.style.display = carrito.style.display; // Mostrar/ocultar los botones del carrito
+  };
 
-
-
-
-    document.getElementById('icono').addEventListener('click', function() {
-    var cartButtons = document.querySelector('.cart-buttons');
-    if (cartButtons.style.display === 'none') {
-        cartButtons.style.display = 'block';
-    } else {
-        cartButtons.style.display = 'none';
-    }
-});
-
-
-
-
-
-
-
-
-
-
+  // Función para mostrar/ocultar el carrito al hacer clic en el botón de toggle
+  toggleCart.onclick = function() {
+      carrito.style.display = carrito.style.display === "none" ? "block" : "none";
+      cartButtons.style.display = carrito.style.display; // Mostrar/ocultar los botones del carrito
+  };
 </script>
 
 
