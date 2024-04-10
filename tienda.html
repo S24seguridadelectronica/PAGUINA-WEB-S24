@@ -1,22 +1,150 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>Registro e Inicio de Sesión</title>
-    <style>
-/* Estilos generales */
-body {
-  font-family: Arial, sans-serif;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="normalize.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/css/foundation.min.css">
+
+<title>Icono de Carrito Arrastrable</title>
+<style>
+/* Reset Moderno Personalizado */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
   margin: 0;
   padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Custom Resets */
+/* Agregar cualquier reset o normalización adicional aquí */
+
+
 
 .container {
   max-width: 1200px; /* Ancho máximo del contenido */
@@ -63,57 +191,383 @@ footer {
 }
 
 
-
-
-
-
-
-
-
-.cart {
-  position: fixed; /* Mantener fijo en la pantalla */
-  top: 20px; /* Ajustar la distancia desde la parte superior de la pantalla */
-  right: 200px; /* Ajustar la distancia desde el borde derecho de la pantalla */
-  width: 500px; /* Ancho del carrito */
-  max-height: 100px; /* Altura máxima del carrito */
-  overflow-y: auto; /* Habilitar desbordamiento vertical con scrollbar */
-  background-color: #0a0101;
-  border: 1px solid #ccc;
-  padding: 10px;
-  display: none; /* Ocultar el carrito inicialmente */
+#productos {
+  background-color: #f2f2f2;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  display: grid;
+  gap: 20px;
 }
 
-.cart-buttons {
-  position: fixed; /* Mantener fijo en la pantalla */
-  top: 200px; /* Ajustar la distancia desde la parte superior de la pantalla */
-  right: 20px; /* Ajustar la distancia desde el borde derecho de la pantalla */
-  width: 200px; /* Ancho del carrito */
-  max-height: 400px; /* Altura máxima del carrito */
-  overflow-y: auto; /* Habilitar desbordamiento vertical */
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  padding: 10px;
-  display: none; /* Ocultar el carrito inicialmente */
+/* Estilos para dispositivos muy pequeños (por ejemplo, smartphones en modo retrato) */
+@media (max-width: 499px) {
+  #productos {
+    grid-template-columns: 1fr 1fr; /* Divide en 2 columnas */
+  }
+}
+
+/* Estilos para smartphones en modo paisaje y dispositivos similares */
+@media (min-width: 500px) and (max-width: 699px) {
+    #productos {
+    grid-template-columns: 1fr 1fr; /* Divide en 2 columnas */
+  }
+}
+
+/* Estilos para tablets y dispositivos con pantalla más grande */
+@media (min-width: 700px) and (max-width: 899px) {
+  #productos {
+    grid-template-columns: repeat(4, 1fr); /* Divide en 4 columnas */
+  }
+}
+
+/* Estilos para laptops y pantallas de escritorio */
+@media (min-width: 900px) and (max-width: 1199px) {
+  #productos {
+    grid-template-columns: repeat(5, 1fr); /* Divide en 5 columnas */
+  }
+}
+
+/* Estilos para pantallas de alta resolución y monitores grandes */
+@media (min-width: 1200px) {
+  #productos {
+    grid-template-columns: repeat(5, 1fr); /* Divide en 5 columnas */
+  }
+}
+
+
+
+
+
+.product {
+        margin-bottom: 30px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        background-color: #f9f9f9;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .product h2 {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+    }
+
+    .product figure {
+        margin-bottom: 10px;
+    }
+
+    .product figure img {
+        width: 100%;
+        border-radius: 10px;
+    }
+
+    .product figcaption {
+        font-style: italic;
+        font-size: 0.8rem;
+        color: #666;
+    }
+
+    .product p {
+        margin-bottom: 10px;
+    }
+
+    .product .nombre {
+        font-weight: bold;
+    }
+
+    .product .precio {
+        font-weight: bold;
+        color: #333;
+    }
+
+    .product form button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background-color 0.3s ease;
+    }
+
+    .product form button:hover {
+        background-color: #45a049;
+    }
+
+    .cart-icon {
+        font-size: 2rem;
+        cursor: pointer;
+        display: none;
+    }
+
+
+
+
+    /* Estilos para los productos en el carrito */
+/* Estilos para los productos en el carrito */
+/* Estilos para los productos en el carrito */
+/* Estilos para los productos en el carrito */
+.productos {
+    list-style-type: none; /* Eliminar viñetas de la lista */
+    padding: 0;
+    margin: 0;
+}
+
+.productos {
+    list-style-type: none; /* Eliminar viñetas de la lista */
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+
+
+
+
+
+
+
+.producto-nombre {
+    font-weight: bold; /* Establece el texto en negrita */
+    font-size: 2rem; /* Establece el tamaño de fuente en relación al tamaño del texto base del navegador */
+    color: hsl(81, 100%, 54%); /* Define el color del texto */
+    margin-bottom: 5px; /* Añade un margen inferior de 5px para separar los elementos */
+    margin-top: -20px; /* Sube el elemento 10 píxeles */
+    height: -10px; /* Controla la altura del elemento a 30px */
+    overflow: hidden; /* Oculta el contenido si excede la altura especificada */
+}
+
+.producto-imagen {
+    width: 10%; /* Ancho de la imagen */
+    height: auto; /* Permitir que la altura se ajuste automáticamente para mantener la proporción */
+    border-radius: 5px; /* Bordes redondeados para la imagen */
+    margin-right: 20px; /* Espacio entre la imagen y la información del producto */
+    float: left; /* Flotar la imagen a la izquierda */
+}
+
+
+
+
+
+.producto-descripcion {
+    display: none; /* Oculta la descripción del producto */
+}
+
+
+.producto-info {
+    padding: 10px;
+    max-width: 850px; /* Establecer el ancho máximo del contenedor */
+    color: hwb(64 0% 0%);
+    font-size: 5.5vw;
+    font-weight: bold; /* Aplicar negrita */
+}
+
+
+
+.producto-cantidad {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Alinea los elementos al final del contenedor (derecha) */
+    margin-right: -80px; /* Mueve ambos botones hacia la derecha */
+    margin-top: 10px; /* Ajusta el margen superior para mover el contenedor hacia arriba */
+    height: 40px; /* Ajusta la altura del contenedor según sea necesario */
+    width: -50px;
+    background-color: hsl(0, 89%, 44%); /* Color de fondo */
+    border: 3px solid white; /* Borde */
+    padding: 10px; /* Espaciado interno */
+    border-radius: 5px; /* Borde redondeado */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+
+
+
+
+
+.cantidad-btn {
+    background-color: rgb(255, 0, 0);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px; /* Ajusta la altura de los botones según sea necesario */
+    cursor: pointer;
+    margin-left: 2vw;
+}
+
+
+
+
+
+/* Estilos para el total del carrito */
+.total {
+    margin-top: 20px;
+    text-align: right;
+}
+
+
+.producto-precio {
+    font-size: 2.4vw; /* Tamaño de fuente */
+    color: white; /* Color del texto */
+    margin: 5px 0; /* Margen superior e inferior de 5px y margen izquierdo y derecho automático */
+    text-align: center; /* Alineación del texto al centro */
+    font-weight: bold; /* Negrita */
+    margin-top: -40px;
+    margin-right: 20vw;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+/* Estilo para el contador */
+#contador {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        background-color: red;
+        color: white;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        font-size: 12px;
+        text-align: center;
+        line-height: 20px;
+        z-index: 2; /* Asegura que esté por encima del icono */
+    }
+
+
+ /* Animación para mover el icono */
+ #icono.moving::after {
+        transform: translate(0, -200%); /* Mueve el icono al contenedor principal */
+    }
+
+
+    /* Estilos CSS para el icono del carrito */
+#icono {
+    position: fixed;
+    bottom: 20px; /* Ajustar según sea necesario */
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    background-color: hsl(73, 100%, 50%);
+    border-radius: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    filter: invert(100%);
+    font-size: 2.5vw;
+}
+
+
+
+    #icono:hover {
+        background-color: rgb(255, 0, 0);
+    }
+
+  
+
+
+
+
+
+
+
+    .cart {
+    position: fixed;
+    top: 60%; /* Centrar verticalmente */
+    left: 50%; /* Centrar horizontalmente */
+    transform: translate(-50%, -50%); /* Centrar horizontalmente */
+    width: 90%; /* Ocupa el 70% del ancho de la pantalla */
+    height: 90%; /* Ocupa el 70% de la altura de la pantalla */
+    max-width: 1500px; /* Limita el ancho máximo */
+    max-height: 1500px; /* Limita la altura máxima */
+    overflow-y: auto;
+    background-color: hsla(0, 0%, 0%, 0.702); /* Fondo semitransparente */
+    border: 1px solid #ccc;
+    padding: 10px;
+    display: none;
+    z-index: 999;
+}
+
+
+
+
+
+
+
+#productos-carrito {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-top: 400px;
+    width: 100%; /* Cambiado a ancho completo */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 25px;
+}
+
+#productos-carrito p {
+    margin: 100; /* Eliminar márgenes predeterminados */
 }
 
 .toggle-cart {
-  position: fixed; /* Mantener fijo en la pantalla */
-  top: 20px; /* Ajustar la distancia desde la parte superior de la pantalla */
-  right: 20px; /* Ajustar la distancia desde el borde derecho de la pantalla */
+    cursor: pointer;
+    color: #007bff;
+    text-decoration: underline;
+}
+
+
+
+.cart-buttons {
+    position: fixed;
+    top: 10%; /* Centrar verticalmente */
+    left: 50%; /* Centrar horizontalmente */
+    transform: translate(-50%, -50%); /* Centrar horizontalmente */
+    z-index: 1;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 10px;
+    display: none;
+}
+
+
+.toggle-cart {
+  position: absolute;
+  top: 80px; /* Posición para ocultar la pestaña */
+  right: 0;
   background-color: #ccc;
   padding: 5px 10px;
   cursor: pointer;
 }
 
 
-
-
-
-
-
-
-
-    .modal {
+/* Estilos para el modal */
+.modal {
   display: none; /* Ocultar la modal inicialmente */
   position: fixed;
   z-index: 1;
@@ -125,108 +579,85 @@ footer {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+/* Estilos para el contenido del modal */
 .modal-content {
-  background-color: hsl(0, 0%, 100%);
+  background-color: #fefefe;
   margin: 10% auto;
   padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
+  border: 1px solid #ccc;
+  width: 80%; /* Porcentaje o tamaño específico */
+  max-width: 600px; /* Opcional: Limita el ancho máximo */
+  border-radius: 5px; /* Agrega bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Agrega sombra */
 }
 
+
+/* Estilos para el botón de cierre */
 .close {
-  color: #aaaaaa;
+  color: #aaa;
   float: right;
-  font-size: 28px;
+  font-size: 24px;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .close:hover,
 .close:focus {
   color: #000;
   text-decoration: none;
-  cursor: pointer;
 }
+
+/* Estilos para el título del modal */
+.modal-content h2 {
+  margin-top: 0;
+}
+
+/* Estilos para el contenido del modal */
+#modal-content {
+  margin-top: 20px;
+}
+
+/* Estilos para el fondo del modal */
+.modal-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 .trash-icon {
-      cursor: pointer;
-      font-size: 20px;
-      margin-right: 10px;
-    }
-
-
-
-
-
-    .draggable {
-    position: absolute;
-    bottom: 20px; /* Ajustar la distancia desde la parte inferior de la pantalla */
-    left: 20px; /* Ajustar la distancia desde el borde izquierdo de la pantalla */
-    cursor: move;
-    width: 50px;
-    height: 50px;
-    font-size: 30px;
-    background-color: #ff9800;
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999; /* Aumentar el valor de z-index */
+    cursor: pointer;
+    font-size: 70px;
+    margin-right: 10px;
+    color: hwb(0 0% 0%); /* Color rojo intenso */
+    transition: color 0.3s ease; /* Transición suave para el cambio de color */
 }
 
- /* Estilos CSS para el icono del carrito */
- #icono {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        cursor: pointer;
-        width: 50px;
-        height: 50px;
-        background-color: #007bff;
-        color: #fff;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    #icono:hover {
-        background-color: #0056b3;
-    }
-
-    #contador {
-        position: absolute;
-        top: -10px;
-        right: -10px;
-        background-color: red;
-        color: white;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 14px;
-    }
-
-    
+.trash-icon:hover {
+    color: rgb(217, 255, 0); /* Cambio de color al pasar el cursor */
+}
 
 
 
 
-
-
-
-
-
-
-
-    /* Nuevo estilo para el mensaje de confirmación */
-    /* Nuevo estilo para el mensaje de confirmación */
-    #confirmacion {
+   /* Nuevo estilo para el mensaje de confirmación */
+   #confirmacion {
       display: none;
       position: absolute;
       background-color: #ffffff;
@@ -245,7 +676,9 @@ footer {
     }
 
 
-    #carrito_buscador {
+
+
+#carrito_buscador {
         margin-top: 100px; /* Ajusta este valor según lo que necesites */
         margin-bottom: 10px; /* Ajusta este valor según lo que necesites */
     }
@@ -257,12 +690,13 @@ footer {
 
 
 
-    
-  </style>
+
+
+</style>
 </head>
 <body>
 
-   <!-- Cabecera de la página con el menú de navegación -->
+    <!-- Cabecera de la página con el menú de navegación -->
    <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="container">
@@ -289,103 +723,134 @@ footer {
 <main>
 
 
-  <section id="carrito_buscador">
-   <!-- HTML del buscador -->
-<input type="text" id="buscador" placeholder="Buscar productos" style="width: 100%; margin-bottom: 10px;">
+    <section id="carrito_buscador">
+        <!-- HTML del buscador -->
+     <input type="text" id="buscador" placeholder="Buscar productos" style="width: 100%; margin-bottom: 10px;">
 
-<!-- JavaScript para la funcionalidad del buscador -->
-<script>
-    // Obtener el elemento del input de búsqueda
-    const buscador = document.getElementById('buscador');
-
-    // Agregar un evento de escucha para detectar cuando se presiona una tecla en el input
-    buscador.addEventListener('keyup', function(event) {
-        // Obtener el valor del input de búsqueda
-        const valorBusqueda = event.target.value.toLowerCase();
-
-        // Obtener todos los productos
-        const productos = document.querySelectorAll('.product');
-
-        // Recorrer cada producto y mostrar/ocultar según coincida con el valor de búsqueda
-        productos.forEach(producto => {
-            // Obtener el nombre del producto y convertirlo a minúsculas
-            const nombreProducto = producto.querySelector('.nombre').textContent.toLowerCase();
-
-            // Verificar si el nombre del producto contiene el valor de búsqueda
-            if (nombreProducto.includes(valorBusqueda)) {
-                producto.style.display = 'block'; // Mostrar el producto si coincide
-            } else {
-                producto.style.display = 'none'; // Ocultar el producto si no coincide
-            }
+    
+   
+     <script>
+        // Obtener el elemento del input de búsqueda
+        const buscador = document.getElementById('buscador');
+    
+        // Agregar un evento de escucha para detectar cuando se presiona una tecla en el input
+        buscador.addEventListener('keyup', function(event) {
+            // Obtener el valor del input de búsqueda
+            const valorBusqueda = event.target.value.toLowerCase();
+    
+            // Obtener todos los productos
+            const productos = document.querySelectorAll('.product');
+    
+            // Recorrer cada producto y mostrar/ocultar según coincida con el valor de búsqueda
+            productos.forEach(producto => {
+                // Obtener el nombre del producto y convertirlo a minúsculas
+                const nombreProducto = producto.querySelector('.nombre').textContent.toLowerCase();
+    
+                // Verificar si el nombre del producto contiene el valor de búsqueda
+                if (nombreProducto.includes(valorBusqueda)) {
+                    producto.style.display = 'block'; // Mostrar el producto si coincide
+                } else {
+                    producto.style.display = 'none'; // Ocultar el producto si no coincide
+                }
+            });
         });
-    });
-</script>
-
-
-
-
-
-
-
-
-
-
-    <div id="icono" class="draggable">
-        🛒 <!-- Emoji de carrito de compras -->
-        <div id="contador">0</div> <!-- Contador de elementos -->
-    </div>
     
-    <div class="cart-buttons" style="display: none;">
-        <button onclick="vaciarCarrito()">Vaciar Carrito</button>
-        <button id="comprarBtn" type="button">enviar cotizacion</button>
+        // Obtener el contenedor del buscador
+        // Obtener el contenedor del buscador
+// Obtener el contenedor del buscador
+const buscadorWrapper = document.getElementById('carrito_buscador');
+
+// Obtener la posición inicial del buscador
+const posicionInicial = buscadorWrapper.offsetTop;
+
+// Agregar un evento de desplazamiento para mantener fijo el buscador
+window.addEventListener('scroll', function() {
+    // Obtener la posición actual del desplazamiento
+    const posicionScroll = window.scrollY;
+
+    // Verificar si la posición del desplazamiento es mayor o igual a la posición inicial del buscador
+    if (posicionScroll >= posicionInicial) {
+        buscadorWrapper.style.position = 'sticky'; // Cambiar la posición a "fixed" en lugar de "relative"
+        buscadorWrapper.style.top = '0'; // Alinear el buscador en la parte superior
+    } else {
+        buscadorWrapper.style.position = 'relative'; // Restaurar la posición relativa del buscador
+    }
+});
+
+
+
+
+
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- icono del carrito -->
+<div id="icono" class="draggable">
+    🛒 <!-- Emoji de carrito de compras -->
+    <div id="contador">0</div> <!-- Contador de elementos -->
+</div>
+
+<div class="cart-buttons" style="display: none;">
+    <button onclick="vaciarCarrito()">Vaciar Carrito</button>
+    <button id="comprarBtn" type="button">enviar cotizacion</button>
+</div>
+<aside class="cart" id="carrito">
+    <h2>Carrito de Compras</h2>
+    <div id="productos-carrito">
+      <div id="toggleCart" class="toggle-cart">Toggle Cart</div>
+        <p>No hay productos en el carrito</p>
+        <p id="total-carrito">Total: $0.00</p>
     </div>
-    <aside class="cart" id="carrito">
-        <h2>Carrito de Compras</h2>
-        <div id="productos-carrito">
-          <div id="toggleCart" class="toggle-cart">Toggle Cart</div>
-            <p>No hay productos en el carrito</p>
-            <p id="total-carrito">Total: $0.00</p>
-        </div>
-    </aside>
-    
-    <div id="modal" class="modal">
-        <div class="modal-content">
-          <span class="close">&times;</span>
-          <h2>Resumen de la compra</h2>
-          <div id="modal-content"></div>
-        </div>
-      </div>
-      
+</aside>
+
+<div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Resumen de la compra</h2>
+      <div id="modal-content"></div>
+    </div>
+  </div>
 
 
-      <div id="confirmacion">
-        <p>¿Estás seguro de que deseas eliminar este producto?</p>
-        <button onclick="eliminarProductoConfirmado(true)">Aceptar</button>
-        <button onclick="eliminarProductoConfirmado(false)">Cancelar</button>
-      </div>
+  <div id="confirmacion">
+    <p>¿Estás seguro de que deseas eliminar este producto?</p>
+    <button onclick="eliminarProductoConfirmado(true)">Aceptar</button>
+    <button onclick="eliminarProductoConfirmado(false)">Cancelar</button>
+  </div>
 
 
 
-    </section>
 
 
+<section id="productos">
 
-    <section id="productos">
+<article class='product'>
+    <h2>Nombre del Producto 63</h2>
+    <figure>
+        <img src='imagenes/face.png' alt=''>
+        <figcaption>Descripción opcional de la imagen.</figcaption>
+    </figure>
+    <p class='nombre'>Nombre del Producto 63</p>
+    <p class='descripcion'>11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111</p>
+    <p class='precio'>Precio: $63.00</p>
+    <form onsubmit='event.preventDefault(); agregarAlCarrito(event)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <span class="cart-icon" onclick="moveToCart()">&#x1F6D2;</span>
+    </form>
+</article>
 
-        <!-- Artículo 63 -->
-    <article class='product'>
-      <h2>Nombre del Producto 63</h2>
-      <figure>
-          <img src='imagenes/face.png' alt=''>
-          <figcaption>Descripción opcional de la imagen.</figcaption>
-      </figure>
-      <p class='nombre'>Nombre del Producto 63</p>
-      <p class='descripcion'>Descripción del producto 63.</p>
-      <p class='precio'>Precio: $63.00</p>
-      <form onsubmit='event.preventDefault(); agregarAlCarrito()'>
-          <button type='submit'>Agregar al Carrito</button>
-      </form>
-    </article>
+
   
     <!-- Artículo 64 -->
     <article class='product'>
@@ -395,7 +860,7 @@ footer {
           <figcaption>Descripción opcional de la imagen.</figcaption>
       </figure>
       <p class='nombre'>Nombre del Producto 64</p>
-      <p class='descripcion'>Descripción del producto 64.</p>
+      <p class='descripcion'>222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222</p>
       <p class='precio'>Precio: $64.00</p>
       <form onsubmit='event.preventDefault(); agregarAlCarrito()'>
           <button type='submit'>Agregar al Carrito</button>
@@ -409,67 +874,17 @@ footer {
           <img src='imagenes/logowhatsapp.png' alt=''>
           <figcaption>Descripción opcional de la imagen.</figcaption>
       </figure>
-      <p class='nombre'>Nombre del Producto 65</p>
+      <p class='nombre'>3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333</p>
       <p class='descripcion'>Descripción del producto 65.</p>
       <p class='precio'>Precio: $65.00</p>
       <form onsubmit='event.preventDefault(); agregarAlCarrito()'>
           <button type='submit'>Agregar al Carrito</button>
       </form>
     </article>
+  
+  </section>
+  
 
-
-
-      <!-- Artículo 50 -->
-      <article class='product'>
-          <h2>Nombre del Producto 50</h2>
-          <figure>
-              <img src='imagenes/50.jpeg' alt=''>
-              <figcaption>Descripción opcional de la imagen.</figcaption>
-          </figure>
-          <p class='nombre'>Nombre del Producto 50</p>
-          <p class='descripcion'>Descripción del producto 50.</p>
-          <p class='precio'>Precio: $50.00</p>
-          <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
-              <button type='submit'>Agregar al Carrito</button>
-          </form>
-      </article>
-      
-      <!-- Artículo 51 -->
-      <article class='product'>
-          <h2>Nombre del Producto 51</h2>
-          <figure>
-              <img src='imagenes/51.jpeg' alt=''>
-              <figcaption>Descripción opcional de la imagen.</figcaption>
-          </figure>
-          <p class='nombre'>Nombre del Producto 51</p>
-          <p class='descripcion'>Descripción del producto 51.</p>
-          <p class='precio'>Precio: $51.00</p>
-          <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
-              <button type='submit'>Agregar al Carrito</button>
-          </form>
-      </article>
-      
-      <!-- Artículo 52 -->
-      <article class='product'>
-          <h2>Nombre del Producto 52</h2>
-          <figure>
-              <img src='imagenes/52.jpeg' alt=''>
-              <figcaption>Descripción opcional de la imagen.</figcaption>
-          </figure>
-          <p class='nombre'>Nombre del Producto 52</p>
-          <p class='descripcion'>Descripción del producto 52.</p>
-          <p class='precio'>Precio: $52.00</p>
-          <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
-              <button type='submit'>Agregar al Carrito</button>
-          </form>
-      </article>
-      
-     
-      
-                  
-              </section>
-      
-      
 
 </main>
   
@@ -477,9 +892,11 @@ footer {
   <!-- Pie de página -->
 </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.3/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.3/jspdf.umd.min.js"></script>
 
-  <script>
+
+
+<script>
     let productosEnCarrito = [];
 
     function agregarAlCarrito() {
@@ -534,31 +951,40 @@ footer {
 
     // Función para mostrar el carrito
     function mostrarCarrito() {
-      const carrito = document.getElementById("carrito");
-      let html = "<h2>Carrito de Compras</h2>";
-      let total = 0;
-      if (productosEnCarrito.length === 0) {
-          html += "<p>No hay productos en el carrito</p>";
-      } else {
-          html += "<ul>";
-          productosEnCarrito.forEach(producto => {
-              html += `<li>
-                          <span class="trash-icon" onclick="eliminarProductoConConfirmacion('${producto.nombre}')">&#128465;</span> <!-- Icono de cesta de basura -->
-                          <img src="${producto.imagen}" alt="${producto.nombre}" style="width: 50px; height: 50px;">
-                          <strong>${producto.nombre}</strong><br>
-                          ${producto.descripcion}<br>
-                          <button onclick="disminuirCantidad('${producto.nombre}')">-</button> 
-                          Cantidad: ${producto.cantidad} 
-                          <button onclick="aumentarCantidad('${producto.nombre}')">+</button><br>
-                          Precio: $${(producto.precio * producto.cantidad).toFixed(2)}
-                      </li>`;
-              total += producto.precio * producto.cantidad;
-          });
-          html += "</ul>";
-      }
-      html += `<p>Total: $${total.toFixed(2)}</p>`;
-      carrito.innerHTML = html;
+    const carrito = document.getElementById("carrito");
+    let html = "<h2>Carrito de Compras</h2>";
+    let total = 0;
+
+    if (productosEnCarrito.length === 0) {
+        html += "<p>No hay productos en el carrito</p>";
+    } else {
+        html += "<div class='productos'>";
+        productosEnCarrito.forEach(producto => {
+            html += `
+                <div class='producto'>
+                    <span class="trash-icon" onclick="eliminarProductoConConfirmacion('${producto.nombre}')">&#128465;</span> <!-- Icono de cesta de basura -->
+                    <img src="${producto.imagen}" alt="${producto.nombre}" class="producto-imagen">
+                    <div class="producto-info">
+                        <strong class="producto-nombre">${producto.nombre}</strong>
+                        <p class="producto-descripcion">${producto.descripcion}</p>
+                        <div class="producto-cantidad">
+                            <button class="cantidad-btn" onclick="disminuirCantidad('${producto.nombre}')">-</button>
+                            <span class="cantidad">${producto.cantidad}</span>
+                            <button class="cantidad-btn" onclick="aumentarCantidad('${producto.nombre}')">+</button>
+                        </div>
+                        <p class="producto-precio">Precio: $${(producto.precio * producto.cantidad).toFixed(2)}</p>
+                    </div>
+                </div>`;
+            total += producto.precio * producto.cantidad;
+        });
+        html += "</div>"; // Cerrar div .productos
     }
+
+    html += `<div class="total"><p>Total: $${total.toFixed(2)}</p></div>`;
+    carrito.innerHTML = html;
+}
+
+
 
 
 
@@ -575,47 +1001,6 @@ function actualizarContador(cantidad) {
     }
 
 
-    var icono = document.getElementById('icono');
-var carrito = document.getElementById('carrito');
-var cartButtons = document.querySelector('.cart-buttons');
-
-icono.onclick = function() {
-  if (carrito.style.display === "none") {
-    carrito.style.display = "block";
-    cartButtons.style.display = "block"; // Mostrar los botones del carrito al abrirlo
-  } else {
-    carrito.style.display = "none";
-    cartButtons.style.display = "none"; // Ocultar los botones del carrito al cerrarlo
-  }
-};
-
-document.getElementById('icono').addEventListener('click', function() {
-  var cartButtons = document.querySelector('.cart-buttons');
-  if (cartButtons.style.display === 'none') {
-    cartButtons.style.display = 'block';
-  } else {
-    cartButtons.style.display = 'none';
-  }
-});
-
-
-
-
-
-
-
-
-
-
-
-    document.getElementById('icono').addEventListener('click', function() {
-    var cartButtons = document.querySelector('.cart-buttons');
-    if (cartButtons.style.display === 'none') {
-        cartButtons.style.display = 'block';
-    } else {
-        cartButtons.style.display = 'none';
-    }
-});
 
 
 
@@ -648,109 +1033,6 @@ function disminuirCantidad(nombreProducto) {
         }
     }
 }
-
-
-
-
-// Obtener el elemento que se puede arrastrar
- // Obtener el elemento que se puede arrastrar
- var icono = document.getElementById('icono');
-
-// Variables para almacenar la posición inicial del mouse y la posición inicial del elemento
-var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-
-// Función que se llama cuando se hace clic y se mantiene en el elemento
-// Función para manejar el evento mousedown en el icono
-icono.onmousedown = function(e) {
-e.preventDefault(); // Evitar el comportamiento predeterminado del clic (evitar desplazamiento)
-
-// Obtener la posición inicial del mouse en relación con el icono
-pos1 = e.clientX;
-pos2 = e.clientY;
-
-// Llamar a la función cuando se mueva el mouse
-document.onmousemove = function(e) {
-    e.preventDefault();
-
-    // Calcular la nueva posición del icono
-    var mouseX = e.clientX;
-    var mouseY = e.clientY;
-    var newX = mouseX - pos1;
-    var newY = mouseY - pos2;
-
-    // Establecer la nueva posición del icono
-    icono.style.left = (icono.offsetLeft + newX) + "px";
-    icono.style.top = (icono.offsetTop + newY) + "px";
-
-    // Actualizar las coordenadas del clic del ratón para la próxima iteración
-    pos1 = mouseX;
-    pos2 = mouseY;
-};
-
-// Llamar a la función cuando se suelte el mouse
-document.onmouseup = function() {
-    // Dejar de mover el icono cuando se suelte el mouse
-    document.onmouseup = null;
-    document.onmousemove = null;
-};
-};
-
-
-
-// Función para asegurarse de que el icono no salga de los límites de la pantalla
-// Función para mover el icono dentro de los límites de la pantalla
-function dragMoveListener(event) {
-var newX = event.clientX - pos1;
-var newY = event.clientY - pos2;
-
-// Calcular los límites de la pantalla
-var windowWidth = window.innerWidth;
-var windowHeight = window.innerHeight;
-
-// Calcular los límites del icono
-var iconoWidth = icono.offsetWidth;
-var iconoHeight = icono.offsetHeight;
-
-// Ajustar la posición del icono para mantenerlo dentro de los límites de la pantalla
-newX = Math.max(0, Math.min(newX, windowWidth - iconoWidth));
-newY = Math.max(0, Math.min(newY, windowHeight - iconoHeight));
-
-// Establecer la nueva posición del icono
-icono.style.left = newX + 'px';
-icono.style.top = newY + 'px';
-}
-
-// Asignar la función dragMoveListener al evento mousedown del icono
-// Función para manejar el evento mousedown en el icono
-
-
-
-
-
-
-
-// Función para manejar el evento de scroll
-function manejarScroll() {
-    var icono = document.getElementById('icono');
-    var scrollY = window.scrollY || window.pageYOffset;
-    var windowHeight = window.innerHeight;
-
-    // Verificar si el icono está en la parte inferior de la pantalla
-    if (icono.offsetTop + icono.offsetHeight >= scrollY + windowHeight) {
-        // Mover el icono hacia abajo
-        icono.style.top = scrollY + windowHeight - icono.offsetHeight + 'px';
-    } else if (icono.offsetTop <= scrollY) {
-        // Mover el icono hacia arriba
-        icono.style.top = scrollY + 'px';
-    }
-}
-
-// Manejar el evento de scroll
-window.addEventListener('scroll', manejarScroll);
-
-
-
-
 
 
 
@@ -960,6 +1242,29 @@ comprarBtn.onclick = function() {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Obtener el elemento de la pestaña
 // Obtener el elemento de la pestaña
 var toggleCart = document.getElementById('toggleCart');
@@ -1030,5 +1335,130 @@ document.getElementById('comprarBtn').addEventListener('click', function() {
 
 
   </script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    // Obtener el elemento que se puede arrastrar
+    var icono = document.getElementById('icono');
+
+    // Variables para almacenar la posición inicial del mouse y la posición inicial del elemento
+    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+
+    // Función para manejar el evento mousedown en el icono
+    icono.onmousedown = function(e) {
+        e.preventDefault(); // Evitar el comportamiento predeterminado del clic (evitar desplazamiento)
+
+        // Obtener la posición inicial del mouse en relación con el icono
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+
+        // Llamar a la función cuando se mueva el mouse
+        document.onmousemove = function(e) {
+            e.preventDefault();
+
+            // Calcular la nueva posición del icono
+            var newX = pos3 - e.clientX;
+            var newY = pos4 - e.clientY;
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+
+            // Establecer la nueva posición del icono
+            var newTop = icono.offsetTop - newY;
+            var newLeft = icono.offsetLeft - newX;
+
+            // Restringir la posición del icono para que no se salga de la ventana visible
+            var scrollY = window.scrollY || window.pageYOffset;
+            var scrollX = window.scrollX || window.pageXOffset;
+            var windowHeight = window.innerHeight;
+            var windowWidth = window.innerWidth;
+            
+            // Ajustar la posición para mantener el icono dentro de la ventana visible
+            if (newTop < 180) {
+                newTop = 180;
+            }
+            if (newTop + icono.offsetHeight > windowHeight) {
+                newTop = windowHeight - icono.offsetHeight;
+            }
+            if (newLeft < 0) {
+                newLeft = 0;
+            }
+            if (newLeft + icono.offsetWidth > windowWidth) {
+                newLeft = windowWidth - icono.offsetWidth;
+            }
+
+            // Establecer la nueva posición del icono
+            icono.style.top = newTop + "px";
+            icono.style.left = newLeft + "px";
+        };
+
+        // Llamar a la función cuando se suelte el mouse
+        document.onmouseup = function() {
+            // Dejar de mover el icono cuando se suelte el mouse
+            document.onmouseup = null;
+            document.onmousemove = null;
+        };
+    };
+
+
+
+    var icono = document.getElementById('icono');
+var carrito = document.getElementById('carrito');
+var cartButtons = document.querySelector('.cart-buttons');
+
+icono.onclick = function() {
+  if (carrito.style.display === "none") {
+    carrito.style.display = "block";
+    cartButtons.style.display = "block"; // Mostrar los botones del carrito al abrirlo
+  } else {
+    carrito.style.display = "none";
+    cartButtons.style.display = "none"; // Ocultar los botones del carrito al cerrarlo
+  }
+};
+
+document.getElementById('icono').addEventListener('click', function() {
+  var cartButtons = document.querySelector('.cart-buttons');
+  if (cartButtons.style.display === 'none') {
+    cartButtons.style.display = 'block';
+  } else {
+    cartButtons.style.display = 'none';
+  }
+});
+
+
+
+
+    document.getElementById('icono').addEventListener('click', function() {
+    var cartButtons = document.querySelector('.cart-buttons');
+    if (cartButtons.style.display === 'none') {
+        cartButtons.style.display = 'block';
+    } else {
+        cartButtons.style.display = 'none';
+    }
+});
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
 </body>
 </html>
