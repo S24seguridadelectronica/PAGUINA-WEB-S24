@@ -1042,11 +1042,11 @@ footer {
 .producto-imagen {
     /* Estilos para smartphones en modo portrait y dispositivos similares */
     /* Rango: hasta 499px */
-    @media (max-width: 499px) {
-        width: 10%; /* Ancho de la imagen al 100% para ocupar todo el espacio disponible */
+    @media (min-width: 200px) and (max-width: 499px)  {
+        width: 15%; /* Ancho de la imagen al 100% para ocupar todo el espacio disponible */
         height: auto; /* Permitir que la altura se ajuste automáticamente para mantener la proporción */
         border-radius: 5px; /* Bordes redondeados para la imagen */
-        margin-right: 20vw; /* Eliminar el margen derecho */
+        margin-left: -13vw; /* Eliminar el margen derecho */
         margin-bottom: 1px; /* Añadir un margen inferior para separar los elementos */
         float: none; /* No flotar la imagen */
     }
@@ -1110,8 +1110,8 @@ footer {
     /* Estilos para smartphones en modo portrait y dispositivos similares */
     /* Rango: hasta 499px */
     @media (max-width: 499px) {
-        padding: 5px; /* Reducir el relleno */
-        max-width: 100%; /* Establecer el ancho máximo del contenedor al 100% */
+        padding: 0px; /* Reducir el relleno */
+        max-width: 80%; /* Establecer el ancho máximo del contenedor al 100% */
         color: hwb(64 0% 0%);
         font-size: 4.5vw; /* Tamaño de fuente relativo */
         font-weight: bold; /* Aplicar negrita */
@@ -1160,54 +1160,42 @@ footer {
 
 
 
+
 .producto-cantidad {
+    /* Estilos para smartphones en modo portrait y dispositivos similares */
+    /* Rango: hasta 499px */
+    @media (max-width: 499px) {
     display: flex;
     align-items: center;
     justify-content: flex-end; /* Alinea los elementos al final del contenedor (derecha) */
-    margin-right: -80px; /* Mueve ambos botones hacia la derecha */
+    margin-right: 20px; /* Mueve ambos botones hacia la derecha */
     margin-top: 10px; /* Ajusta el margen superior para mover el contenedor hacia arriba */
     height: 40px; /* Ajusta la altura del contenedor según sea necesario */
-    width: -50px;
+    width: auto; /* Establece el ancho automático */
     background-color: hsl(0, 89%, 44%); /* Color de fondo */
     border: 3px solid white; /* Borde */
     padding: 10px; /* Espaciado interno */
     border-radius: 5px; /* Borde redondeado */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
 }
-.producto-cantidad {
-    /* Estilos para smartphones en modo portrait y dispositivos similares */
-    /* Rango: hasta 499px */
-    @media (max-width: 499px) {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end; /* Alinea los elementos al final del contenedor (derecha) */
-        margin-right: 0; /* Restablece el margen derecho */
-        margin-top: 10px; /* Ajusta el margen superior para mover el contenedor hacia arriba */
-        height: 40px; /* Ajusta la altura del contenedor según sea necesario */
-        width: 100%; /* Establece el ancho al 100% */
-        background-color: hsl(0, 89%, 44%); /* Color de fondo */
-        border: 3px solid white; /* Borde */
-        padding: 10px; /* Espaciado interno */
-        border-radius: 5px; /* Borde redondeado */
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
-    }
 
     /* Estilos para smartphones en modo landscape y dispositivos similares */
     /* Rango: De 500px a 699px */
     @media (min-width: 500px) and (max-width: 699px) {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end; /* Alinea los elementos al final del contenedor (derecha) */
-        margin-right: -40px; /* Mueve ambos botones hacia la derecha */
-        margin-top: 10px; /* Ajusta el margen superior para mover el contenedor hacia arriba */
-        height: 40px; /* Ajusta la altura del contenedor según sea necesario */
-        width: auto; /* Establece el ancho automático */
-        background-color: hsl(0, 89%, 44%); /* Color de fondo */
-        border: 3px solid white; /* Borde */
-        padding: 10px; /* Espaciado interno */
-        border-radius: 5px; /* Borde redondeado */
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
-    }
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Alinea los elementos al final del contenedor (derecha) */
+    margin-right: 200px; /* Mueve ambos botones hacia la derecha */
+    margin-top: 10px; /* Ajusta el margen superior para mover el contenedor hacia arriba */
+    height: 40px; /* Ajusta la altura del contenedor según sea necesario */
+    width: auto; /* Establece el ancho automático */
+    background-color: hsl(0, 89%, 44%); /* Color de fondo */
+    border: 3px solid white; /* Borde */
+    padding: 10px; /* Espaciado interno */
+    border-radius: 5px; /* Borde redondeado */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+
 
     /* Estilos para tablets y dispositivos con pantalla más grande */
     /* Rango: De 700px a 899px */
@@ -1266,51 +1254,75 @@ footer {
 
 
 
+
+
+
 .cantidad-btn {
     background-color: rgb(255, 0, 0);
     color: #fff;
     border: none;
     border-radius: 50%;
-    width: 100px; /* Ancho de los botones */
-    height: 100px; /* Altura de los botones */
+    width: 10vw; /* Ancho de los botones */
+    height: 10vw; /* Altura de los botones */
     cursor: pointer;
-    margin-left: 2vw; /* Margen izquierdo en relación al ancho de la ventana */
+    margin-left: 4vw; /* Margen izquierdo en relación al ancho de la ventana */
 }
 
 /* Estilos para smartphones en modo landscape y dispositivos similares */
-@media (min-width: 500px) and (max-width: 699px) {
+@media (min-width: 200px) and (max-width: 699px) {
     .cantidad-btn {
-        width: 80px; /* Ajuste de tamaño para smartphones en modo landscape */
-        height: 80px; /* Ajuste de tamaño para smartphones en modo landscape */
-        margin-left: 1.5vw; /* Ajuste de margen para smartphones en modo landscape */
-    }
+    background-color: rgb(255, 0, 0);
+    color: #fff;
+    border: none;
+    border-radius: 0%;
+    width: 10vw; /* Ancho de los botones */
+    height: 10vw; /* Altura de los botones */
+    cursor: pointer;
+    margin-left: 2vw; /* Margen izquierdo en relación al ancho de la ventana */
+    margin-top: -70%;
 }
+
 
 /* Estilos para tablets y dispositivos con pantalla más grande */
 @media (min-width: 700px) and (max-width: 899px) {
     .cantidad-btn {
-        width: 90px; /* Ajuste de tamaño para tablets y dispositivos con pantalla más grande */
-        height: 90px; /* Ajuste de tamaño para tablets y dispositivos con pantalla más grande */
-        margin-left: 2vw; /* Ajuste de margen para tablets y dispositivos con pantalla más grande */
-    }
+      background-color: rgb(255, 0, 0);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 10vw; /* Ancho de los botones */
+    height: 10vw; /* Altura de los botones */
+    cursor: pointer;
+    margin-left: 4vw; /* Margen izquierdo en relación al ancho de la ventana */
+}
 }
 
 /* Estilos para laptops y pantallas de escritorio */
 @media (min-width: 900px) and (max-width: 1199px) {
     .cantidad-btn {
-        width: 100px; /* Ajuste de tamaño para laptops y pantallas de escritorio */
-        height: 100px; /* Ajuste de tamaño para laptops y pantallas de escritorio */
-        margin-left: 2vw; /* Ajuste de margen para laptops y pantallas de escritorio */
-    }
+      background-color: rgb(255, 0, 0);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 10vw; /* Ancho de los botones */
+    height: 10vw; /* Altura de los botones */
+    cursor: pointer;
+    margin-left: 4vw; /* Margen izquierdo en relación al ancho de la ventana */
+}
 }
 
 /* Estilos para pantallas de alta resolución y monitores grandes */
 @media (min-width: 1200px) {
     .cantidad-btn {
-        width: 120px; /* Ajuste de tamaño para pantallas de alta resolución y monitores grandes */
-        height: 120px; /* Ajuste de tamaño para pantallas de alta resolución y monitores grandes */
-        margin-left: 2vw; /* Ajuste de margen para pantallas de alta resolución y monitores grandes */
-    }
+      background-color: rgb(255, 0, 0);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 10vw; /* Ancho de los botones */
+    height: 10vw; /* Altura de los botones */
+    cursor: pointer;
+    margin-left: 4vw; /* Margen izquierdo en relación al ancho de la ventana */
+}
 }
 
 
@@ -2509,10 +2521,6 @@ window.addEventListener('scroll', function() {
 });
 
 
-
-
-
-
     </script>
 
 
@@ -3159,3 +3167,4 @@ icono.onmousedown = function(e) {
 
 </body>
 </html>
+}
