@@ -606,12 +606,166 @@ footer {
 }
 
 
+/* Estilos para dispositivos muy pequeños */
+/* Por ejemplo, smartphones en modo portrait */
+/* Rango: Menos de 500px */
+@media (max-width: 499px) {
+    #icono {
+      position: fixed;
+    bottom: 20px; /* Ajustar según sea necesario */
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    background-color: hsl(73, 100%, 50%);
+    border-radius: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    filter: invert(100%);
+    font-size: 2.5vw;
+    }
+}
+
+/* Estilos para smartphones en modo landscape y dispositivos similares */
+/* Rango: De 500px a 699px */
+@media (min-width: 500px) and (max-width: 699px) {
+    #icono {
+      position: fixed;
+    bottom: 20px; /* Ajustar según sea necesario */
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    background-color: hsl(73, 100%, 50%);
+    border-radius: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    filter: invert(100%);
+    font-size: 2.5vw;
+    }
+}
+
+/* Estilos para tablets y dispositivos con pantalla más grande */
+/* Rango: De 700px a 899px */
+@media (min-width: 700px) and (max-width: 899px) {
+    #icono {
+      position: fixed;
+    bottom: 20px; /* Ajustar según sea necesario */
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    background-color: hsl(73, 100%, 50%);
+    border-radius: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    filter: invert(100%);
+    font-size: 2.5vw;
+    }
+}
+
+/* Estilos para laptops y pantallas de escritorio */
+/* Rango: De 900px a 1199px */
+@media (min-width: 900px) and (max-width: 1199px) {
+    #icono {
+      position: fixed;
+    bottom: 20px; /* Ajustar según sea necesario */
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    background-color: hsl(73, 100%, 50%);
+    border-radius: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    filter: invert(100%);
+    font-size: 2.5vw;
+    }
+}
+
+/* Estilos para pantallas de alta resolución y monitores grandes */
+/* Rango: 1200px o más */
+@media (min-width: 1200px) {
+    #icono {
+      position: fixed;
+    bottom: 20px; /* Ajustar según sea necesario */
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    background-color: hsl(73, 100%, 50%);
+    border-radius: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    filter: invert(100%);
+    font-size: 2.5vw;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     #icono:hover {
         background-color: rgb(255, 0, 0);
     }
 
   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -658,7 +812,7 @@ footer {
 
 .toggle-cart {
     cursor: pointer;
-    color: #007bff;
+    color: #ff0000;
     text-decoration: underline;
 }
 
