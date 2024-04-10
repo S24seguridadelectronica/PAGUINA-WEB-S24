@@ -180,6 +180,8 @@ nav ul li {
 /* Estilos para el contenido principal */
 main {
   padding: 20px 0;
+  display: grid;
+  gap: 20px;
 }
 
 /* Estilos para el pie de página */
@@ -204,15 +206,21 @@ footer {
 /* Estilos para dispositivos muy pequeños (por ejemplo, smartphones en modo retrato) */
 @media (max-width: 499px) {
   #productos {
-    grid-template-columns: 1fr 1fr; /* Divide en 2 columnas */
-  }
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  display: grid;
+  gap: 20px;
+}
 }
 
 /* Estilos para smartphones en modo paisaje y dispositivos similares */
 @media (min-width: 500px) and (max-width: 699px) {
     #productos {
-    grid-template-columns: 1fr 1fr; /* Divide en 2 columnas */
-  }
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  display: grid;
+  gap: 20px;
+}
 }
 
 /* Estilos para tablets y dispositivos con pantalla más grande */
@@ -241,15 +249,119 @@ footer {
 
 
 .product {
-        margin-bottom: 30px;
-        border: 1px solid #ccc;
-        border-radius: 10px;
-        padding: 20px;
-        background-color: #f9f9f9;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        max-width: 400px;
-        margin: 0 auto;
-    }
+  margin-bottom: 30px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Columnas automáticas con un mínimo de 200px */
+  grid-gap: 20px; /* Espacio entre elementos */
+}
+
+/* Estilos para dispositivos muy pequeños */
+/* Por ejemplo, smartphones en modo portrait */
+/* Rango: Menos de 500px */
+@media (max-width: 499px) {
+  .product {
+    margin-bottom: 30px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Columnas automáticas con un mínimo de 200px */
+  grid-gap: 20px; /* Espacio entre elementos */
+}
+}
+
+/* Estilos para smartphones en modo landscape y dispositivos similares */
+/* Rango: De 500px a 699px */
+@media (min-width: 500px) and (max-width: 699px) {
+  .product {
+    margin-bottom: 30px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Columnas automáticas con un mínimo de 200px */
+  grid-gap: 20px; /* Espacio entre elementos */
+}
+}
+
+/* Estilos para tablets y dispositivos con pantalla más grande */
+/* Rango: De 700px a 899px */
+@media (min-width: 700px) and (max-width: 899px) {
+  .product {
+    margin-bottom: 30px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Columnas automáticas con un mínimo de 200px */
+  grid-gap: 20px; /* Espacio entre elementos */
+}
+}
+
+/* Estilos para laptops y pantallas de escritorio */
+/* Rango: De 900px a 1199px */
+@media (min-width: 900px) and (max-width: 1199px) {
+  .product {
+    margin-bottom: 30px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Columnas automáticas con un mínimo de 200px */
+  grid-gap: 20px; /* Espacio entre elementos */
+}
+}
+
+/* Estilos para pantallas de alta resolución y monitores grandes */
+/* Rango: 1200px o más */
+@media (min-width: 1200px) {
+  .product {
+    margin-bottom: 30px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Columnas automáticas con un mínimo de 200px */
+  grid-gap: 20px; /* Espacio entre elementos */
+}
+}
+
+
+
+
+
+
+
+
+
+
 
     .product h2 {
         font-size: 1.8rem;
@@ -272,8 +384,17 @@ footer {
     }
 
     .product p {
-        margin-bottom: 10px;
-    }
+    margin-bottom: 10px;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4; /* Limita el texto a tres líneas */
+    overflow: hidden;
+}
+
+
+
 
     .product .nombre {
         font-weight: bold;
