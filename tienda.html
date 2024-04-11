@@ -940,445 +940,51 @@ footer {
 }
 
 
-
-
-
-
-
-
-
-
-
-.producto-nombre {
-    font-weight: bold; /* Establece el texto en negrita */
-    font-size: 2rem; /* Establece el tamaño de fuente en relación al tamaño del texto base del navegador */
-    color: hsl(81, 100%, 54%); /* Define el color del texto */
-    margin-bottom: 5px; /* Añade un margen inferior de 5px para separar los elementos */
-    margin-top: -20px; /* Sube el elemento 10 píxeles */
-    height: -10px; /* Controla la altura del elemento a 30px */
-    overflow: hidden; /* Oculta el contenido si excede la altura especificada */
-}
-/* Estilos para smartphones en modo portrait y dispositivos similares */
-/* Rango: hasta 499px */
-@media (max-width: 499px) {
-    .producto-nombre {
-        font-weight: bold; /* Establece el texto en negrita */
-        font-size: 1.5rem; /* Reducción del tamaño de fuente */
-        color: hsl(81, 100%, 54%); /* Define el color del texto */
-        margin-bottom: 5px; /* Añade un margen inferior de 5px para separar los elementos */
-        margin-top: -15px; /* Sube el elemento 15 píxeles */
-        height: auto; /* Restablecer la altura */
-        overflow: hidden; /* Oculta el contenido si excede la altura especificada */
-    }
-}
-
-/* Estilos para smartphones en modo landscape y dispositivos similares */
-/* Rango: De 500px a 699px */
-@media (min-width: 500px) and (max-width: 699px) {
-    .producto-nombre {
-        font-weight: bold; /* Establece el texto en negrita */
-        font-size: 1.7rem; /* Ajuste del tamaño de fuente */
-        color: hsl(81, 100%, 54%); /* Define el color del texto */
-        margin-bottom: 5px; /* Añade un margen inferior de 5px para separar los elementos */
-        margin-top: -18px; /* Sube el elemento 18 píxeles */
-        height: auto; /* Restablecer la altura */
-        overflow: hidden; /* Oculta el contenido si excede la altura especificada */
-    }
-}
-
-/* Estilos para tablets y dispositivos con pantalla más grande */
-/* Rango: De 700px a 899px */
-@media (min-width: 700px) and (max-width: 899px) {
-    .producto-nombre {
-        font-weight: bold; /* Establece el texto en negrita */
-        font-size: 1.8rem; /* Ajuste del tamaño de fuente */
-        color: hsl(81, 100%, 54%); /* Define el color del texto */
-        margin-bottom: 5px; /* Añade un margen inferior de 5px para separar los elementos */
-        margin-top: -20px; /* Sube el elemento 20 píxeles */
-        height: auto; /* Restablecer la altura */
-        overflow: hidden; /* Oculta el contenido si excede la altura especificada */
-    }
-}
-
-/* Estilos para laptops y pantallas de escritorio */
-/* Rango: De 900px a 1199px */
-@media (min-width: 900px) and (max-width: 1199px) {
-    .producto-nombre {
-        font-weight: bold; /* Establece el texto en negrita */
-        font-size: 2rem; /* Establece el tamaño de fuente en relación al tamaño del texto base del navegador */
-        color: hsl(81, 100%, 54%); /* Define el color del texto */
-        margin-bottom: 5px; /* Añade un margen inferior de 5px para separar los elementos */
-        margin-top: -20px; /* Sube el elemento 20 píxeles */
-        height: auto; /* Restablecer la altura */
-        overflow: hidden; /* Oculta el contenido si excede la altura especificada */
-    }
-}
-
-/* Estilos para pantallas de alta resolución y monitores grandes */
-/* Rango: 1200px o más */
-@media (min-width: 1200px) {
-    .producto-nombre {
-        font-weight: bold; /* Establece el texto en negrita */
-        font-size: 2rem; /* Establece el tamaño de fuente en relación al tamaño del texto base del navegador */
-        color: hsl(81, 100%, 54%); /* Define el color del texto */
-        margin-bottom: 5px; /* Añade un margen inferior de 5px para separar los elementos */
-        margin-top: -20px; /* Sube el elemento 20 píxeles */
-        height: auto; /* Restablecer la altura */
-        overflow: hidden; /* Oculta el contenido si excede la altura especificada */
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-.producto-imagen {
-    /* Estilos para smartphones en modo portrait y dispositivos similares */
-    /* Rango: hasta 499px */
-    @media (min-width: 200px) and (max-width: 499px)  {
-        width: 15%; /* Ancho de la imagen al 100% para ocupar todo el espacio disponible */
-        height: auto; /* Permitir que la altura se ajuste automáticamente para mantener la proporción */
-        border-radius: 5px; /* Bordes redondeados para la imagen */
-        margin-left: -13vw; /* Eliminar el margen derecho */
-        margin-bottom: 1px; /* Añadir un margen inferior para separar los elementos */
-        float: none; /* No flotar la imagen */
-    }
-
-    /* Estilos para smartphones en modo landscape y dispositivos similares */
-    /* Rango: De 500px a 699px */
-    @media (min-width: 500px) and (max-width: 699px) {
-        width: 10%; /* Ancho de la imagen al 100% para ocupar todo el espacio disponible */
-        height: auto; /* Permitir que la altura se ajuste automáticamente para mantener la proporción */
-        border-radius: 5px; /* Bordes redondeados para la imagen */
-        margin-right: 20vw; /* Eliminar el margen derecho */
-        margin-bottom: 1px; /* Añadir un margen inferior para separar los elementos */
-        float: none; /* No flotar la imagen */
-    }
-
-    /* Estilos para tablets y dispositivos con pantalla más grande */
-    /* Rango: De 700px a 899px */
-    @media (min-width: 700px) and (max-width: 899px) {
-        width: 100%; /* Ancho de la imagen al 100% para ocupar todo el espacio disponible */
-        height: auto; /* Permitir que la altura se ajuste automáticamente para mantener la proporción */
-        border-radius: 5px; /* Bordes redondeados para la imagen */
-        margin-right: 0; /* Eliminar el margen derecho */
-        margin-bottom: 10px; /* Añadir un margen inferior para separar los elementos */
-        float: none; /* No flotar la imagen */
-    }
-
-    /* Estilos para laptops y pantallas de escritorio */
-    /* Rango: De 900px a 1199px */
-    @media (min-width: 900px) and (max-width: 1199px) {
-        width: 10%; /* Ancho de la imagen */
-        height: auto; /* Permitir que la altura se ajuste automáticamente para mantener la proporción */
-        border-radius: 5px; /* Bordes redondeados para la imagen */
-        margin-right: 20px; /* Espacio entre la imagen y la información del producto */
-        float: left; /* Flotar la imagen a la izquierda */
-    }
-
-    /* Estilos para pantallas de alta resolución y monitores grandes */
-    /* Rango: 1200px o más */
-    @media (min-width: 1200px) {
-        width: 10%; /* Ancho de la imagen */
-        height: auto; /* Permitir que la altura se ajuste automáticamente para mantener la proporción */
-        border-radius: 5px; /* Bordes redondeados para la imagen */
-        margin-right: 20px; /* Espacio entre la imagen y la información del producto */
-        float: left; /* Flotar la imagen a la izquierda */
-    }
-}
-
-
-
-
-
-
-
-
-.producto-descripcion {
-    display: none; /* Oculta la descripción del producto */
-}
-
-
-.producto-info {
-    /* Estilos para smartphones en modo portrait y dispositivos similares */
-    /* Rango: hasta 499px */
-    @media (max-width: 499px) {
-        padding: 0px; /* Reducir el relleno */
-        max-width: 80%; /* Establecer el ancho máximo del contenedor al 100% */
-        color: hwb(64 0% 0%);
-        font-size: 4.5vw; /* Tamaño de fuente relativo */
-        font-weight: bold; /* Aplicar negrita */
-    }
-
-    /* Estilos para smartphones en modo landscape y dispositivos similares */
-    /* Rango: De 500px a 699px */
-    @media (min-width: 500px) and (max-width: 699px) {
-        padding: 5px; /* Reducir el relleno */
-        max-width: 100%; /* Establecer el ancho máximo del contenedor al 100% */
-        color: hwb(64 0% 0%);
-        font-size: 4.5vw; /* Tamaño de fuente relativo */
-        font-weight: bold; /* Aplicar negrita */
-    }
-
-    /* Estilos para tablets y dispositivos con pantalla más grande */
-    /* Rango: De 700px a 899px */
-    @media (min-width: 700px) and (max-width: 899px) {
-        padding: 10px; /* Restaurar el relleno original */
-        max-width: 850px; /* Establecer el ancho máximo del contenedor */
-        color: hwb(64 0% 0%);
-        font-size: 5.5vw; /* Tamaño de fuente relativo */
-        font-weight: bold; /* Aplicar negrita */
-    }
-
-    /* Estilos para laptops y pantallas de escritorio */
-    /* Rango: De 900px a 1199px */
-    @media (min-width: 900px) and (max-width: 1199px) {
-        padding: 10px; /* Restaurar el relleno original */
-        max-width: 850px; /* Establecer el ancho máximo del contenedor */
-        color: hwb(64 0% 0%);
-        font-size: 5.5vw; /* Tamaño de fuente relativo */
-        font-weight: bold; /* Aplicar negrita */
-    }
-
-    /* Estilos para pantallas de alta resolución y monitores grandes */
-    /* Rango: 1200px o más */
-    @media (min-width: 1200px) {
-        padding: 10px; /* Restaurar el relleno original */
-        max-width: 850px; /* Establecer el ancho máximo del contenedor */
-        color: hwb(64 0% 0%);
-        font-size: 5.5vw; /* Tamaño de fuente relativo */
-        font-weight: bold; /* Aplicar negrita */
-    }
-}
-
-
-
-
-.producto-cantidad {
-    /* Estilos para smartphones en modo portrait y dispositivos similares */
-    /* Rango: hasta 499px */
-    @media (max-width: 499px) {
+.producto {
     display: flex;
     align-items: center;
-    justify-content: flex-end; /* Alinea los elementos al final del contenedor (derecha) */
-    margin-right: 20px; /* Mueve ambos botones hacia la derecha */
-    margin-top: 10px; /* Ajusta el margen superior para mover el contenedor hacia arriba */
-    height: 40px; /* Ajusta la altura del contenedor según sea necesario */
-    width: auto; /* Establece el ancho automático */
-    background-color: hsl(0, 89%, 44%); /* Color de fondo */
-    border: 3px solid white; /* Borde */
-    padding: 10px; /* Espaciado interno */
-    border-radius: 5px; /* Borde redondeado */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
+    margin-bottom: 20px;
 }
 
-    /* Estilos para smartphones en modo landscape y dispositivos similares */
-    /* Rango: De 500px a 699px */
-    @media (min-width: 500px) and (max-width: 699px) {
+.producto .producto-imagen {
+    width: 10vw; /* Ajusta el ancho según sea necesario */
+    height: auto;
+    margin-right: 20px;
+    margin-top: 2vh;
+}
+
+.producto .producto-info {
+    flex-grow: 1;
+}
+
+.producto .producto-nombre {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #f2f2f2;
+}
+
+.producto .producto-cantidad {
     display: flex;
     align-items: center;
-    justify-content: flex-end; /* Alinea los elementos al final del contenedor (derecha) */
-    margin-right: 200px; /* Mueve ambos botones hacia la derecha */
-    margin-top: 10px; /* Ajusta el margen superior para mover el contenedor hacia arriba */
-    height: 40px; /* Ajusta la altura del contenedor según sea necesario */
-    width: auto; /* Establece el ancho automático */
-    background-color: hsl(0, 89%, 44%); /* Color de fondo */
-    border: 3px solid white; /* Borde */
-    padding: 10px; /* Espaciado interno */
-    border-radius: 5px; /* Borde redondeado */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
+    margin-bottom: 5px;
 }
 
-
-    /* Estilos para tablets y dispositivos con pantalla más grande */
-    /* Rango: De 700px a 899px */
-    @media (min-width: 700px) and (max-width: 899px) {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end; /* Alinea los elementos al final del contenedor (derecha) */
-        margin-right: -60px; /* Mueve ambos botones hacia la derecha */
-        margin-top: 10px; /* Ajusta el margen superior para mover el contenedor hacia arriba */
-        height: 40px; /* Ajusta la altura del contenedor según sea necesario */
-        width: auto; /* Establece el ancho automático */
-        background-color: hsl(0, 89%, 44%); /* Color de fondo */
-        border: 3px solid white; /* Borde */
-        padding: 10px; /* Espaciado interno */
-        border-radius: 5px; /* Borde redondeado */
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
-    }
-
-    /* Estilos para laptops y pantallas de escritorio */
-    /* Rango: De 900px a 1199px */
-    @media (min-width: 900px) and (max-width: 1199px) {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end; /* Alinea los elementos al final del contenedor (derecha) */
-        margin-right: -80px; /* Mueve ambos botones hacia la derecha */
-        margin-top: 10px; /* Ajusta el margen superior para mover el contenedor hacia arriba */
-        height: 40px; /* Ajusta la altura del contenedor según sea necesario */
-        width: auto; /* Establece el ancho automático */
-        background-color: hsl(0, 89%, 44%); /* Color de fondo */
-        border: 3px solid white; /* Borde */
-        padding: 10px; /* Espaciado interno */
-        border-radius: 5px; /* Borde redondeado */
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
-    }
-
-    /* Estilos para pantallas de alta resolución y monitores grandes */
-    /* Rango: 1200px o más */
-    @media (min-width: 1200px) {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end; /* Alinea los elementos al final del contenedor (derecha) */
-        margin-right: -100px; /* Mueve ambos botones hacia la derecha */
-        margin-top: 10px; /* Ajusta el margen superior para mover el contenedor hacia arriba */
-        height: 40px; /* Ajusta la altura del contenedor según sea necesario */
-        width: auto; /* Establece el ancho automático */
-        background-color: hsl(0, 89%, 44%); /* Color de fondo */
-        border: 3px solid white; /* Borde */
-        padding: 10px; /* Espaciado interno */
-        border-radius: 5px; /* Borde redondeado */
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
-    }
-}
-
-
-
-
-
-
-
-
-
-.cantidad-btn {
-    background-color: rgb(255, 0, 0);
+.producto .cantidad-btn {
+    padding: 5px 10px;
+    background-color: #007bff;
     color: #fff;
     border: none;
-    border-radius: 50%;
-    width: 10vw; /* Ancho de los botones */
-    height: 10vw; /* Altura de los botones */
     cursor: pointer;
-    margin-left: 4vw; /* Margen izquierdo en relación al ancho de la ventana */
 }
 
-/* Estilos para smartphones en modo landscape y dispositivos similares */
-@media (min-width: 200px) and (max-width: 699px) {
-    .cantidad-btn {
-    background-color: rgb(255, 0, 0);
-    color: #fff;
-    border: none;
-    border-radius: 0%;
-    width: 10vw; /* Ancho de los botones */
-    height: 10vw; /* Altura de los botones */
-    cursor: pointer;
-    margin-left: 2vw; /* Margen izquierdo en relación al ancho de la ventana */
-    margin-top: -70%;
+.producto .cantidad {
+    margin: 0 10px;
 }
 
-
-/* Estilos para tablets y dispositivos con pantalla más grande */
-@media (min-width: 700px) and (max-width: 899px) {
-    .cantidad-btn {
-      background-color: rgb(255, 0, 0);
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    width: 10vw; /* Ancho de los botones */
-    height: 10vw; /* Altura de los botones */
-    cursor: pointer;
-    margin-left: 4vw; /* Margen izquierdo en relación al ancho de la ventana */
+.producto .producto-precio {
+    font-size: 16px;
+    color: hsl(73, 100%, 49%);
 }
-}
-
-/* Estilos para laptops y pantallas de escritorio */
-@media (min-width: 900px) and (max-width: 1199px) {
-    .cantidad-btn {
-      background-color: rgb(255, 0, 0);
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    width: 10vw; /* Ancho de los botones */
-    height: 10vw; /* Altura de los botones */
-    cursor: pointer;
-    margin-left: 4vw; /* Margen izquierdo en relación al ancho de la ventana */
-}
-}
-
-/* Estilos para pantallas de alta resolución y monitores grandes */
-@media (min-width: 1200px) {
-    .cantidad-btn {
-      background-color: rgb(255, 0, 0);
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    width: 10vw; /* Ancho de los botones */
-    height: 10vw; /* Altura de los botones */
-    cursor: pointer;
-    margin-left: 4vw; /* Margen izquierdo en relación al ancho de la ventana */
-}
-}
-
-
-
-
-
-
-/* Estilos para el total del carrito */
-.total {
-    margin-top: 20px;
-    text-align: right;
-}
-
-
-.producto-precio {
-    font-size: 2.4vw; /* Tamaño de fuente */
-    color: white; /* Color del texto */
-    margin: 5px 0; /* Margen superior e inferior de 5px */
-    text-align: center; /* Alineación del texto al centro */
-    font-weight: bold; /* Negrita */
-    margin-top: -40px; /* Ajuste de margen superior */
-    margin-right: 10vw; /* Ajuste de margen derecho */
-}
-
-/* Estilos para smartphones en modo landscape y dispositivos similares */
-@media (min-width: 500px) and (max-width: 699px) {
-    .producto-precio {
-        font-size: 3vw; /* Tamaño de fuente ajustado para smartphones en modo landscape */
-        margin-right: 5vw; /* Margen derecho ajustado para smartphones en modo landscape */
-    }
-}
-
-/* Estilos para tablets y dispositivos con pantalla más grande */
-@media (min-width: 700px) and (max-width: 899px) {
-    .producto-precio {
-        font-size: 2.8vw; /* Tamaño de fuente ajustado para tablets y dispositivos con pantalla más grande */
-        margin-right: 8vw; /* Margen derecho ajustado para tablets y dispositivos con pantalla más grande */
-    }
-}
-
-/* Estilos para laptops y pantallas de escritorio */
-@media (min-width: 900px) and (max-width: 1199px) {
-    .producto-precio {
-        font-size: 2.6vw; /* Tamaño de fuente ajustado para laptops y pantallas de escritorio */
-        margin-right: 15vw; /* Margen derecho ajustado para laptops y pantallas de escritorio */
-    }
-}
-
-/* Estilos para pantallas de alta resolución y monitores grandes */
-@media (min-width: 1200px) {
-    .producto-precio {
-        font-size: 2.4vw; /* Tamaño de fuente ajustado para pantallas de alta resolución y monitores grandes */
-        margin-right: 20vw; /* Margen derecho ajustado para pantallas de alta resolución y monitores grandes */
-    }
-}
-
 
 
 
@@ -2340,17 +1946,7 @@ footer {
 
 
 
-.trash-icon {
-    cursor: pointer;
-    font-size: 70px;
-    margin-right: 10px;
-    color: hwb(0 0% 0%); /* Color rojo intenso */
-    transition: color 0.3s ease; /* Transición suave para el cambio de color */
-}
 
-.trash-icon:hover {
-    color: rgb(217, 255, 0); /* Cambio de color al pasar el cursor */
-}
 
 
 
@@ -2701,7 +2297,6 @@ window.addEventListener('scroll', function() {
         productosEnCarrito.forEach(producto => {
             html += `
                 <div class='producto'>
-                    <span class="trash-icon" onclick="eliminarProductoConConfirmacion('${producto.nombre}')">&#128465;</span> <!-- Icono de cesta de basura -->
                     <img src="${producto.imagen}" alt="${producto.nombre}" class="producto-imagen">
                     <div class="producto-info">
                         <strong class="producto-nombre">${producto.nombre}</strong>
