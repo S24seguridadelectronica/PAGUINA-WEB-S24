@@ -792,75 +792,8 @@ footer {
 
 
 
-    /* Estilos para los productos en el carrito */
-/* Estilos para los productos en el carrito */
-/* Estilos para los productos en el carrito */
-/* Estilos para los productos en el carrito */
-.productos {
-    list-style-type: none; /* Eliminar viñetas de la lista */
-    padding: 0;
-    margin: 0;
-}
-/* Estilos para smartphones en modo portrait y dispositivos similares */
-/* Rango: hasta 499px */
-@media (max-width: 499px) {
-    .productos {
-        list-style-type: none; /* Eliminar viñetas de la lista */
-        padding: 0;
-        margin: 0;
-        display: block; /* Cambio a display de bloque */
-    }
-}
 
-/* Estilos para smartphones en modo landscape y dispositivos similares */
-/* Rango: De 500px a 699px */
-@media (min-width: 500px) and (max-width: 699px) {
-    .productos {
-        list-style-type: none; /* Eliminar viñetas de la lista */
-        padding: 0;
-        margin: 0;
-        display: block; /* Cambio a display de bloque */
-    }
-}
 
-/* Estilos para tablets y dispositivos con pantalla más grande */
-/* Rango: De 700px a 899px */
-@media (min-width: 700px) and (max-width: 899px) {
-    .productos {
-        list-style-type: none; /* Eliminar viñetas de la lista */
-        padding: 0;
-        margin: 0;
-        display: grid; /* Cambio a display de cuadrícula */
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Columnas automáticas */
-        gap: 20px; /* Espacio entre elementos */
-    }
-}
-
-/* Estilos para laptops y pantallas de escritorio */
-/* Rango: De 900px a 1199px */
-@media (min-width: 900px) and (max-width: 1199px) {
-    .productos {
-        list-style-type: none; /* Eliminar viñetas de la lista */
-        padding: 0;
-        margin: 0;
-        display: grid; /* Cambio a display de cuadrícula */
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Columnas automáticas */
-        gap: 20px; /* Espacio entre elementos */
-    }
-}
-
-/* Estilos para pantallas de alta resolución y monitores grandes */
-/* Rango: 1200px o más */
-@media (min-width: 1200px) {
-    .productos {
-        list-style-type: none; /* Eliminar viñetas de la lista */
-        padding: 0;
-        margin: 0;
-        display: grid; /* Cambio a display de cuadrícula */
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Columnas automáticas */
-        gap: 20px; /* Espacio entre elementos */
-    }
-}
 
 
 
@@ -871,86 +804,23 @@ footer {
 
 
 .productos {
-    list-style-type: none; /* Eliminar viñetas de la lista */
-    padding: 0;
-    margin: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    display: flex;
+    flex-direction: column;
     gap: 20px;
+    width: 30%; /* El 30% del ancho de la pantalla */
+    position: absolute;
+    top: 60%; /* 60% del nivel de la pantalla */
+    transform: translateY(-50%);
 }
-/* Estilos para smartphones en modo portrait y dispositivos similares */
-/* Rango: hasta 499px */
-@media (max-width: 499px) {
-    .productos {
-        list-style-type: none; /* Eliminar viñetas de la lista */
-        padding: 0;
-        margin: 0;
-        display: block; /* Cambio a display de bloque */
-    }
-}
-
-/* Estilos para smartphones en modo landscape y dispositivos similares */
-/* Rango: De 500px a 699px */
-@media (min-width: 500px) and (max-width: 699px) {
-    .productos {
-        list-style-type: none; /* Eliminar viñetas de la lista */
-        padding: 0;
-        margin: 0;
-        display: block; /* Cambio a display de bloque */
-    }
-}
-
-/* Estilos para tablets y dispositivos con pantalla más grande */
-/* Rango: De 700px a 899px */
-@media (min-width: 700px) and (max-width: 899px) {
-    .productos {
-        list-style-type: none; /* Eliminar viñetas de la lista */
-        padding: 0;
-        margin: 0;
-        display: grid; /* Cambio a display de cuadrícula */
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Columnas automáticas */
-        gap: 20px; /* Espacio entre elementos */
-    }
-}
-
-/* Estilos para laptops y pantallas de escritorio */
-/* Rango: De 900px a 1199px */
-@media (min-width: 900px) and (max-width: 1199px) {
-    .productos {
-        list-style-type: none; /* Eliminar viñetas de la lista */
-        padding: 0;
-        margin: 0;
-        display: grid; /* Cambio a display de cuadrícula */
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Columnas automáticas */
-        gap: 20px; /* Espacio entre elementos */
-    }
-}
-
-/* Estilos para pantallas de alta resolución y monitores grandes */
-/* Rango: 1200px o más */
-@media (min-width: 1200px) {
-    .productos {
-        list-style-type: none; /* Eliminar viñetas de la lista */
-        padding: 0;
-        margin: 0;
-        display: grid; /* Cambio a display de cuadrícula */
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Columnas automáticas */
-        gap: 20px; /* Espacio entre elementos */
-    }
-}
-
 
 .producto {
     display: flex;
-    align-items: center;
-    margin-bottom: 20px;
+    gap: 20px;
 }
 
 .producto .producto-imagen {
-    width: 10vw; /* Ajusta el ancho según sea necesario */
+    width: 100px; /* Ajusta el tamaño según sea necesario */
     height: auto;
-    margin-right: 20px;
-    margin-top: 2vh;
 }
 
 .producto .producto-info {
@@ -959,34 +829,78 @@ footer {
 
 .producto .producto-nombre {
     font-weight: bold;
-    margin-bottom: 5px;
-    color: #f2f2f2;
 }
 
 .producto .producto-cantidad {
     display: flex;
     align-items: center;
-    margin-bottom: 5px;
-}
-
-.producto .cantidad-btn {
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-}
-
-.producto .cantidad {
-    margin: 0 10px;
 }
 
 .producto .producto-precio {
-    font-size: 16px;
-    color: hsl(73, 100%, 49%);
+    margin-top: 10px;
+}
+
+.total {
+    margin-top: 20px;
 }
 
 
+
+
+
+
+
+
+
+/* Estilos para el título del carrito */
+.titulo-carrito {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Estilos para la imagen del carrito */
+.carrito-imagen {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+}
+
+/* Estilos para el logo */
+.logo {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+}
+
+/* Estilos para la fecha y hora */
+.fecha-hora {
+    font-size: 16px;
+    color: hsl(0, 0%, 100%);
+    margin-bottom: 20px;
+}
+
+/* Estilos para el botón de limpiar carrito */
+.boton-limpiar {
+    background-color: #ff0000;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+/* Estilos para el botón de enviar por WhatsApp */
+.boton-whatsapp {
+    background-color: #25d366;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
 
 
@@ -1281,47 +1195,6 @@ footer {
     display: none;
     z-index: 999;
 }
-
-/* Estilos para smartphones en modo portrait y dispositivos similares */
-/* Rango: De 300px a 499px */
-@media (min-width: 300px) and (max-width: 499px) {
-    .cart {
-        /* Estilos específicos para smartphones en modo portrait */
-        width: 90%; /* Modifica según sea necesario */
-        height: 90%; /* Modifica según sea necesario */
-    }
-}
-
-/* Estilos para smartphones en modo landscape y dispositivos similares */
-/* Rango: De 500px a 699px */
-@media (min-width: 500px) and (max-width: 699px) {
-    .cart {
-        /* Estilos específicos para smartphones en modo landscape */
-        width: 90%; /* Modifica según sea necesario */
-        height: 90%; /* Modifica según sea necesario */
-    }
-}
-
-/* Estilos para tablets y dispositivos con pantalla más grande */
-/* Rango: De 700px a 899px */
-@media (min-width: 700px) and (max-width: 899px) {
-    .cart {
-        /* Estilos específicos para tablets */
-        width: 80%; /* Modifica según sea necesario */
-        height: 80%; /* Modifica según sea necesario */
-    }
-}
-
-/* Estilos para laptops, pantallas de escritorio y dispositivos con pantallas más grandes */
-/* Rango: De 900px en adelante */
-@media (min-width: 900px) {
-    .cart {
-        /* Estilos específicos para laptops y pantallas de escritorio */
-        width: 70%; /* Modifica según sea necesario */
-        height: 70%; /* Modifica según sea necesario */
-    }
-}
-
 
 
 
@@ -2284,10 +2157,38 @@ window.addEventListener('scroll', function() {
       }
     }
 
-    // Función para mostrar el carrito
-    function mostrarCarrito() {
+   // Función para mostrar el carrito
+   function mostrarCarrito() {
     const carrito = document.getElementById("carrito");
-    let html = "<h2>Carrito de Compras</h2>";
+    let html = "<h2 class='titulo-carrito'>Carrito de Compras</h2>";
+
+   // Agregar espacio para la imagen del carrito
+html += "<img src='imagenes/logocarrito.png' alt='Imagen del carrito' class='carrito-imagen'>";
+
+// Agregar espacio para el logo
+html += "<img src='imagenes/logocarrito.png' alt='Logo' class='logo'>";
+
+
+    // Agregar espacio para la hora y la fecha en vivo
+    html += "<p class='fecha-hora'>Fecha y hora actual: <span id='fecha-hora'></span></p>";
+
+
+    // Función para actualizar la hora cada segundo
+    function actualizarHora() {
+        const fechaActual = new Date();
+        const hora = fechaActual.getHours();
+        const minutos = fechaActual.getMinutes();
+        const segundos = fechaActual.getSeconds();
+        const dia = fechaActual.getDate();
+        const mes = fechaActual.getMonth() + 1; // Los meses comienzan desde 0
+        const anio = fechaActual.getFullYear();
+        const fechaHora = `${dia}/${mes}/${anio} ${hora}:${minutos}:${segundos}`;
+        document.getElementById("fecha-hora").textContent = fechaHora;
+    }
+
+    // Actualizar la hora cada segundo
+    setInterval(actualizarHora, 1000);
+
     let total = 0;
 
     if (productosEnCarrito.length === 0) {
@@ -2314,29 +2215,91 @@ window.addEventListener('scroll', function() {
         html += "</div>"; // Cerrar div .productos
     }
 
+    // Mostrar el total de la compra
     html += `<div class="total"><p>Total: $${total.toFixed(2)}</p></div>`;
+
+   
+  // Agregar el botón para limpiar el carrito
+html += "<button class='boton-limpiar' onclick='limpiarCarrito()'>Limpiar carrito</button>";
+
+// Agregar el botón para enviar por WhatsApp
+html += "<button class='boton-whatsapp' onclick='enviarCarritoPorWhatsApp()'>Enviar por WhatsApp</button>";
+
+
+  
+
     carrito.innerHTML = html;
 }
 
-
-
-
-
-function vaciarCarrito() {
-    productosEnCarrito = []; // Limpiar el arreglo de productos en el carrito
-    mostrarCarrito(); // Actualizar la visualización del carrito en la interfaz
-    actualizarContador(0); // Actualizar el contador para que muestre 0
+// Función para limpiar el carrito
+function limpiarCarrito() {
+    console.log("Limpiar carrito");
+    productosEnCarrito = []; // Vaciar el arreglo de productos en el carrito
+    const carrito = document.getElementById("carrito");
+    carrito.innerHTML = ""; // Limpiar el contenido del carrito
+    console.log("Carrito limpiado");
 }
+
+
+// Función para enviar el carrito por WhatsApp
+function enviarCarritoPorWhatsApp() {
+    // Construir el mensaje con los detalles del carrito
+    var mensaje = "Detalles del carrito:\n\n";
+
+    // Agregar información del cliente y de la empresa
+    mensaje += "Datos del Cliente:\n";
+    mensaje += "Nombre: [Nombre del cliente]\n";
+    mensaje += "Teléfono: [Teléfono del cliente]\n";
+    mensaje += "Email: [Email del cliente]\n\n";
+    mensaje += "Datos de tu Empresa:\n";
+    mensaje += "Nombre: S24 Seguridad Electrónica\n";
+    mensaje += "Teléfono: 3158859744\n";
+    mensaje += "Mail: [Email de tu empresa]\n\n";
+
+    // Agregar la tabla con los productos en el carrito
+    mensaje += "Productos en el carrito:\n";
+    productosEnCarrito.forEach(producto => {
+        mensaje += `- Nombre: ${producto.nombre}\n`;
+        mensaje += `  Descripción: ${producto.descripcion}\n`;
+        mensaje += `  Cantidad: ${producto.cantidad}\n`;
+        mensaje += `  Precio unitario: $${producto.precio.toFixed(2)}\n`;
+        mensaje += `  Precio total: $${(producto.precio * producto.cantidad).toFixed(2)}\n\n`;
+    });
+
+    // Calcular el gran total
+    var total = productosEnCarrito.reduce((acc, producto) => acc + (producto.precio * producto.cantidad), 0);
+    mensaje += `Gran total: $${total.toFixed(2)}`;
+
+    // Crear el enlace para enviar por WhatsApp
+    var numeroTelefono = "3158859744"; // Reemplaza esto con el número de teléfono al que deseas enviar el mensaje
+    var url = `https://api.whatsapp.com/send?phone=${numeroTelefono}&text=${encodeURIComponent(mensaje)}`;
+
+    // Abrir el enlace en una nueva ventana o pestaña
+    window.open(url, '_blank');
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 function actualizarContador(cantidad) {
       contador.textContent = cantidad;
     }
-
-
-
-
 
 
 
