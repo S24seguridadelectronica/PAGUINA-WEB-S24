@@ -208,11 +208,13 @@ footer {
   margin-bottom: 20px;
   display: grid;
   gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Cambia el 200px al ancho deseado de cada columna */
 }
+
 
 /* Estilos para smartphones en modo portrait y dispositivos similares */
 /* Rango: hasta 499px */
-@media (max-width: 499px) {
+@media (min-width: 200px) and (max-width: 499px) {
     #productos {
         background-color: #f2f2f2;
         padding: 10px;
@@ -221,6 +223,7 @@ footer {
         margin-bottom: 10px;
         display: grid;
         gap: 10px;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Cambia el 200px al ancho deseado de cada columna */
     }
 }
 
@@ -798,50 +801,107 @@ footer {
 
 
 
-
-
-
-
-
+/* Estilos para la tabla de productos */
 .productos {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 30%; /* El 30% del ancho de la pantalla */
-    position: absolute;
-    top: 60%; /* 60% del nivel de la pantalla */
-    transform: translateY(-50%);
+    width: 100%;
+    margin-top: 20px;
 }
 
 .producto {
     display: flex;
-    gap: 20px;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
 }
 
-.producto .producto-imagen {
-    width: 100px; /* Ajusta el tamaño según sea necesario */
+.producto-imagen {
+    width: 100px;
+    padding-right: 20px;
+}
+
+.producto-imagen img {
+    max-width: 100%;
     height: auto;
 }
 
-.producto .producto-info {
-    flex-grow: 1;
+.producto-info {
+    flex: 1;
+    margin-left: 0vw;
 }
 
-.producto .producto-nombre {
+.producto-nombre {
     font-weight: bold;
 }
 
-.producto .producto-cantidad {
-    display: flex;
-    align-items: center;
+.producto-descripcion {
+    margin-top: 5px;
+    color: #666;
 }
 
-.producto .producto-precio {
+.producto-cantidad {
+    display: flex;
+    align-items: center;
     margin-top: 10px;
 }
 
+.cantidad-btn {
+    background-color: #ccc;
+    color: #333;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.cantidad-btn:hover {
+    background-color: #bbb;
+}
+
+.cantidad {
+    margin: 0 10px;
+}
+
+.producto-precio {
+    font-weight: bold;
+    margin-right: 1000px;
+    color: #25d366;
+}
+
+
+
+
+
+
+
+
+.producto-descripcion {
+    font-size: 1em; /* Ajusté el tamaño de la fuente */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 15ch; /* Limita la descripción a 15 caracteres */
+}
+
+
+
 .total {
-    margin-top: 20px;
+    position: absolute; /* Establece la posición absoluta */
+    bottom: 120px; /* Coloca el elemento a 20px del borde inferior */
+    left: 50%; /* Coloca el elemento en el centro horizontal */
+    transform: translateX(-50%); /* Centra horizontalmente el elemento */
+    font-size: 1.5em; /* Tamaño de la fuente */
+}
+
+
+
+
+
+
+
+
+/* NO MOSTRAR*/
+.boton-limpiar {
+    display: none; /* Oculta el elemento */
+  
 }
 
 
@@ -877,7 +937,7 @@ footer {
 /* Estilos para la fecha y hora */
 .fecha-hora {
     font-size: 16px;
-    color: hsl(0, 0%, 100%);
+    color: hwb(0 2% 61%);
     margin-bottom: 20px;
 }
 
@@ -892,7 +952,6 @@ footer {
     margin-right: 10px;
 }
 
-/* Estilos para el botón de enviar por WhatsApp */
 .boton-whatsapp {
     background-color: #25d366;
     color: #fff;
@@ -900,7 +959,12 @@ footer {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    position: fixed;
+    bottom: 60px; /* Ajusta la distancia del borde inferior de la pantalla */
+    left: 50%; /* Centra horizontalmente */
+    transform: translateX(-50%); /* Corrige la posición para que esté centrado */
 }
+
 
 
 
@@ -1181,15 +1245,15 @@ footer {
 
     .cart {
     position: fixed;
-    top: 60%; /* Centrar verticalmente */
+    top: 50%; /* Centrar verticalmente */
     left: 50%; /* Centrar horizontalmente */
     transform: translate(-50%, -50%); /* Centrar horizontalmente */
     width: 90%; /* Ocupa el 90% del ancho de la pantalla */
-    height: 90%; /* Ocupa el 90% de la altura de la pantalla */
+    height: 100%; /* Ocupa el 90% de la altura de la pantalla */
     max-width: 1500px; /* Limita el ancho máximo */
-    max-height: 1500px; /* Limita la altura máxima */
+    max-height: 2000px; /* Limita la altura máxima */
     overflow-y: auto;
-    background-color: hsla(0, 0%, 0%, 0.702); /* Fondo semitransparente */
+    background-color: white; /* Fondo semitransparente */
     border: 1px solid #ccc;
     padding: 10px;
     display: none;
@@ -1203,7 +1267,7 @@ footer {
 
 
 #productos-carrito {
-    background-color: #ffffff;
+    background-color: hsl(0, 43%, 4%);
     border: 1px solid #ccc;
     padding: 20px;
     margin-top: 400px; /* Se ajustará para diferentes tamaños de pantalla */
@@ -2043,52 +2107,776 @@ window.addEventListener('scroll', function() {
 
 <section id="productos">
 
-<article class='product'>
-    <h2>Nombre del Producto 63</h2>
-    <figure>
-        <img src='imagenes/face.png' alt=''>
-        <figcaption>Descripción opcional de la imagen.</figcaption>
-    </figure>
-    <p class='nombre'>Nombre del Producto 63</p>
-    <p class='descripcion'>11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111</p>
-    <p class='precio'>Precio: $63.00</p>
-    <form onsubmit='event.preventDefault(); agregarAlCarrito(event)'>
+    <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(1)DS-2CE56D0T-IRPF.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>Resolución de 2MPx Alcance de 20 metros en visión nocturna Material de fabricación en plástico resistente Lente fijo de 3.6mm Sensor CMOS Dimensiones físicas de 89.6mm × 59.1mm Consumo eléctrico de 3.5W Alimentación de 12VDC</p>
+        <p class='descripcion'>ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd</p>
+        <p class='precio'>ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
         <button type='submit'>Agregar al Carrito</button>
-        <span class="cart-icon" onclick="moveToCart()">&#x1F6D2;</span>
-    </form>
-</article>
-
-
-  
-    <!-- Artículo 64 -->
-    <article class='product'>
-      <h2>Nombre del Producto 64</h2>
-      <figure>
-          <img src='imagenes/logowhatsapp.png' alt=''>
-          <figcaption>Descripción opcional de la imagen.</figcaption>
-      </figure>
-      <p class='nombre'>Nombre del Producto 64</p>
-      <p class='descripcion'>222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222</p>
-      <p class='precio'>Precio: $64.00</p>
-      <form onsubmit='event.preventDefault(); agregarAlCarrito()'>
-          <button type='submit'>Agregar al Carrito</button>
-      </form>
-    </article>
-  
-    <!-- Artículo 65 -->
-    <article class='product'>
-      <h2>Nombre del Producto 65</h2>
-      <figure>
-          <img src='imagenes/logowhatsapp.png' alt=''>
-          <figcaption>Descripción opcional de la imagen.</figcaption>
-      </figure>
-      <p class='nombre'>3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333</p>
-      <p class='descripcion'>Descripción del producto 65.</p>
-      <p class='precio'>Precio: $65.00</p>
-      <form onsubmit='event.preventDefault(); agregarAlCarrito()'>
-          <button type='submit'>Agregar al Carrito</button>
-      </form>
-    </article>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(2)DS-2CE76D0T-LMFS.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>Resolución en mpx: 5 mpx Alcance en visión nocturna: 40 metros Material de fabricación: Plástico resistente Lente: 3.6mm Sensor: CMOS Dimensiones: no especificado Consumo eléctrico: máximo de 6W Características físicas: Resistente a la intemperie, con soporte para montaje en pared o techo</p>
+        <p class='descripcion'>2</p>
+        <p class='precio'>2</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(3)DS-2CE76D0T-ITMFS.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>1. Resolución en millones de píxeles: 5 megapíxeles 2. Alcance en visión nocturna: 40 metros 3. Material de fabricación: plástico resistente 4. Tipo de lente: 2.8 mm 5. Tipo de sensor: CMOS 6. Dimensiones físicas: resistente al agua y al polvo, diseño compacto 7. Consumo eléctrico: voltaje de operación 12V DC, consumo de energía 5W</p>
+        <p class='descripcion'>3</p>
+        <p class='precio'>3</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(4)DS-2CE76D0T-LPFS.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>2MP, 40 metros de alcance en visión nocturna, material de metal resistente, lente varifocal, sensor CMOS, resistente al agua y al polvo, consumo eléctrico de 4W.</p>
+        <p class='descripcion'>4</p>
+        <p class='precio'>4</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(5)DS-2CE76D0T-ITPFS.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>1. Resolución: 2 megapíxeles 2. Alcance en visión nocturna: 20 metros 3. Material de fabricación: Plástico resistente 4. Lente: 3.6 mm 5. Sensor: CMOS 6. Dimensiones: Cámara tipo bullet, resistente a la intemperie 7. Consumo eléctrico: Voltaje de alimentación 12V DC, consumo de corriente máxima 4W</p>
+        <p class='descripcion'>5</p>
+        <p class='precio'>5</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(6)DS-2CE56D0T-IT1F.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>Resolución: 2.0 MPX Alcance de visión nocturna: 40 metros Material: metal Lente: varifocal de 2.8-12 mm Sensor: CMOS de 1/2.7” Características físicas: resistente al agua y al polvo, apta para exteriores Dimensiones: (no especificadas) Consumo eléctrico: 12VDC, 4W</p>
+        <p class='descripcion'>6</p>
+        <p class='precio'>6</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(7)DS-2CE56D0T-IT3F©.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>2MP, 20 metros, metal, 3.6mm, sensor CMOS, resistente a la intemperie, 6W máximo.</p>
+        <p class='descripcion'>7</p>
+        <p class='precio'>7</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(8)DS-2CE56D0T-VFIR3F.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>- Resolución en mpx: 2 megapíxeles - Mts de alcance en visión nocturna: 20 metros - Material de fabricación: metal - Lente: 3.6mm - Sensor: CMOS - Dimensiones: compactas - Consumo eléctrico: bajo - Características físicas: resistente a la intemperie</p>
+        <p class='descripcion'>8</p>
+        <p class='precio'>8</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(9)DS-2CE16D0T-ITPFS.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>- Resolución en mpx: 2 megapíxeles - Mts de alcance en visión nocturna: 20 metros - Material de fabricación: metal - Lente: 3.6mm - Sensor: CMOS - Dimensiones: compactas - Consumo eléctrico: bajo - Características físicas: resistente a la intemperie</p>
+        <p class='descripcion'>9</p>
+        <p class='precio'>9</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(10)DS-2CE16D0T-IRPF.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>2 mpx, 20 metros de alcance, plástico resistente, lente fijo de 3.6mm, sensor de imagen CMOS, pequeño y ligero, consume 12V de alimentación.</p>
+        <p class='descripcion'>10</p>
+        <p class='precio'>10</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(11)DS-2CE16D0T-IRF.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>Resolución: 2MP Alcance: 20m en visión nocturna Material: Metal Lente: 2.8mm Sensor: CMOS Resistente al agua y al polvo Temperatura de operación: -40°C a 60°C Consumo de energía: 4W máximo</p>
+        <p class='descripcion'>11</p>
+        <p class='precio'>11</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(12)DS-2CE17D0T-IT1F.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>2 mpx, 20 metros de alcance en visión nocturna, material metálico, lente fijo de 3.6mm, sensor de imagen CMOS, resistente al agua y al polvo (IP67), voltaje de alimentación de 12V DC, consumo de energía de hasta 4W.</p>
+        <p class='descripcion'>12</p>
+        <p class='precio'>12</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(13)DS-2CE17D0T-LFS.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>- Resolución en mpx: no especificada - Alcance en visión nocturna: hasta 20 metros - Material: plástico resistente - Lente: varifocal - Sensor: CMOS - Dimensiones: diseño compacto - Consumo eléctrico: alimentación por corriente directa 12V - Características físicas: resistente al agua y al polvo</p>
+        <p class='descripcion'>13</p>
+        <p class='precio'>13</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(14)DS-2CE17D0T-IT5F.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>2MP de resolución, 40 metros de alcance en visión nocturna, material de metal resistente, lente fijo de 2.8mm, sensor CMOS, resistente a la intemperie, consumo eléctrico de 5W, voltaje de 12VDC.</p>
+        <p class='descripcion'>14</p>
+        <p class='precio'>14</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(15)DS-2CE16D0T-VFIR3F.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>- Resolución en MPX: 2 megapíxeles - Alcance en visión nocturna: 40 metros - Material de fabricación: Plástico resistente - Lente: Varifocal de 2.8-12 mm - Sensor: CMOS de escaneo progresivo - Dimensiones físicas: Diseño compacto, resistente a la intemperie, soporte para montaje en pared o techo - Consumo eléctrico: Alimentación de 12 VDC, consumo de energía de 4.2 W</p>
+        <p class='descripcion'>15</p>
+        <p class='precio'>15</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(16)DS-2CE19D0T-VFIT3F.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>- Resolución en megapíxeles: 2 megapíxeles - Metros de alcance en visión nocturna: 40 metros - Material de que está hecha: plástico resistente - Lente: 3.6mm - Sensor: CMOS - Dimensiones: diseño compacto - Consumo eléctrico: alimentación de 12VDC, consumo de energía de 4W - Características físicas: resistente al agua y al polvo, diseño compacto</p>
+        <p class='descripcion'>16</p>
+        <p class='precio'>16</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(17)DS-2CE70DF0T-PF.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>Resolución: 5MP Alcance en visión nocturna: 20m Material: Metal Lente: 2.8mm Sensor: CMOS Características físicas: resistente al agua Características eléctricas: consume 12V DC</p>
+        <p class='descripcion'>17</p>
+        <p class='precio'>17</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(18)DS-2CE70DF0T-LPFS.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>- Resolución: 5MPx - Alcance en visión nocturna: 20 metros - Material: metal - Lente: 2.8mm - Sensor: CMOS - Características físicas: resistente al agua y al polvo - Consumo eléctrico: voltaje de operación de 12V DC</p>
+        <p class='descripcion'>18</p>
+        <p class='precio'>18</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(19)DS-2CE70DF0T-PFS.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>- Resolución en megapíxeles: 5 mpx - Alcance en visión nocturna: 20 metros - Material de fabricación: plástico y metal - Lente: 3.6 mm - Sensor: CMOS - Dimensiones físicas: diseño compacto, resistente al agua y al polvo - Consumo eléctrico: alimentación de 12V DC, consumo de energía de 4W</p>
+        <p class='descripcion'>19</p>
+        <p class='precio'>19</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(20)DS-2CE70DF3T-PF.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>Cámara de seguridad DS-2CE70DF3T-PF - Resolución en mpx: 5 - Alcance en visión nocturna: 40 mts - Material: Plástico resistente - Lente: 3.6 mm - Sensor: CMOS - Dimensiones: No especificado - Consumo eléctrico: 6W - Características físicas: Resistente al agua y al polvo, con soporte ajustable</p>
+        <p class='descripcion'>20</p>
+        <p class='precio'>20</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(21)DS-2CE70DF0T-MF.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>2MP de resolución, 20 metros de alcance nocturno, hecho de metal, lente de 3.6mm, sensor CMOS, resistente a la intemperie, clasificación IP66, opera con 12V DC de potencia.</p>
+        <p class='descripcion'>21</p>
+        <p class='precio'>21</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(22)DS-2CE70DF0T-MFS.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>Resolución en megapíxeles: 2 megapíxeles Alcance en visión nocturna: 30 metros Material: Metal resistente Lente: 3.6mm Sensor: CMOS Dimensiones: Compacta y resistente al agua Consumo eléctrico: 12V DC, 4 watts Características físicas: Compacta y resistente al agua</p>
+        <p class='descripcion'>22</p>
+        <p class='precio'>22</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(23)DS-2CE72DF0T-F.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>Resolución: 2MP Alcance en visión nocturna: 40 metros Material de fabricación: metal Lente: 2.8mm Sensor: CMOS Dimensiones: no especificado Consumo eléctrico: 12V DC, 5W Características físicas: resistente a la intemperie, soporte ajustable</p>
+        <p class='descripcion'>23</p>
+        <p class='precio'>23</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(24)DS-2CE72DF0T-FS.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>- Megapíxeles: 2 MP - Alcance en visión nocturna: 20 metros - Material: plástico resistente - Lente: 3.6mm - Sensor: CMOS - Características físicas: resistente al agua y al polvo, apta para uso en exteriores - Consumo eléctrico: 12V DC, consumo máximo de 4W</p>
+        <p class='descripcion'>24</p>
+        <p class='precio'>24</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(25)DS-2CE72DF3T-PIRXOS.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>2MPx de resolución 40 mts de alcance en visión nocturna Hecha de plástico resistente Lente fijo de 3.6mm Sensor CMOS Color blanco, forma cilíndrica 12V DC, consumo máximo de 4W</p>
+        <p class='descripcion'>25</p>
+        <p class='precio'>25</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(26)DS-2CE72HFT-F28.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>Resolución: 2MP Alcance en visión nocturna: 40 mts Material: plástico resistente Lente: varifocal de 2.8mm a 12mm Sensor: CMOS de escaneo progresivo Dimensiones: compacta Consumo eléctrico: 12VDC Características físicas: resistente y compacta</p>
+        <p class='descripcion'>26</p>
+        <p class='precio'>26</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(27)DS-2CE72DFT-F.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>2MPX, 20 metros de alcance, metal, lente de 3.6mm, sensor CMOS de 1/2.7", diseño pequeño y discreto, 12V DC de alimentación eléctrica.</p>
+        <p class='descripcion'>27</p>
+        <p class='precio'>27</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(28)DS-2CE72DF3T-F.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>Resolución: 2MP,  Alcance en visión nocturna: 40 metros,  Material: Metal,  Lente: 2.8mm,  Sensor: CMOS,  Dimensiones: --- Consumo eléctrico: 12VDC,  Características físicas: Resistente a la intemperie.</p>
+        <p class='descripcion'>28</p>
+        <p class='precio'>28</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(29)DS-2CE10DF0T-PF.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>2 megapíxeles 20 metros de alcance en visión nocturna Fabricada en metal Lente fijo de 3.6mm Sensor CMOS Dimensiones físicas de 86.22mm × 82.05mm Consumo eléctrico de 4W</p>
+        <p class='descripcion'>29</p>
+        <p class='precio'>29</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(30)DS-2CE10DF0T-LPFS.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>Resolución: 2MP Alcance: 20 metros de visión nocturna Material: plástico resistente a la intemperie Lente: 3.6mm Sensor: CMOS Características físicas: 70 grados de ángulo de visión, resistente al agua Características eléctricas: 12V DC, consumo de energía 4W máximo.</p>
+        <p class='descripcion'>30</p>
+        <p class='precio'>30</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(31)DS-2CE10DF0T-PFS.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>- Resolución en megapíxeles: 2 - Alcance en visión nocturna: 20 metros - Material de fabricación: plástico resistente - Lente: 2.8 mm - Sensor: CMOS - Dimensiones: diseño compacto, resistente al agua y polvo - Consumo eléctrico: voltaje de funcionamiento 12V DC, consumo de energía máximo 4W</p>
+        <p class='descripcion'>31</p>
+        <p class='precio'>31</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(32)DS-2CE10DF0T-F.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>- Resolución: 2 megapíxeles  - Alcance en visión nocturna: 20 metros  - Material: Plástico resistente  - Lente: 3.6mm  - Sensor: CMOS  - Dimensiones: no especificado  - Consumo eléctrico: Alimentación de 12VDC  - Características físicas: Resistente al agua y al polvo</p>
+        <p class='descripcion'>32</p>
+        <p class='precio'>32</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(33)DS-2CE10DF0T-FS.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>- Resolución en megapíxeles: 2 - Alcance en visión nocturna: 20 metros - Material de fabricación: plástico resistente - Lente: fijo de 3.6mm - Sensor: CMOS - Dimensiones: diseño compacto - Consumo eléctrico: alimentación por corriente directa 12V DC - Características físicas: resistente al agua y al polvo</p>
+        <p class='descripcion'>33</p>
+        <p class='precio'>33</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(34)DS-2CE10DF3T-PF.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>Resolución: 2 MP Alcance en visión nocturna: 20 metros Material: plástico Lente: 3.6 mm Sensor: CMOS Dimensiones: no especificado Consumo eléctrico: 2.8 W Características físicas: resistente al agua y al polvo</p>
+        <p class='descripcion'>34</p>
+        <p class='precio'>34</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(35)DS-2CE10DF3T-F.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>1. Resolución en Mpx: 2 megapíxeles 2. Mts de alcance en visión nocturna: 20 metros 3. Material de que está hecha: Plástico resistente 4. Lente: 3.6mm 5. Sensor: CMOS 6. Dimensiones: Cámara tipo bullet, resistente a la intemperie 7. Consumo eléctrico: Consumo de energía de 4W</p>
+        <p class='descripcion'>35</p>
+        <p class='precio'>35</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='"imagenes/(36)DS-2CE12DF3T-PIRXOS.jpg"' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>Resolución en MPX: 2 megapíxeles Alcance en visión nocturna: 40 metros Material de fabricación: Plástico resistente Lente: Varifocal de 2.7-13.5 mm Sensor: CMOS Características físicas: Cámara domo, resistente al agua y al polvo Consumo eléctrico: Alimentación de 12V DC</p>
+        <p class='descripcion'>36</p>
+        <p class='precio'>36</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='"imagenes/(37)DS-2CE12DF0T-LFS.jpg"' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>Resolución: 2MP Alcance en visión nocturna: 20 metros Material: plástico Lente: 2.8 mm Sensor: CMOS Dimensiones: diseño compacto Consumo eléctrico: alimentación 12V DC Características físicas: resistente al agua y al polvo.</p>
+        <p class='descripcion'>37</p>
+        <p class='precio'>37</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='"imagenes/(38)DS-2CE12DF0T-F.jpg"' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>1. Resolución en mpx: 2 megapíxeles 2. Alcance en visión nocturna: 20 metros 3. Material: Plástico resistente 4. Lente: 3.6mm 5. Sensor: CMOS 6. Características físicas: Diseño compacto, resistente al agua y polvo 7. Consumo eléctrico: 12V DC, bajo consumo de energía</p>
+        <p class='descripcion'>38</p>
+        <p class='precio'>38</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='"imagenes/(39)DS-2CE12DF3T-F.jpg"' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>2 mpx de resolución 20 metros de alcance en visión nocturna Fabricada en material resistente Lente de alta calidad Sensor CMOS Diseño compacto y resistente Alimentación de 12V DC.</p>
+        <p class='descripcion'>39</p>
+        <p class='precio'>39</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='"imagenes/(40)DS-2CE18D0T-LFS.jpg"' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>2 megapíxeles de resolución 20 metros de alcance en visión nocturna Material de metal resistente Lente fijo de 3.6 mm Sensor de imagen CMOS Dimensiones físicas de 68.3 mm × 58.7 mm Consumo eléctrico de 12VDC.</p>
+        <p class='descripcion'>40</p>
+        <p class='precio'>40</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='"imagenes/(41)DS-2CE76H0T-ITPF(C).jpg"' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>- Resolución en MPX: 5 megapíxeles - Alcance en visión nocturna: 40 metros - Material: metal - Lente: 2.8 mm - Sensor: CMOS - Dimensiones: (no especificado) - Consumo eléctrico: 12V DC, consumo máximo de energía de 4W - Características físicas: resistente al agua y al polvo, soporta condiciones extremas de temperatura</p>
+        <p class='descripcion'>41</p>
+        <p class='precio'>41</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='"imagenes/(42)DS-2CE76H0T-ITPFS.jpg"' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>- Resolución en megapíxeles: 5 MP - Alcance en visión nocturna: 40 metros - Material de fabricación: plástico resistente - Lente: 3.6 mm - Sensor: CMOS - Dimensiones: diseño tipo bala, resistente al agua y al polvo - Consumo eléctrico: alimentación de 12 VDC, consumo de energía de 4 W</p>
+        <p class='descripcion'>42</p>
+        <p class='precio'>42</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='"imagenes/(43)DS-2CE76H0T-ITMFS.jpg"' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>2MPX, 20 metros de alcance, metal, 2.8mm de lente, sensor CMOS, resistente al agua y al polvo, consumo de energía de 12V DC y 4W.</p>
+        <p class='descripcion'>43</p>
+        <p class='precio'>43</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='"imagenes/(44)DS-2CE56H0T-IRMMF(C).jpg"' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>2MPx de resolución, 20 metros de alcance en visión nocturna, material de metal resistente, lente vari-focal de 2.8-12mm, sensor CMOS, resistente a la intemperie, dimensiones no especificadas, consumo de 6W.</p>
+        <p class='descripcion'>44</p>
+        <p class='precio'>44</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='"imagenes/(45)DS-2CE57H0T-VPITF.jpg"' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>5MP, 20 metros de alcance en visión nocturna, material metálico, lente de 3.6mm, sensor CMOS, tamaño compacto, consumo eléctrico de 12VDC, características físicas.</p>
+        <p class='descripcion'>45</p>
+        <p class='precio'>45</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(36)DS-2CE12DF3T-PIRXOS.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>Resolución en MPX: 2 megapíxeles Alcance en visión nocturna: 40 metros Material de fabricación: Plástico resistente Lente: Varifocal de 2.7-13.5 mm Sensor: CMOS Características físicas: Cámara domo, resistente al agua y al polvo Consumo eléctrico: Alimentación de 12V DC</p>
+        <p class='descripcion'>36</p>
+        <p class='precio'>36</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(37)DS-2CE12DF0T-LFS.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>Resolución: 2MP Alcance en visión nocturna: 20 metros Material: plástico Lente: 2.8 mm Sensor: CMOS Dimensiones: diseño compacto Consumo eléctrico: alimentación 12V DC Características físicas: resistente al agua y al polvo.</p>
+        <p class='descripcion'>37</p>
+        <p class='precio'>37</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(38)DS-2CE12DF0T-F.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>1. Resolución en mpx: 2 megapíxeles 2. Alcance en visión nocturna: 20 metros 3. Material: Plástico resistente 4. Lente: 3.6mm 5. Sensor: CMOS 6. Características físicas: Diseño compacto, resistente al agua y polvo 7. Consumo eléctrico: 12V DC, bajo consumo de energía</p>
+        <p class='descripcion'>38</p>
+        <p class='precio'>38</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(39)DS-2CE12DF3T-F.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>2 mpx de resolución 20 metros de alcance en visión nocturna Fabricada en material resistente Lente de alta calidad Sensor CMOS Diseño compacto y resistente Alimentación de 12V DC.</p>
+        <p class='descripcion'>39</p>
+        <p class='precio'>39</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(40)DS-2CE18D0T-LFS.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>2 megapíxeles de resolución 20 metros de alcance en visión nocturna Material de metal resistente Lente fijo de 3.6 mm Sensor de imagen CMOS Dimensiones físicas de 68.3 mm × 58.7 mm Consumo eléctrico de 12VDC.</p>
+        <p class='descripcion'>40</p>
+        <p class='precio'>40</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(41)DS-2CE76H0T-ITPF(C).jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>- Resolución en MPX: 5 megapíxeles - Alcance en visión nocturna: 40 metros - Material: metal - Lente: 2.8 mm - Sensor: CMOS - Dimensiones: (no especificado) - Consumo eléctrico: 12V DC, consumo máximo de energía de 4W - Características físicas: resistente al agua y al polvo, soporta condiciones extremas de temperatura</p>
+        <p class='descripcion'>41</p>
+        <p class='precio'>41</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(42)DS-2CE76H0T-ITPFS.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>- Resolución en megapíxeles: 5 MP - Alcance en visión nocturna: 40 metros - Material de fabricación: plástico resistente - Lente: 3.6 mm - Sensor: CMOS - Dimensiones: diseño tipo bala, resistente al agua y al polvo - Consumo eléctrico: alimentación de 12 VDC, consumo de energía de 4 W</p>
+        <p class='descripcion'>42</p>
+        <p class='precio'>42</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(43)DS-2CE76H0T-ITMFS.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>2MPX, 20 metros de alcance, metal, 2.8mm de lente, sensor CMOS, resistente al agua y al polvo, consumo de energía de 12V DC y 4W.</p>
+        <p class='descripcion'>43</p>
+        <p class='precio'>43</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(44)DS-2CE56H0T-IRMMF(C).jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>2MPx de resolución, 20 metros de alcance en visión nocturna, material de metal resistente, lente vari-focal de 2.8-12mm, sensor CMOS, resistente a la intemperie, dimensiones no especificadas, consumo de 6W.</p>
+        <p class='descripcion'>44</p>
+        <p class='precio'>44</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
+        <article class='product'>
+        <h2>hikvision</h2>
+        <figure>
+        <img src='imagenes/(45)DS-2CE57H0T-VPITF.jpg' alt=''>
+        <figcaption>DS-2CE57H0T-VPITF</figcaption>
+        </figure>
+        <p class='nombre'>5MP, 20 metros de alcance en visión nocturna, material metálico, lente de 3.6mm, sensor CMOS, tamaño compacto, consumo eléctrico de 12VDC, características físicas.</p>
+        <p class='descripcion'>45</p>
+        <p class='precio'>45</p>
+        <form onsubmit='event.preventDefault(); agregarAlCarrito(this)'>
+        <button type='submit'>Agregar al Carrito</button>
+        <button type='button' onclick='openModal()'>Ver Detalles</button>
+        </form>
+        </article>
   
   </section>
   
@@ -2190,30 +2978,43 @@ html += "<img src='imagenes/logocarrito.png' alt='Logo' class='logo'>";
     setInterval(actualizarHora, 1000);
 
     let total = 0;
+if (productosEnCarrito.length === 0) {
+    html += "<p>No hay productos en el carrito</p>";
+} else {
+    html += "<div class='productos'>";
+    productosEnCarrito.forEach(producto => {
+        html += `
+        <div id="tablaProductos-${producto.nombre}">
+    <table>
+        <tr class='producto'>
+            <td class='producto-imagen'><img src="${producto.imagen}" alt="${producto.nombre}"></td>
+            <td class="producto-info">
+                <strong class="producto-nombre">${producto.nombre}</strong><br>
+                <p class="producto-descripcion">${producto.descripcion}</p>
+                <p>Cantidad:</p>
+                <button class="cantidad-btn" onclick="disminuirCantidad('${producto.nombre}')">-</button>
+                <span class="cantidad">${producto.cantidad}</span>
+                <button class="cantidad-btn" onclick="aumentarCantidad('${producto.nombre}')">+</button>
+            </td>
+            <td class="producto-precio">
+            <p>total:</p>
+            $${(producto.precio * producto.cantidad).toFixed(2)}
+           </td>
+        </tr>
+    </table>
+</div>`;
+        total += producto.precio * producto.cantidad;
+    });
+    html += "</div>"; // Cerrar div .productos
+}
 
-    if (productosEnCarrito.length === 0) {
-        html += "<p>No hay productos en el carrito</p>";
-    } else {
-        html += "<div class='productos'>";
-        productosEnCarrito.forEach(producto => {
-            html += `
-                <div class='producto'>
-                    <img src="${producto.imagen}" alt="${producto.nombre}" class="producto-imagen">
-                    <div class="producto-info">
-                        <strong class="producto-nombre">${producto.nombre}</strong>
-                        <p class="producto-descripcion">${producto.descripcion}</p>
-                        <div class="producto-cantidad">
-                            <button class="cantidad-btn" onclick="disminuirCantidad('${producto.nombre}')">-</button>
-                            <span class="cantidad">${producto.cantidad}</span>
-                            <button class="cantidad-btn" onclick="aumentarCantidad('${producto.nombre}')">+</button>
-                        </div>
-                        <p class="producto-precio">Precio: $${(producto.precio * producto.cantidad).toFixed(2)}</p>
-                    </div>
-                </div>`;
-            total += producto.precio * producto.cantidad;
-        });
-        html += "</div>"; // Cerrar div .productos
-    }
+   
+
+
+
+
+
+
 
     // Mostrar el total de la compra
     html += `<div class="total"><p>Total: $${total.toFixed(2)}</p></div>`;
